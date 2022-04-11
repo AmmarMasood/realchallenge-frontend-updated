@@ -133,7 +133,11 @@ function PlayerVideoBrowser({
                   >
                     <div className="challenge-player-container-exercies-box-imagebox">
                       <VideoThumbnail
-                        videoUrl={e.videoURL ? e.videoURL : ""}
+                        videoUrl={
+                          e.videoURL
+                            ? `${process.env.REACT_APP_SERVER}/uploads/${e.videoURL}`
+                            : ""
+                        }
                         width={250}
                         height={200}
                         cors={true}
@@ -190,7 +194,11 @@ function PlayerVideoBrowser({
                   >
                     <div className="challenge-player-container-exercies-box-imagebox">
                       <VideoThumbnail
-                        videoUrl={e.videoURL ? e.videoURL : ""}
+                        videoUrl={
+                          e.videoURL
+                            ? `${process.env.REACT_APP_SERVER}/uploads/${e.videoURL}`
+                            : ""
+                        }
                         width={250}
                         height={200}
                         cors={true}

@@ -9,7 +9,7 @@ import { ArrowRightOutlined, SearchOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import ChallengeCard from "../components/Cards/ChallengeCard";
 import { getAllTrainers } from "../services/trainers";
-import slug from 'elegant-slug';
+import slug from "elegant-slug";
 
 const { Panel } = Collapse;
 
@@ -105,12 +105,14 @@ function Trainers() {
                     fontSize: "18px",
                   }}
                 >
-                  Filter Trainers
+                  {t("trainers.filter_trainer")}
                 </p>
               }
               key="1"
             >
-              <p className="font-paragraph-white">Filter By Gender</p>
+              <p className="font-paragraph-white">
+                {t("trainers.filter_gender")}
+              </p>
               <div style={{ display: "flex" }}>
                 <p
                   className="font-paragraph-white"
@@ -125,7 +127,7 @@ function Trainers() {
                       filterGender === "male" ? "#ff7700" : "#454b52",
                   }}
                 >
-                  Male
+                  {t("trainers.male")}
                 </p>
                 <p
                   className="font-paragraph-white"
@@ -140,7 +142,7 @@ function Trainers() {
                       filterGender === "female" ? "#ff7700" : "#454b52",
                   }}
                 >
-                  Female
+                  {t("trainers.female")}
                 </p>
                 <p
                   className="font-paragraph-white"
@@ -155,7 +157,7 @@ function Trainers() {
                       filterGender === "other" ? "#ff7700" : "#454b52",
                   }}
                 >
-                  Other
+                  {t("trainers.other")}
                 </p>
               </div>
             </Panel>
@@ -166,7 +168,7 @@ function Trainers() {
                 <ChallengeCard
                   picture={
                     trainer.avatarLink
-                      ? `${process.env.REACT_APP_SERVER}/api${trainer.avatarLink}`
+                      ? `${process.env.REACT_APP_SERVER}/uploads/${trainer.avatarLink}`
                       : ""
                   }
                   // rating={5}

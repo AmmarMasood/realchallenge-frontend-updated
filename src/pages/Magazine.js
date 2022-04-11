@@ -30,19 +30,10 @@ function Magazine() {
   return (
     <div>
       <Navbar color="dark" />
-      <div className="magazine-row-1" style={{ backgroundColor: "#e1e9f2" }}>
-        {/* <div className="magazine-row-1-text-container">
-          <Link to="/" className="magazine-row-1-text">
-            {t("magazine.nutrition")}
-          </Link>
-          <Link to="/" className="magazine-row-1-text">
-            {t("magazine.training")}
-          </Link>
-          <Link to="/" className="magazine-row-1-text">
-            {t("magazine.well_being")}
-          </Link>
-        </div> */}
-      </div>
+      <div
+        className="magazine-row-1"
+        style={{ backgroundColor: "#e1e9f2" }}
+      ></div>
       <div style={{ backgroundColor: "#e1e9f2" }}>
         <div className="magazine-row-2">
           <div className="magazine-row-2-box">

@@ -149,7 +149,7 @@ function AllChallenges() {
                   fontSize: "18px",
                 }}
               >
-                Filter Challenges
+                F{t("challenges.filter")}
               </p>
             }
             key="1"
@@ -161,7 +161,7 @@ function AllChallenges() {
               }}
             >
               <div>
-                <p className="font-paragraph-white">Goals</p>
+                <p className="font-paragraph-white">{t("challenges.goals")}</p>
                 <div
                   style={{
                     display: "flex",
@@ -190,7 +190,9 @@ function AllChallenges() {
                 </div>
               </div>
               <div>
-                <p className="font-paragraph-white">Intensity</p>
+                <p className="font-paragraph-white">
+                  {t("challenges.intensity")}
+                </p>
                 <div
                   style={{
                     display: "flex",
@@ -219,7 +221,9 @@ function AllChallenges() {
                 </div>
               </div>
               <div>
-                <p className="font-paragraph-white">Body Focus</p>
+                <p className="font-paragraph-white">
+                  {t("challenges.body_focus")}
+                </p>
                 <div
                   style={{
                     display: "flex",
@@ -248,7 +252,9 @@ function AllChallenges() {
                 </div>
               </div>
               <div>
-                <p className="font-paragraph-white">Equipments</p>
+                <p className="font-paragraph-white">
+                  {t("challenges.equipments")}
+                </p>
                 <div
                   style={{
                     display: "flex",
@@ -284,7 +290,7 @@ function AllChallenges() {
           {filterChallenges.map((challenge) => (
             <Link to={`challenge/${challenge.challengeName}/${challenge._id}`}>
               <ChallengeCard
-                picture={`${process.env.REACT_APP_SERVER}/api${challenge.thumbnailLink}`}
+                picture={`${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink}`}
                 rating={challenge.rating}
                 name={challenge.challengeName}
                 newc={true}

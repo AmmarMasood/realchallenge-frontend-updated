@@ -166,7 +166,7 @@ function NewChallengeAdditionalTab({
                 > */}
                 {info.file ? (
                   <img
-                    src={`${process.env.REACT_APP_SERVER}/api${info.file.link}`}
+                    src={`${process.env.REACT_APP_SERVER}/uploads/${info.file.link}`}
                     alt=""
                     height="100px"
                     width="120px"

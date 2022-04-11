@@ -116,7 +116,11 @@ export function createWorkout(workout) {
 
 export function getAllChallenges(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/challenges?language=${language}`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/challenges?language=${
+        language ? language : "eng"
+      }`
+    )
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

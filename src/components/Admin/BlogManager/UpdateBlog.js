@@ -245,7 +245,7 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
               >
                 <img
                   alt=""
-                  src={`${process.env.REACT_APP_SERVER}/api${featuredImage.link}`}
+                  src={`${process.env.REACT_APP_SERVER}/uploads/${featuredImage.link}`}
                   height="200px"
                   width="250px"
                 />
@@ -268,7 +268,7 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
               >
                 <img
                   alt=""
-                  src={`${process.env.REACT_APP_SERVER}/api${featuredImage}`}
+                  src={`${process.env.REACT_APP_SERVER}/uploads/${featuredImage}`}
                   height="200px"
                   width="250px"
                 />

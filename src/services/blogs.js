@@ -10,7 +10,11 @@ const openNotificationWithIcon = (type, message, description) => {
 
 export function getAllBlogs(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/blog/all?language=${language}`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/blog/all?language=${
+        language ? language : "eng"
+      }`
+    )
     .then((res) => {
       return res.data;
     })

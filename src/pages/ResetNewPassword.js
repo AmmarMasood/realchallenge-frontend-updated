@@ -46,7 +46,9 @@ function ResetNewPassword() {
               <Form.Item
                 name="password"
                 label={
-                  <span className="font-paragraph-white">New Password</span>
+                  <span className="font-paragraph-white">
+                    {t("forgot_password.new")}
+                  </span>
                 }
                 rules={[
                   {
@@ -64,7 +66,7 @@ function ResetNewPassword() {
                 name="confirm"
                 label={
                   <span className="font-paragraph-white">
-                    Confirm New Password
+                    {t("forgot_password.confirmNew")}
                   </span>
                 }
                 dependencies={["password"]}
@@ -102,7 +104,7 @@ function ResetNewPassword() {
                   border: "none",
                 }}
               >
-                Confirm Password Reset
+                {t("forgot_password.confirmPassReset")}
               </Button>
             )}
           </Form>

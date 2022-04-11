@@ -35,7 +35,9 @@ function RenderedVideoPlayer({
   const [timerVisible, setTimerVisible] = useContext(timerVisibleContext);
   const [playerState, setPlayerState] = useContext(playerStateContext);
   // const [currentBreak, setCurrentBreak] = useContext(breakContext);
-  const [exerciseWorkoutTimeTrack, setExerciseWorkoutTimeTrack] = useContext(exerciseWorkoutTimeTrackContext)
+  const [exerciseWorkoutTimeTrack, setExerciseWorkoutTimeTrack] = useContext(
+    exerciseWorkoutTimeTrackContext
+  );
   const [exerciseSeconds, setExerciseSeconds] = useState(-1);
   const playerRef = useRef(null);
   const playerContainerRef = useRef(null);
@@ -67,12 +69,9 @@ function RenderedVideoPlayer({
         (a, b) => a + (parseInt(b["exerciseLength"]) || 0),
         0
       );
-    console.log(
-      "sumAllBreakTime",
-      workout + sumAllExerciseDuration
-    );
+    console.log("sumAllBreakTime", workout + sumAllExerciseDuration);
     const d = sumAllExerciseDuration + sumAllBreakTime;
-    setExerciseWorkoutTimeTrack((prev) => ({...prev, total: d}));
+    setExerciseWorkoutTimeTrack((prev) => ({ ...prev, total: d }));
   }, [workout]);
 
   useEffect(() => {
@@ -101,8 +100,6 @@ function RenderedVideoPlayer({
       return;
     }
   }, [exerciseSeconds]);
-  
-
 
   const handleProgress = (changeState) => {
     if (count > 1) {
@@ -119,7 +116,10 @@ function RenderedVideoPlayer({
 
     if (exerciseSeconds > 0 && playerState.playing && !playerState.loading) {
       setExerciseSeconds(exerciseSeconds - 1);
-      setExerciseWorkoutTimeTrack((prev) => ({...prev, current: prev.current + 1}));
+      setExerciseWorkoutTimeTrack((prev) => ({
+        ...prev,
+        current: prev.current + 1,
+      }));
     }
 
     setPlayerState({ ...playerState, progress: changeState });
@@ -151,7 +151,11 @@ function RenderedVideoPlayer({
         muted={playerState.muted}
         loop={currentExercise.index === 0 ? false : true}
         volume={playerState.volume}
-        url={exercise.videoURL ? exercise.videoURL : ""}
+        url={
+          exercise.videoURL
+            ? `${process.env.REACT_APP_SERVER}/uploads/${exercise.videoURL}`
+            : ""
+        }
         progress={playerState.progress}
         onProgress={handleProgress}
         // onEnded={() => {

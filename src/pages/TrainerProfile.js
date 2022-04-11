@@ -16,8 +16,8 @@ import { Avatar, Input } from "antd";
 import moment from "moment";
 import StarFilled from "../assets/icons/star-orange.svg";
 import StartTransparent from "../assets/icons/star-transparent.svg";
-import slug from 'elegant-slug';
-import {Helmet} from "react-helmet"
+import slug from "elegant-slug";
+import { Helmet } from "react-helmet";
 
 function TrainerProfile(props) {
   const [open, setOpen] = useState(false);
@@ -74,7 +74,7 @@ function TrainerProfile(props) {
     </div>
   ) : (
     <div>
-        <Helmet>
+      <Helmet>
         <title>{`Realchallenge: ${trainer.firstName}`}</title>
         <meta name="description" content={trainer.motto} />
         <meta property="og:title" content={trainer.name} />
@@ -82,7 +82,9 @@ function TrainerProfile(props) {
         <meta property="og:description" content={trainer.motto} />
         <meta
           property="og:url"
-          content={`http://localhost:3001/trainer/${slug(trainer.firstName)}/${trainer._id}`}
+          content={`http://localhost:3001/trainer/${slug(trainer.firstName)}/${
+            trainer._id
+          }`}
         />
         <meta name="author" content="Realchallenge" />
       </Helmet>
@@ -102,7 +104,7 @@ function TrainerProfile(props) {
           style={{
             background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${
               process.env.REACT_APP_SERVER
-            }/api${trainer.heroBanner ? trainer.heroBanner : ""})`,
+            }/uploads/${trainer.heroBanner ? trainer.heroBanner : ""})`,
             backgroundSize: "cover",
             backgroundPosition: "10% 10%",
           }}
@@ -114,7 +116,7 @@ function TrainerProfile(props) {
             <div className="profile-box-row1">
               <div className="profile-box-row1-avatar">
                 <img
-                  src={`${process.env.REACT_APP_SERVER}/api${trainer.avatarLink}`}
+                  src={`${process.env.REACT_APP_SERVER}/uploads/${trainer.avatarLink}`}
                   alt="trainer-profile"
                 />
               </div>
@@ -134,13 +136,15 @@ function TrainerProfile(props) {
                   >
                     {trainer.country ? trainer.country : ""}
                   </p>
-                  {new Array(calculatedRating).fill(0).map(() => (
-                    <img
-                      src={StarFilled}
-                      alt=""
-                      style={{ height: "20px", margin: "2px" }}
-                    />
-                  ))}
+                  {new Array(calculatedRating ? calculatedRating : 0)
+                    .fill(0)
+                    .map(() => (
+                      <img
+                        src={StarFilled}
+                        alt=""
+                        style={{ height: "20px", margin: "2px" }}
+                      />
+                    ))}
                   {new Array(calculatedRating ? 5 - calculatedRating : 5)
                     .fill(0)
                     .map(() => (
@@ -237,9 +241,14 @@ function TrainerProfile(props) {
               />
               {/* TODO  */}
               {filterChallenges.map((challenge) => (
-                <Link to={`/challenge/${slug(challenge.challengeName)}/${challenge._id}`} key={challenge._id}>
+                <Link
+                  to={`/challenge/${slug(challenge.challengeName)}/${
+                    challenge._id
+                  }`}
+                  key={challenge._id}
+                >
                   <ChallengeCard
-                    picture={`${process.env.REACT_APP_SERVER}/api${challenge.thumbnailLink}`}
+                    picture={`${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink}`}
                     name={challenge.challengeName}
                     rating={challenge.rating}
                   />
@@ -310,7 +319,7 @@ function TrainerProfile(props) {
                       cursor: "pointer",
                     }}
                   >
-                    POST COMMENT
+                    {t("common.postComment")}
                   </button>
                 )}
               </>

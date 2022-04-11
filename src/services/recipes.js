@@ -11,7 +11,9 @@ const openNotificationWithIcon = (type, message, description) => {
 export function getAllRecipes(language) {
   return axios
     .get(
-      `${process.env.REACT_APP_SERVER}/api/recipes/recipe?language=${language}`
+      `${process.env.REACT_APP_SERVER}/api/recipes/recipe?language=${
+        language ? language : "eng"
+      }`
     )
     .then((res) => {
       return res.data;

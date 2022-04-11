@@ -511,7 +511,7 @@ function UserUpdate() {
                     typeof beforePic === "object"
                       ? URL.createObjectURL(beforePic)
                       : typeof beforePic === "string" && beforePic.length > 0
-                      ? `${process.env.REACT_APP_SERVER}/api${beforePic}`
+                      ? `${process.env.REACT_APP_SERVER}/uploads/${beforePic}`
                       : HumanVector
                   }
                   style={{
@@ -566,7 +566,7 @@ function UserUpdate() {
                     typeof afterPic === "object"
                       ? URL.createObjectURL(afterPic)
                       : typeof afterPic === "string" && afterPic.length > 0
-                      ? `${process.env.REACT_APP_SERVER}/api${afterPic}`
+                      ? `${process.env.REACT_APP_SERVER}/uploads/${afterPic}`
                       : HumanVector
                   }
                   style={{

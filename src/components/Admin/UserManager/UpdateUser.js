@@ -385,7 +385,7 @@ function UpdateUser({
                 {avatar && (
                   <div style={{ margin: "10px" }}>
                     <img
-                      src={`${process.env.REACT_APP_SERVER}/api${avatar.link}`}
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${avatar.link}`}
                       height="120px"
                       width="150px"
                       alt=""
@@ -414,7 +414,7 @@ function UpdateUser({
                 {hero && (
                   <div style={{ margin: "10px" }}>
                     <img
-                      src={`${process.env.REACT_APP_SERVER}/api${hero.link}`}
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${hero.link}`}
                       alt=""
                       height="150px"
                       width="200px"

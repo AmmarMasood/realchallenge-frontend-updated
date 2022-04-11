@@ -101,7 +101,7 @@ function RecipeProfile(props) {
         <div
           className="trainer-profile-container-column1"
           style={{
-            background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${process.env.REACT_APP_SERVER}/api${recipe.image})`,
+            background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${process.env.REACT_APP_SERVER}/uploads/${recipe.image})`,
             backgroundSize: "cover",
             backgroundPosition: "10% 10%",
           }}
@@ -393,7 +393,7 @@ function RecipeProfile(props) {
                       cursor: "pointer",
                     }}
                   >
-                    POST COMMENT
+                    {t("common.postComment")}
                   </button>
                 )}
               </>

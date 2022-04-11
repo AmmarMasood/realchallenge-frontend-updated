@@ -159,7 +159,7 @@ function Challenges() {
                 }`}
               >
                 <ChallengeCard
-                  picture={`${process.env.REACT_APP_SERVER}/api${challenge.thumbnailLink}`}
+                  picture={`${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink}`}
                   rating={challenge.rating}
                   name={challenge.challengeName}
                   newc={true}

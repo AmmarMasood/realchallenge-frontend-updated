@@ -35,7 +35,6 @@ function Home(props) {
         props.history.push("/admin/dashboard");
       }
     }
-    console.log("asdsad", userInfo);
   }, []);
   return (
     <div>

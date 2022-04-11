@@ -68,7 +68,7 @@ function ChallengeProfileWeb(props) {
             <div className="overlap-group" style={{ border: "3px solid blue" }}>
               <img
                 className="cover-photo"
-                src={`${process.env.REACT_APP_SERVER}/api${thumbnailLink}`}
+                src={`${process.env.REACT_APP_SERVER}/uploads/${thumbnailLink}`}
               />
               <img className="cover-feather" src={ChalleengeProfileFether} />
 
@@ -211,7 +211,7 @@ function ChallengeProfileWeb(props) {
                 <div className="overlap-group6" key={t._id}>
                   <img
                     className="rectangle-1859"
-                    src={`${process.env.REACT_APP_SERVER}/api${t.avatarLink}`}
+                    src={`${process.env.REACT_APP_SERVER}/uploads/${t.avatarLink}`}
                   />
                   <div className="name poppins-normal-crusta-17px">
                     {t.username}
@@ -326,7 +326,7 @@ function ChallengeProfileWeb(props) {
                     >
                       <img
                         style={{ height: "16px" }}
-                        src={`${process.env.REACT_APP_SERVER}/api${m.icon}`}
+                        src={`${process.env.REACT_APP_SERVER}/uploads/${m.icon}`}
                         alt=""
                       />
                       <span
@@ -346,7 +346,7 @@ function ChallengeProfileWeb(props) {
                     >
                       <img
                         style={{ height: "16px" }}
-                        src={`${process.env.REACT_APP_SERVER}/api${m.icon}`}
+                        src={`${process.env.REACT_APP_SERVER}/uploads/${m.icon}`}
                         alt=""
                       />
                       <span
@@ -366,7 +366,7 @@ function ChallengeProfileWeb(props) {
               style={{ border: "3px solid green" }}
             >
               <div className="text-7 poppins-light-sonic-silver-14px">
-                YOUR PERSONAL JOURNEY
+                {t("challenge_profile.yourPersonalJourney")}
               </div>
               <div className="week-1-1">
                 <div className="overlap-group7-3">
@@ -444,7 +444,7 @@ function ChallengeProfileWeb(props) {
               <div className="rectangle-1838"></div>
               <div className="overlap-group12">
                 <div className="post-comment poppins-normal-tango-16px">
-                  POST COMMENT
+                  {t("common.postComment")}
                 </div>
                 <div className="rectangle-1839 border-1px-tango"></div>
               </div>

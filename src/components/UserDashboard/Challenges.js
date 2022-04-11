@@ -225,7 +225,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                     style={{ backgroundColor: "#2F3E50", height: "100%" }}
                   >
                     <img
-                      src={`${process.env.REACT_APP_SERVER}/api${pics[0]}`}
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${pics[0]}`}
                       alt="users-before"
                     />
                   </div>
@@ -236,7 +236,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                     style={{ backgroundColor: "#3C618F", height: "100%" }}
                   >
                     <img
-                      src={`${process.env.REACT_APP_SERVER}/api${pics[1]}`}
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${pics[1]}`}
                       alt="users-after"
                     />
                   </div>

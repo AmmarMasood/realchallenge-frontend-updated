@@ -20,7 +20,6 @@ import ForgotPassword from "./pages/ForgotPassword";
 import AllChallenges from "./pages/AllChallenges";
 import TrainerProfile from "./pages/TrainerProfile";
 import ChallengeProfile from "./pages/ChallengeProfile";
-import ChallengeProfileFigma from "./pages/ChallengeProfileFigma";
 import RecipeProfile from "./pages/RecipeProfile";
 import UserDashboard from "./pages/UserDashboard";
 import MagazineArticle from "./pages/MagazineArticle";
@@ -56,12 +55,17 @@ function App() {
 
   let history = useHistory();
   useEffect(() => {
+    if (!localStorage.getItem("locale")) {
+      localStorage.setItem("locale", "eng");
+    }
     checkUserInfo();
   }, []);
 
   const checkUserInfo = async () => {
     checkUser(userInfo, setUserInfo, localStorage.getItem("jwtToken"), history);
-    await getUserPoints(userPoints, setUserPoints);
+    if (localStorage.getItem("jwtToken")) {
+      await getUserPoints(userPoints, setUserPoints);
+    }
   };
   return (
     <Router>

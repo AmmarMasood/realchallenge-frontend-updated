@@ -155,7 +155,7 @@ function Signup(props) {
           cursor: "pointer",
         }}
       >
-        <ArrowLeftOutlined /> Back
+        <ArrowLeftOutlined /> {t("signup.back")}
       </button>
       <div className="signup-container">
         <h1 className="font-heading-white">{t("signup.join")}</h1>
@@ -168,9 +168,7 @@ function Signup(props) {
             textAlign: "left",
           }}
         >
-          We have developed the best challenge and weekley meal for you based on
-          your enteries. After confirming your email will be find them in you
-          dashboard.
+          {t("signup.weHaveDeveloped")}
         </p>
         <div className="signup-container-columns">
           <div
@@ -191,7 +189,7 @@ function Signup(props) {
                   style={{ width: "90%" }}
                   onClick={renderProps.onClick}
                 >
-                  Signup with facebook
+                  {t("signup.signFacebook")}
                 </button>
               )}
             />
@@ -204,7 +202,7 @@ function Signup(props) {
                   style={{ width: "90%" }}
                   disabled={renderProps.disabled}
                 >
-                  Signup with google
+                  {t("signup.signGoogle")}
                 </button>
               )}
               buttonText="Login"
@@ -227,7 +225,12 @@ function Signup(props) {
                   {t("signup.or_with_email")}
                 </p>
                 <Form.Item
-                  label={<div className="font-paragraph-white">Username</div>}
+                  label={
+                    <div className="font-paragraph-white">
+                      {" "}
+                      {t("signup.username")}
+                    </div>
+                  }
                   name="username"
                   rules={[
                     { required: true, message: "Please input your username!" },
@@ -241,7 +244,11 @@ function Signup(props) {
                 style={{ textAlign: "left" }}
               >
                 <Form.Item
-                  label={<div className="font-paragraph-white">First Name</div>}
+                  label={
+                    <div className="font-paragraph-white">
+                      {t("signup.firstName")}
+                    </div>
+                  }
                   name="firstName"
                   rules={[
                     {
@@ -258,7 +265,11 @@ function Signup(props) {
                 style={{ textAlign: "left" }}
               >
                 <Form.Item
-                  label={<div className="font-paragraph-white">Last Name</div>}
+                  label={
+                    <div className="font-paragraph-white">
+                      {t("signup.lastName")}
+                    </div>
+                  }
                   name="lastName"
                   rules={[
                     { required: true, message: "Please input your last name." },
@@ -272,7 +283,11 @@ function Signup(props) {
                 style={{ textAlign: "left" }}
               >
                 <Form.Item
-                  label={<div className="font-paragraph-white">Email</div>}
+                  label={
+                    <div className="font-paragraph-white">
+                      {t("signup.email")}
+                    </div>
+                  }
                   name="email"
                   rules={[
                     { required: true, message: "Please input your email!" },
@@ -287,7 +302,11 @@ function Signup(props) {
                 style={{ textAlign: "left" }}
               >
                 <Form.Item
-                  label={<div className="font-paragraph-white">Password</div>}
+                  label={
+                    <div className="font-paragraph-white">
+                      {t("signup.password")}
+                    </div>
+                  }
                   name="password"
                   rules={[
                     { required: true, message: "Please input your password!" },
@@ -304,7 +323,9 @@ function Signup(props) {
                 <Form.Item
                   name="confirm"
                   label={
-                    <div className="font-paragraph-white">Confirm Password</div>
+                    <div className="font-paragraph-white">
+                      {t("signup.confirm_password")}
+                    </div>
                   }
                   dependencies={["password"]}
                   hasFeedback
@@ -333,8 +354,7 @@ function Signup(props) {
                   style={{ color: "#72777B" }}
                   className="font-paragraph-white"
                 >
-                  By clicking Create Account, you agree to our Terms of use and
-                  its Cookie and Privecy Policy.
+                  {t("signup.by_creating")}
                 </span>
               </div>
               {loading ? (
@@ -357,7 +377,7 @@ function Signup(props) {
                     className="font-paragraph-white"
                     style={{ textTransform: "uppercase", fontWeight: "600" }}
                   >
-                    Create Account
+                    {t("signup.create_account")}
                   </span>
                 </button>
               )}

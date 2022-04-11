@@ -723,7 +723,7 @@ function UpdateRecipe(props) {
                   >
                     <img
                       alt=""
-                      src={`${process.env.REACT_APP_SERVER}/api${
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${
                         typeof featuredImage === "object"
                           ? featuredImage.link
                           : featuredImage
@@ -751,7 +751,7 @@ function UpdateRecipe(props) {
                   >
                     <img
                       alt=""
-                      src={`${process.env.REACT_APP_SERVER}/api${featuredImage}`}
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${featuredImage}`}
                       height="100px"
                     />
                     <span>

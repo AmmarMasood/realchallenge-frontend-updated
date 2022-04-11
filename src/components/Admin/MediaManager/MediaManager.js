@@ -271,6 +271,7 @@ const useCustomFileMap = () => {
         },
       };
     });
+    console.log("ammar", imageFiles);
     const imageObjects = imageIds.map((id, i) => {
       return {
         [id]: {
@@ -278,7 +279,7 @@ const useCustomFileMap = () => {
           id: id,
           link: imageFiles.images[i].filelink,
           parent: "images-e598a85f843c",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${imageFiles.images[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${imageFiles.images[i].filelink}`,
         },
       };
     });
@@ -302,7 +303,7 @@ const useCustomFileMap = () => {
           id: id,
           link: iconFiles.files[i].filelink,
           parent: "icons-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${iconFiles.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${iconFiles.files[i].filelink}`,
         },
       };
     });
@@ -314,7 +315,7 @@ const useCustomFileMap = () => {
           id: id,
           link: foodFiles.files[i].filelink,
           parent: "foods-e598a85f843b",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${foodFiles.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${foodFiles.files[i].filelink}`,
         },
       };
     });
@@ -326,7 +327,7 @@ const useCustomFileMap = () => {
           id: id,
           link: tempFiles.files[i].filelink,
           parent: "temps-e598a85f843b",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${tempFiles.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${tempFiles.files[i].filelink}`,
         },
       };
     });
@@ -338,7 +339,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc1Files.files[i].filelink,
           parent: "rc1-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc1Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc1Files.files[i].filelink}`,
         },
       };
     });
@@ -350,7 +351,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc2Files.files[i].filelink,
           parent: "rc2-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc2Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc2Files.files[i].filelink}`,
         },
       };
     });
@@ -362,7 +363,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc3Files.files[i].filelink,
           parent: "rc3-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc3Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc3Files.files[i].filelink}`,
         },
       };
     });
@@ -373,7 +374,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc4Files.files[i].filelink,
           parent: "rc4-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc4Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc4Files.files[i].filelink}`,
         },
       };
     });
@@ -384,7 +385,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc5Files.files[i].filelink,
           parent: "rc5-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc5Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc5Files.files[i].filelink}`,
         },
       };
     });
@@ -395,7 +396,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc6Files.files[i].filelink,
           parent: "rc6-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc6Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc6Files.files[i].filelink}`,
         },
       };
     });
@@ -406,7 +407,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc7Files.files[i].filelink,
           parent: "rc7-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc7Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc7Files.files[i].filelink}`,
         },
       };
     });
@@ -417,7 +418,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc8Files.files[i].filelink,
           parent: "rc8-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc8Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc8Files.files[i].filelink}`,
         },
       };
     });
@@ -428,7 +429,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc9Files.files[i].filelink,
           parent: "rc9-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc9Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc9Files.files[i].filelink}`,
         },
       };
     });
@@ -439,7 +440,7 @@ const useCustomFileMap = () => {
           id: id,
           link: rc10Files.files[i].filelink,
           parent: "rc10-e598a85f84gb",
-          thumbnailUrl: `${process.env.REACT_APP_SERVER}/api${rc10Files.files[i].filelink}`,
+          thumbnailUrl: `${process.env.REACT_APP_SERVER}/uploads/${rc10Files.files[i].filelink}`,
         },
       };
     });

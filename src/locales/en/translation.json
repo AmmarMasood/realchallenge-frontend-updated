@@ -6,7 +6,8 @@
     "how_it_works": "HOW IT WORKS!",
     "start_your_challenge_today": "START YOUR REAL CHALLENGE TODAY!",
     "price": "Less than €1 a day",
-    "how_it_works_small": "How it works"
+    "how_it_works_small": "How it works",
+    "postComment": "POST COMMENT"
   },
   "home": {
     "header": {
@@ -176,7 +177,12 @@
     "need_more": " Need more inspiration?",
     "feel_better": "Feel better than ever before",
     "become": "  Become inspired and motivated by our coaches. Their energy will make you glow during all exercises.",
-    "inspire": "INSPIRE ME!"
+    "inspire": "INSPIRE ME!",
+    "filter_trainer": "Filter Trainers",
+    "fiter_gender": "Filter By Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
   },
   "trainer_profile": {
     "my_goal": "My Goals Areas",
@@ -193,7 +199,16 @@
     "email": "Email",
     "password": "Password",
     "confirm_password": "Confirm Password",
-    "join_free": "JOIN FOR FREE NOW"
+    "join_free": "JOIN FOR FREE NOW",
+    "back": "Back",
+    "weHaveDeveloped": "We have developed the best challenge and weekley meal for you based on your enteries. After confirming your email will be find them in you dashboard.",
+    "signFacebook": "Signup with facebook",
+    "signGoogle": "Signup with google",
+    "username": "Username",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "by_creating": "By clicking Create Account, you agree to our Terms of use and its Cookie and Privecy Policy.",
+    "create_account": "Create Account"
   },
   "recipe_profile": {
     "close": "Close",
@@ -316,7 +331,10 @@
   "forgot_password": {
     "reset": "Reset Password",
     "email": "Email",
-    "rp": "REQUEST PASSWORD RESET"
+    "rp": "REQUEST PASSWORD RESET",
+    "new": "New Password",
+    "confirmNew": "Confirm New Password",
+    "confirmPassReset": "Confirm Password Reset"
   },
   "challenges": {
     "your_goals": "Your Goals",
@@ -343,7 +361,12 @@
     "a_personal": "A personal trainer at the gym will cost you at least thousands of Euros per year. With Real Challenge you are able to save lots of money, because with us you can work out for less than 1 Euro a day!",
     "find_the": "Find the perfect challenge",
     "our_real": "Our Real Challenge Team is working hard for you on a daily basis to offer new challenges and delicious recipes to help you reach your goals.",
-    "start_now": "Start Now"
+    "start_now": "Start Now",
+    "filter": "Filter Challenges",
+    "goals": "Goals",
+    "intensity": "Intensity",
+    "bodyFocus": "Body Focus",
+    "equipments": "Equipments"
   },
   "challenge_profile": {
     "be_the": "Be the first to leave a review.",
@@ -358,7 +381,14 @@
     "day": "Day",
     "workout": "Workout",
     "comments": "Comments",
-    "start_today": "START TODAY"
+    "start_today": "START TODAY",
+    "sub": "SUBSCRIPTION",
+    "gataf": "Get access to all features",
+    "ofc": "One free challenge",
+    "nosub": "No Subscription",
+    "hsn": "Hit start now, and find the challenge on your dashboard",
+    "yourPersonalJourney": "YOUR PERSONAL JOURNEY",
+    "fitnessInterests": "Fitness Interests"
   },
   "player": {
     "well": "Well done!",
@@ -367,7 +397,10 @@
     "great_exp": "Great Experience",
     "avg_stuff": "Average Stuff",
     "very_diff": "Very Difficult",
-    "workout_title": "Workout Title"
+    "workout_title": "Workout Title",
+    "today_workout_attachment": " Today's Workout Attachment",
+    "today_equipment": "Today's Equipments",
+    "related": "RELATED PRODUCT FROM E-SHOP"
   },
   "admin": {
     "profile_setting": "Profile Setting",
@@ -801,5 +834,31 @@
     "cp-2iva-s": "Sharing:  Google shares this data with third parties.",
     "cp-3": "How to disable cookies?",
     "cp-3a": "You can set your browser to notify you as soon as you receive a cookie or to deactivate cookies. In doing so, it is possible that our websites will not function optimally. Below we offer some specific information about cookies for the most commonly used browsers:"
+  },
+  "emailVerification": {
+    "esv": "Email successfully verified!",
+    "pwvi": "Please wait while we verify your email."
+  },
+  "newWelcome": {
+    "skip": "Skip",
+    "tyfjr": "THANK YOU FOR JOINING REALCHALLENGE",
+    "getAccess": "Get Access To All Our Features",
+    "oneTime": "One-Time",
+    "challenge": "Challenge",
+    "from": "FROM",
+    "ccfl": " Choose your challenge from our library",
+    "nsn": "No subscription needed",
+    "billedOnce": "Billed once",
+    "unlockAll": "Unlock all features",
+    "rs": "Repeat & Save",
+    "saveUpTo": "Save up to",
+    "week": "Week",
+    "tmp": "3 months plan",
+    "uac": "Unlock any challenge",
+    "bm": "Billed Monthly",
+    "mtg": "Menu tailored to your goals",
+    "choose": "CHOOSE",
+    "dash": "Go to dashboard",
+    "moneyBack": "7 days money back guarantee"
   }
 }

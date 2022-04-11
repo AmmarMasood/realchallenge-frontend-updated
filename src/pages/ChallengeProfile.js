@@ -263,26 +263,28 @@ function ChallengeProfile(props) {
               className="trainer-profile-goals-heading font-paragraph-white"
               style={{ color: "#72777B", textTransform: "uppercase" }}
             >
-              SUBSCRIPTION
+              {t("challenge_profile.sub")}
               <Tooltip placement="top" title={tooltipText}>
                 <img src={HelpIcon} alt="" style={{ marginLeft: "5px" }} />
               </Tooltip>
             </div>
             <div className="font-paragraph-white">
-              Get access to all features
+              {t("challenge_profile.gataf")}
             </div>
 
             <div className="unlock-challenge-div font-paragraph-white">
               <span style={{ fontSize: "20px", fontWeight: "600" }}>
-                One free challenge
+                {t("challenge_profile.ofc")}
               </span>
               <span style={{ fontSize: "26px", fontWeight: "600" }}>€0</span>
-              <span className="font-paragraph-white">No Subscription</span>
+              <span className="font-paragraph-white">
+                {t("challenge_profile.nosub")}
+              </span>
               <span
                 className="font-paragraph-white"
                 style={{ color: "#9F9F9F" }}
               >
-                Hit start now, and find the challenge on your dashboard
+                {t("challenge_profile.hsn")}
               </span>
             </div>
           </>
@@ -302,13 +304,14 @@ function ChallengeProfile(props) {
                 className="trainer-profile-goals-heading font-paragraph-white"
                 style={{ color: "#72777B", textTransform: "uppercase" }}
               >
-                SUBSCRIPTION
+                {t("player.related")}
+                {t("challenge_profile.sub")}
                 <Tooltip placement="top" title={tooltipText}>
                   <img src={HelpIcon} alt="" style={{ marginLeft: "5px" }} />
                 </Tooltip>
               </div>
               <div className="font-paragraph-white">
-                Get access to all features
+                {t("challenge_profile.gataf")}
               </div>
               <div className="unlock-challenge-packages">
                 <div
@@ -743,7 +746,9 @@ function ChallengeProfile(props) {
           style={{
             background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${
               process.env.REACT_APP_SERVER
-            }/api${challenge.thumbnailLink ? challenge.thumbnailLink : ""})`,
+            }/uploads/${
+              challenge.thumbnailLink ? challenge.thumbnailLink : ""
+            })`,
             backgroundSize: "cover",
             backgroundPosition: "10% 10%",
           }}
@@ -828,7 +833,7 @@ function ChallengeProfile(props) {
                   >
                     <span
                       style={{
-                        backgroundImage: `url(${process.env.REACT_APP_SERVER}/api${trainer.avatarLink})`,
+                        backgroundImage: `url(${process.env.REACT_APP_SERVER}/uploads/${trainer.avatarLink})`,
                         backgroundPosition: "center center",
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
@@ -856,9 +861,7 @@ function ChallengeProfile(props) {
                 className="trainer-profile-goals-heading font-paragraph-white"
                 style={{ color: "#72777B", textTransform: "uppercase" }}
               >
-                {/* {t("challenge_profile.goals")}
-                 */}
-                Fitness Interests
+                {t("challenge_profile.fitnessInterests")}
               </div>
               <div className="trainer-profile-goals-container">
                 {challenge.trainersFitnessInterest &&
@@ -904,7 +907,7 @@ function ChallengeProfile(props) {
               className="trainer-profile-goals-heading font-paragraph-white"
               style={{ color: "#72777B", textTransform: "uppercase" }}
             >
-              YOUR PERSONAL JOURNEY
+              {t("challenge_profile.yourPersonalJourney")}
             </div>
             {getWeeks()}
           </div>
@@ -1008,7 +1011,7 @@ function ChallengeProfile(props) {
                       cursor: "pointer",
                     }}
                   >
-                    POST COMMENT
+                    {t("common.postComment")}
                   </button>
                 )}
               </>

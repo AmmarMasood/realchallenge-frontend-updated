@@ -78,7 +78,7 @@ function NewWelcome(props) {
             cursor: "pointer",
           }}
         >
-          Skip <RightOutlined />
+          {t("newWelcome.skip")} <RightOutlined />
         </div>
       )}
 
@@ -97,11 +97,9 @@ function NewWelcome(props) {
             className="font-subheading-white"
             style={{ fontSize: props.onPricingPage ? "18px" : "" }}
           >
-            {props.onPricingPage
-              ? t("pricing.p")
-              : "THANK YOU FOR JOINING REALCHALLENGE"}
+            {props.onPricingPage ? t("pricing.p") : t("newWelcome.tyfjr")}
           </h3>
-          <p className="font-paragraph-white">Get Access To All Our Features</p>
+          <p className="font-paragraph-white">{t("newWelcome.getAccess")}</p>
           <div className="new-welcome-cards">
             {/* first card */}
             <div
@@ -115,21 +113,23 @@ function NewWelcome(props) {
               }}
             >
               <h2 className="font-paragraph-white">
-                One-Time <br />
-                Challenge
+                {t("newWelcome.oneTime")} <br />
+                {t("newWelcome.challenge")}
               </h2>
               <span
                 className="font-paragraph-white"
                 style={{ fontWeight: "600", margin: "10px" }}
               >
-                FROM <span style={{ fontSize: "30px" }}>€29</span> / CHALLENGE
+                {t("newWelcome.from")}{" "}
+                <span style={{ fontSize: "30px" }}>€29</span> /{" "}
+                {t("newWelcome.challenge")}
               </span>
 
               <span
                 className="font-paragraph-white"
                 style={{ color: "#969696", textAlign: "left" }}
               >
-                Choose your challenge from our library
+                {t("newWelcome.ccfl")}
               </span>
               <ul
                 className="features"
@@ -138,17 +138,19 @@ function NewWelcome(props) {
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    No subscription needed
+                    {t("newWelcome.nsn")}
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
-                  <span className="font-paragraph-white">Billed once</span>
+                  <span className="font-paragraph-white">
+                    {t("newWelcome.billedOnce")}
+                  </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    Unlock all features
+                    {t("newWelcome.unlockAll")}
                   </span>
                 </li>
               </ul>
@@ -164,7 +166,7 @@ function NewWelcome(props) {
                     : "2px solid #2a2f36",
               }}
             >
-              <h2 className="font-paragraph-white">Repeat & Save</h2>
+              <h2 className="font-paragraph-white"> {t("newWelcome.rs")}</h2>
               <span
                 className="font-paragraph-white"
                 style={{
@@ -177,7 +179,7 @@ function NewWelcome(props) {
                   marginBottom: "10px",
                 }}
               >
-                Save up to 60%
+                {t("newWelcome.saveUpTo")} 60%
               </span>
               <span
                 className="font-paragraph-white"
@@ -199,17 +201,19 @@ function NewWelcome(props) {
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    Unlock any challenge
+                    {t("newWelcome.uac")}
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
-                  <span className="font-paragraph-white">Billed monthly</span>
+                  <span className="font-paragraph-white">
+                    {t("newWelcome.bm")}
+                  </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    Menu tailored to your goals
+                    {t("newWelcome.mtg")}
                   </span>
                 </li>
               </ul>
@@ -225,7 +229,7 @@ function NewWelcome(props) {
                     : "2px solid #2a2f36",
               }}
             >
-              <h2 className="font-paragraph-white">Repeat & Save</h2>
+              <h2 className="font-paragraph-white">{t("newWelcome.rs")}</h2>
               <span
                 className="font-paragraph-white"
                 style={{
@@ -238,19 +242,20 @@ function NewWelcome(props) {
                   marginBottom: "10px",
                 }}
               >
-                Save up to 30%
+                {t("newWelcome.saveUpTo")} 30%
               </span>
               <span
                 className="font-paragraph-white"
                 style={{ fontWeight: "600", margin: "10px" }}
               >
-                <span style={{ fontSize: "30px" }}>€6</span> / WEEK
+                <span style={{ fontSize: "30px" }}>€6</span> /{" "}
+                {t("newWelcome.week")}
               </span>
               <span
                 className="font-paragraph-white"
                 style={{ color: "#969696", textAlign: "left" }}
               >
-                3 months plan
+                {t("newWelcome.tmp")}
               </span>
               <ul
                 className="features"
@@ -259,17 +264,19 @@ function NewWelcome(props) {
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    Unlock any challenge
+                    {t("newWelcome.uac")}
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
-                  <span className="font-paragraph-white">Billed monthly</span>
+                  <span className="font-paragraph-white">
+                    {t("newWelcome.bm")}
+                  </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    Menu tailored to your goals
+                    {t("newWelcome.mtg")}
                   </span>
                 </li>
               </ul>
@@ -298,7 +305,7 @@ function NewWelcome(props) {
                 className="font-paragraph-white"
                 style={{ fontWeight: "600" }}
               >
-                CHOOSE
+                {t("newWelcome.choose")}
               </span>
             </button>
           </div>
@@ -318,13 +325,13 @@ function NewWelcome(props) {
                   cursor: "pointer",
                 }}
               >
-                Go to dashboard
+                {t("newWelcome.dash")}
               </div>
             </div>
           )}
         </div>
         <div className="money-back-guarantee font-paragraph-white">
-          <EuroOutlined /> 7 days money back guarantee
+          <EuroOutlined /> {t("newWelcome.moneyBack")}
         </div>
       </div>
 

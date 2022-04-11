@@ -279,7 +279,7 @@ function NewProduct() {
                 >
                   <img
                     alt=""
-                    src={`${process.env.REACT_APP_SERVER}/api${img.link}`}
+                    src={`${process.env.REACT_APP_SERVER}/uploads/${img.link}`}
                     height="100px"
                   />
                   <span>

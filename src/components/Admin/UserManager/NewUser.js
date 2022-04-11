@@ -131,6 +131,37 @@ function NewUser({ setCurrentSelection, home }) {
       console.log("yas0", res);
       if (res) {
         if (role === "ADMIN") {
+          const data = {
+            heroBanner: "",
+            videoTrailerLink: "",
+            motto: "",
+            bio: "",
+            country: "",
+            gender: "other",
+            avatarLink: "",
+            trainersFitnessInterest: [],
+            trainerGoals: [],
+          };
+          await updateUserProfileByAdmin(data, res._id);
+          await createCustomerDetails(
+            {
+              gender,
+              goals: [],
+              currentFitnessLevel: [],
+              age: 10,
+              weight: 150,
+              measureSystem: "metrics",
+              height: 18,
+              bmi: 900,
+              bmir: 50,
+              caloriesPerDay: 200,
+              amountOfProtein: 25,
+              amountOfFat: 30,
+              amountOfCarbohydrate: 45,
+              avatarLink: "some link",
+            },
+            res._id
+          );
           console.log("ADMIN CREATED");
           setLoading(false);
         } else if (role === "TRAINER") {
@@ -439,7 +470,7 @@ function NewUser({ setCurrentSelection, home }) {
                 {avatar && (
                   <div style={{ margin: "10px" }}>
                     <img
-                      src={`${process.env.REACT_APP_SERVER}/api${avatar.link}`}
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${avatar.link}`}
                       // height="120px"
                       // width="150px"
                       height="auto"
@@ -470,7 +501,7 @@ function NewUser({ setCurrentSelection, home }) {
                 {hero && (
                   <div style={{ margin: "10px" }}>
                     <img
-                      src={`${process.env.REACT_APP_SERVER}/api${hero.link}`}
+                      src={`${process.env.REACT_APP_SERVER}/uploads/${hero.link}`}
                       alt=""
                       height="50%"
                       width={"80%"}

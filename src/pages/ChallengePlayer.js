@@ -392,11 +392,11 @@ function ChallengePlayer(props) {
                   textTransform: "uppercase",
                 }}
               >
-                Today's Workout Attachment
+                {t("player.today_workout_attachment")}
               </p>
 
               <a
-                href={`${process.env.REACT_APP_SERVER}/api${workout.infoFile}`}
+                href={`${process.env.REACT_APP_SERVER}/uploads/${workout.infoFile}`}
                 target="_blank"
                 download
               >
@@ -419,7 +419,7 @@ function ChallengePlayer(props) {
                   textTransform: "uppercase",
                 }}
               >
-                Today's Equipments
+                {t("player.today_equipment")}
               </p>
               <div>
                 {workout.relatedEquipments.map((e) => (
@@ -448,7 +448,7 @@ function ChallengePlayer(props) {
                   textTransform: "uppercase",
                 }}
               >
-                RELATED PRODUCT FROM E-SHOP
+                {t("player.related")}
               </p>
               <div>
                 {workout.relatedProducts.map((e) => (

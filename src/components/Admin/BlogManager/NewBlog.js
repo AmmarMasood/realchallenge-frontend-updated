@@ -260,7 +260,7 @@ function NewBlog({ setCurrentSelection }) {
               >
                 <img
                   alt=""
-                  src={`${process.env.REACT_APP_SERVER}/api${featuredImage.link}`}
+                  src={`${process.env.REACT_APP_SERVER}/uploads/${featuredImage.link}`}
                   height="auto"
                   width={"80%"}
                 />
