@@ -11,15 +11,15 @@ import {
   CaretRightOutlined,
 } from "@ant-design/icons";
 import { Carousel } from "antd";
-import { useTranslation } from "react-i18next";
 import ChallengeCard from "../components/Cards/ChallengeCard";
 import forward from "../assets/icons/forward-white.png";
 import { getAllChallenges } from "../services/createChallenge/main";
 import slug from "elegant-slug";
+import { T } from "../components/Translate";
 
 function Challenges() {
   // eslint-disable-next-line
-  const [t] = useTranslation();
+
   const [challenges, setChallenges] = useState([]);
   const ref = useRef(null);
 
@@ -44,12 +44,14 @@ function Challenges() {
       <div className="page-header challenge-background">
         <div className="page-header-textbox" style={{ padding: "50px" }}>
           <h1 className="font-heading-white">
-            {t("challenges.your_goals")} <br /> {t("challenges.your_cha")}
+            <T>challenges.your_goals</T> <br /> <T>challenges.your_cha</T>
           </h1>
-          <p className="font-paragraph-white">{t("challenges.regard")}</p>
+          <p className="font-paragraph-white">
+            <T>challenges.regard</T>
+          </p>
           <Link className="home-button" to="/new">
             <span className="home-button-text font-paragraph-white">
-              {t("challenges.start")} <ArrowRightOutlined />
+              <T>challenges.start</T> <ArrowRightOutlined />
             </span>
           </Link>
         </div>
@@ -68,7 +70,7 @@ function Challenges() {
                 <div
                   className="challenge-carousel-body"
                   style={{
-                    background: `url(${process.env.REACT_APP_SERVER}/api${challenge.thumbnailLink})`,
+                    background: `url(${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink})`,
                     backgroundSize: "cover",
                     backgroundPosition: "50% 50%",
                   }}
@@ -79,10 +81,10 @@ function Challenges() {
                       className="font-subheading-white"
                       style={{ fontSize: "4rem" }}
                     >
-                      {t("challenges.new_cha")}
+                      <T>challenges.new_cha</T>
                     </h1>
                     <p className="challenge-carousel-body-abstext-paragraph font-subheading-white">
-                      {t("challenges.tp")}
+                      <T>challenges.tp</T>
                     </p>
                   </div>
                   <div
@@ -139,10 +141,10 @@ function Challenges() {
             style={{ fontSize: "3rem", paddingLeft: "20px" }}
             className="font-subheading-white"
           >
-            {t("challenges.lt")}
+            <T>challenges.lt</T>
           </h1>
           <p className="font-paragraph-white" style={{ paddingLeft: "20px" }}>
-            {t("challenges.basic_challenge")}
+            <T>challenges.basic_challenge</T>
           </p>
           <div
             className="trainers-3-row-cards"
@@ -178,7 +180,7 @@ function Challenges() {
               }}
             >
               <span className="font-paragraph-white">
-                {t("challenges.view_all")} <ArrowRightOutlined />
+                <T>challenges.view_all</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>
@@ -214,8 +216,12 @@ function Challenges() {
       {/* 4th row */}
       <div style={{ backgroundColor: "#222932" }}>
         <div className="challenge-row-4 color-grey">
-          <h1 className="font-heading-white">{t("challenges.healthy")}</h1>
-          <p className="font-paragraph-white">{t("challenges.basic")}</p>
+          <h1 className="font-heading-white">
+            <T>challenges.healthy</T>
+          </h1>
+          <p className="font-paragraph-white">
+            <T>challenges.basic</T>
+          </p>
           <div style={{ paddingTop: "10px" }}>
             <Link
               className="view-all-button"
@@ -226,7 +232,7 @@ function Challenges() {
               }}
             >
               <span className="font-paragraph-white">
-                {t("challenges.view_all")} <ArrowRightOutlined />
+                <T>challenges.view_all</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>
@@ -236,9 +242,11 @@ function Challenges() {
       {/* 5th row */}
       <div style={{ backgroundColor: "#171e27" }}>
         <div className="challenge-row-4 color-grey-dark">
-          <h1 className="font-heading-white">{t("challenges.tk")}</h1>
+          <h1 className="font-heading-white">
+            <T>challenges.tk</T>
+          </h1>
           <p className="font-paragraph-white">
-            {t("challenges.challenge_yourself")}
+            <T>challenges.challenge_yourself</T>
           </p>
           <div style={{ paddingTop: "10px" }}>
             <Link
@@ -250,7 +258,7 @@ function Challenges() {
               }}
             >
               <span className="font-paragraph-white">
-                {t("challenges.view_all")} <ArrowRightOutlined />
+                <T>challenges.view_all</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>
@@ -260,31 +268,11 @@ function Challenges() {
       {/* 6th row */}
       <div style={{ backgroundColor: "#222932" }}>
         <div className="challenge-row-4 color-grey">
-          <h1 className="font-heading-white">{t("challenges.mindset")}</h1>
-          <p className="font-paragraph-white">{t("challenges.think_fit")}</p>
-          <div style={{ paddingTop: "10px" }}>
-            <Link
-              className="view-all-button"
-              to="/all-challenges"
-              style={{
-                marginLeft: "20px",
-                width: "150px",
-              }}
-            >
-              <span className="font-paragraph-white">
-                {t("challenges.view_all")} <ArrowRightOutlined />
-              </span>
-            </Link>
-          </div>
-        </div>
-      </div>
-      {/* 6th row */}
-      {/* 7th row */}
-      <div style={{ backgroundColor: "#171e27" }}>
-        <div className="challenge-row-4 color-grey-dark">
-          <h1 className="font-heading-white">{t("challenges.gain_muscle")}</h1>
+          <h1 className="font-heading-white">
+            <T>challenges.mindset</T>
+          </h1>
           <p className="font-paragraph-white">
-            {t("challenges.let_the_gains")}
+            <T>challenges.think_fit</T>
           </p>
           <div style={{ paddingTop: "10px" }}>
             <Link
@@ -296,7 +284,33 @@ function Challenges() {
               }}
             >
               <span className="font-paragraph-white">
-                {t("challenges.view_all")} <ArrowRightOutlined />
+                <T>challenges.view_all</T> <ArrowRightOutlined />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* 6th row */}
+      {/* 7th row */}
+      <div style={{ backgroundColor: "#171e27" }}>
+        <div className="challenge-row-4 color-grey-dark">
+          <h1 className="font-heading-white">
+            <T>challenges.gain_muscle</T>
+          </h1>
+          <p className="font-paragraph-white">
+            <T>challenges.let_the_gains</T>
+          </p>
+          <div style={{ paddingTop: "10px" }}>
+            <Link
+              className="view-all-button"
+              to="/all-challenges"
+              style={{
+                marginLeft: "20px",
+                width: "150px",
+              }}
+            >
+              <span className="font-paragraph-white">
+                <T>challenges.view_all</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>
@@ -305,10 +319,12 @@ function Challenges() {
       {/* 7th row */}
       {/* 8th row */}
       <div className="challenge-row-8 color-grey" style={{ height: "300px" }}>
-        <h1 className="font-heading-white">{t("challenges.want")}</h1>
+        <h1 className="font-heading-white">
+          <T>challenges.want</T>
+        </h1>
         <Link className="home-button" to="/all-challenges">
           <span className="home-button-text font-paragraph-white">
-            {t("challenges.our")} <ArrowRightOutlined />
+            <T>challenges.our</T> <ArrowRightOutlined />
           </span>
         </Link>
       </div>
@@ -317,20 +333,20 @@ function Challenges() {
         <div className="home-row-7-container">
           <div className="home-row-7-container-text">
             <h2 style={{ fontSize: "2rem" }} className="font-subheading-black">
-              {t("challenges.start_today")}
+              <T>challenges.start_today</T>
             </h2>
             <h1 style={{ fontSize: "4.5rem" }} className="font-heading-black">
-              {t("challenges.optimal")}
+              <T>challenges.optimal</T>
             </h1>
             <p
               style={{ fontSize: "1.8rem", paddingBottom: "10px" }}
               className="font-paragraph-black"
             >
-              {t("challenges.a_personal")}
+              <T>challenges.a_personal</T>
             </p>
             <Link className="home-button" to="/new">
               <span className="home-button-text font-paragraph-white">
-                {t("common.start_now")} <ArrowRightOutlined />
+                <T>common.start_now</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>

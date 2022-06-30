@@ -8,9 +8,9 @@ const openNotificationWithIcon = (type, message, description) => {
   });
 };
 
-export function createChallengeEquipment(name) {
+export function createChallengeEquipment(values) {
   return axios
-    .post(`${process.env.REACT_APP_SERVER}/api/equipment/create`, { name })
+    .post(`${process.env.REACT_APP_SERVER}/api/equipment/create`, values)
     .then((res) =>
       openNotificationWithIcon("success", "Successfully Created", "")
     )
@@ -32,9 +32,9 @@ export function updateChallengeEquipment(name, id) {
     });
 }
 
-export function getAllChallengeEquipments() {
+export function getAllChallengeEquipments(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/equipment/`)
+    .get(`${process.env.REACT_APP_SERVER}/api/equipment?language=${language}`)
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

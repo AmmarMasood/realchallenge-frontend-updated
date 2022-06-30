@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table, Space, Input, Select, Switch } from "antd";
 import moment from "moment";
-import { useTranslation } from "react-i18next";
+
 import {
   getAllAdminRequests,
   updateAdminRequest,
 } from "../../../services/adminRequests";
 import slug from "elegant-slug";
 import { Link } from "react-router-dom";
+import { T } from "../../Translate";
 
 function AllRequests() {
-  const [t] = useTranslation();
   const [filterAllData, setFilterAllData] = useState([]);
   const [allData, setAllData] = useState([]);
   const [requestsTypeFilter, setRequestsTypeFilter] = useState("challenge");
@@ -136,7 +136,9 @@ function AllRequests() {
             rel="noopener noreferrer"
           >
             {" "}
-            <Button type="primary">{t("adminDashboard.preview")}</Button>
+            <Button type="primary">
+              <T>adminDashboard.preview</T>
+            </Button>
           </Link>
 
           <Select

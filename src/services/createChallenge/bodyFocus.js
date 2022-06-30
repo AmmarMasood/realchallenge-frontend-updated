@@ -32,9 +32,9 @@ export function updateBodyFocus(name, id) {
     });
 }
 
-export function getAllBodyFocus() {
+export function getAllBodyFocus(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/body/`)
+    .get(`${process.env.REACT_APP_SERVER}/api/body?language=${language}`)
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

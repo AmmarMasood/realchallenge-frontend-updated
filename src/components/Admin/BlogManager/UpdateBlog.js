@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Form, Input, Button, Select, Modal, List } from "antd";
-import { useTranslation } from "react-i18next";
 import { CloseSquareOutlined, LoadingOutlined } from "@ant-design/icons";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import {
   createBlogCategory,
   getAllBlogCategories,
+  getAllUserBlogs,
   removeBlogCategory,
 } from "../../../services/blogs";
 import EditCategoryName from "./EditCategoryName";
@@ -21,8 +21,6 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
   const [mediaManagerVisible, setMediaManagerVisible] = useState(false);
   const [mediaManagerType, setMediaManagerType] = useState("images");
   const [mediaManagerActions, setMediaManagerActions] = useState([]);
-
-  const [t] = useTranslation();
   const [title, setTitle] = useState("");
   const [paragraph, setParagraph] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
@@ -42,15 +40,22 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
   const [isPublic, setIsPublic] = useState(false);
   const [allowComments, setAllowComments] = useState(false);
   const [allowReviews, setAllowReviews] = useState(false);
+
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [selectedBlog, setSelectedBlog] = useState("");
+
   const userInfo = useContext(userInfoContext)[0];
   useEffect(() => {
     fethData();
+    getAllBlogsFromBackend();
     form.setFieldsValue({
       title: blogInfo.title,
       paragraph: blogInfo.paragraph,
       category: blogInfo.category,
     });
     blogInfo.category && setCategory(blogInfo.category._id);
+    blogInfo.alternativeLanguage &&
+      setSelectedBlog(blogInfo.alternativeLanguage._id);
     setFeaturedImage(blogInfo.featuredImage);
     setVideLink(blogInfo.videoLink);
     setTitle(blogInfo.title);
@@ -61,8 +66,16 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
 
     console.log(blogInfo);
   }, [blogInfo]);
+
+  async function getAllBlogsFromBackend() {
+    const data = await getAllUserBlogs("");
+    if (data && data.blogs) {
+      setAllBlogs(data.blogs);
+    }
+  }
+
   const fethData = async () => {
-    const data = await getAllBlogCategories();
+    const data = await getAllBlogCategories("");
     setAllCategories(data.categories);
     console.log(data);
   };
@@ -88,6 +101,7 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
         isPublic: isPublic,
         allowComments: allowComments,
         allowReviews: allowReviews,
+        alternativeLanguage: selectedBlog,
       };
       onUpdateComplete(setLoading, vals, blogInfo._id);
     }
@@ -211,6 +225,25 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
+          <div>
+            <span
+              style={{ marginRight: "5px" }}
+            >{`Select alternative language version`}</span>
+            <Select
+              style={{ width: "500px" }}
+              onChange={(e) => setSelectedBlog(e)}
+              value={selectedBlog}
+            >
+              <Option value={""} key={1}>
+                -
+              </Option>
+              {allBlogs.map((r, i) => (
+                <Option key={i + 2} value={r._id}>
+                  {r.title}
+                </Option>
+              ))}
+            </Select>
+          </div>
           <Form.Item
             label="Title"
             name="title"
@@ -318,7 +351,7 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
             ) : (
               videoLink && (
                 <div className="font-paragraph-black">
-                  {`${process.env.REACT_APP_SERVER}/api${videoLink}`}{" "}
+                  {`${process.env.REACT_APP_SERVER}/uploads/${videoLink}`}{" "}
                   <CloseSquareOutlined
                     style={{ cursor: "pointer" }}
                     onClick={() => setVideLink("")}

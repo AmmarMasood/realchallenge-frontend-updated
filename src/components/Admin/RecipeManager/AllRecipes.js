@@ -15,9 +15,11 @@ function AllRecipes() {
   const [selectedProduct, setSelectedProduct] = useState({});
 
   async function fetchData() {
-    const data = await getAllUserRecipes();
-    setAllRecipes(data.recipes);
-    setFilterAllRecipes(data.recipes);
+    const data = await getAllUserRecipes("");
+    if (data) {
+      setAllRecipes(data.recipes);
+      setFilterAllRecipes(data.recipes);
+    }
   }
 
   async function deleteRecipe(id) {

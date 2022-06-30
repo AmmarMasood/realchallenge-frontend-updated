@@ -10,12 +10,12 @@ import {
 } from "@ant-design/icons";
 import Logo from "../images/logo.png";
 import { userInfoContext, userPointsContext } from "../contexts/UserStore";
-import { languageContext } from "../contexts/LanguageContext";
 import { Avatar, Popover, Badge } from "antd";
-import { useTranslation } from "react-i18next";
 import { logoutUser } from "../services/authentication";
 import { withRouter } from "react-router-dom";
 import Coins from "../assets/icons/coins.svg";
+import LanguageSelector from "./LanguageSelector/LanguageSelector";
+import { T } from "./Translate";
 
 function Navbar({ color, history }) {
   const [click, setClick] = useState(false);
@@ -23,9 +23,6 @@ function Navbar({ color, history }) {
   const [button, setButton] = useState(true);
   const [userInfo, setUserInfo] = useContext(userInfoContext);
   const userPoints = useContext(userPointsContext)[0];
-  const [language, setLangauge] = useContext(languageContext);
-
-  const [t] = useTranslation();
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -39,63 +36,36 @@ function Navbar({ color, history }) {
   const content = (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Link to="/user/dashboard" className="font-paragraph-white nav-links">
-        {t("navbar.success_overview")}
+        <T>navbar.success_overview</T>
       </Link>
       <Link to="/user/update" className="font-paragraph-white nav-links">
-        {t("navbar.update")}
+        <T>navbar.update</T>
       </Link>
 
       <Link to="/user/settings" className="font-paragraph-white nav-links">
-        {t("navbar.setting")}
+        <T>navbar.setting</T>
       </Link>
       <Link
         className="font-paragraphw-white nav-links"
         onClick={() => logoutUser(history, setUserInfo)}
       >
-        {" "}
-        {t("navbar.logout")}
+        <T>navbar.logout</T>
       </Link>
     </div>
   );
   const contentAdmin = (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Link to="/admin/dashboard" className="font-paragraph-white nav-links">
-        {t("navbar.admin_dashboard")}
+        <T>navbar.admin_dashboard</T>
       </Link>
       <Link
         className="font-paragraphw-white nav-links"
         onClick={() => logoutUser(history, setUserInfo)}
       >
         {" "}
-        {t("navbar.logout")}
+        <T>navbar.logout</T>
       </Link>
-    </div>
-  );
-
-  const languageChooser = (
-    <div
-      style={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
-    >
-      <span
-        onClick={() => {
-          setLangauge("English");
-          localStorage.setItem("locale", "eng");
-          window.location.reload();
-        }}
-        className="font-paragraph-white nav-links"
-      >
-        English
-      </span>
-      <span
-        onClick={() => {
-          setLangauge("Dutch");
-          localStorage.setItem("locale", "du");
-          window.location.reload();
-        }}
-        className="font-paragraph-white nav-links"
-      >
-        Dutch
-      </span>
+      <div>Chcking</div>
     </div>
   );
 
@@ -109,9 +79,6 @@ function Navbar({ color, history }) {
 
   useEffect(() => {
     showButton();
-    if (localStorage.getItem("locale") === "du") {
-      setLangauge("Dutch");
-    }
   }, []);
 
   window.addEventListener("resize", showButton);
@@ -169,7 +136,7 @@ function Navbar({ color, history }) {
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
-                {t("navbar.challenges")}
+                <T>navbar.challenges</T>
               </Link>
               {/* </li> */}
               {/* <li className="nav-item font-paragraph-white"> */}
@@ -179,7 +146,7 @@ function Navbar({ color, history }) {
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
-                {t("navbar.trainers")}
+                <T>navbar.trainers</T>
               </Link>
               {/* </li> */}
               {/* <li className="nav-item font-paragraph-white"> */}
@@ -189,7 +156,7 @@ function Navbar({ color, history }) {
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
-                {t("navbar.nutrient")}
+                <T>navbar.nutrient</T>
               </Link>
             </li>
             <li
@@ -202,7 +169,7 @@ function Navbar({ color, history }) {
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
-                {t("navbar.how_it_works")}
+                <T>navbar.how_it_works</T>
               </Link>
               {/* </li>
             <li className="nav-item font-paragraph-white"> */}
@@ -212,7 +179,7 @@ function Navbar({ color, history }) {
                 style={{ fontWeight: "400", fontSize: "13px" }}
                 onClick={closeMobileMenu}
               >
-                {t("navbar.pricing")}
+                <T>navbar.pricing</T>
               </Link>
               {/* </li>
             <li className="nav-item font-paragraph-white"> */}
@@ -222,21 +189,10 @@ function Navbar({ color, history }) {
                 style={{ fontWeight: "400", fontSize: "13px" }}
                 onClick={closeMobileMenu}
               >
-                {t("navbar.magazine")}
+                <T>navbar.magazine</T>
               </Link>
               <div className="loggedin-nav-userinfo">
-                <Popover
-                  placement="bottom"
-                  content={languageChooser}
-                  trigger="click"
-                >
-                  <span
-                    className="font-paragraph-white"
-                    style={{ cursor: "pointer" }}
-                  >
-                    {language} <CaretDownOutlined />
-                  </span>
-                </Popover>
+                <LanguageSelector />
               </div>
             </li>
           </ul>
@@ -266,6 +222,7 @@ function Navbar({ color, history }) {
                   />
                 </Badge>
               </Popover>
+
               <Avatar
                 shape="square"
                 src={userInfo.avatar}
@@ -274,6 +231,7 @@ function Navbar({ color, history }) {
                   marginRight: "20px",
                 }}
               />
+
               <Popover
                 placement="bottom"
                 content={userInfo.role === "customer" ? content : contentAdmin}

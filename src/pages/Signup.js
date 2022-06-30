@@ -7,7 +7,7 @@ import GoogleLogin from "react-google-login";
 import { Input, Form } from "antd";
 import { LoadingOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
 import {
   registerUser,
   signupUserWithGoogle,
@@ -16,9 +16,9 @@ import {
 import { userInfoContext } from "../contexts/UserStore";
 import { createCustomerDetails } from "../services/customer";
 import setAuthToken from "../helpers/setAuthToken";
+import { T } from "../components/Translate";
 
 function Signup(props) {
-  const [t] = useTranslation();
   const [userInfo, setUserInfo] = useContext(userInfoContext);
   const [wizCompleted, setWizCompleted] = useState(false);
   const [wizardValues, setWizardValues] = useState({});
@@ -155,10 +155,13 @@ function Signup(props) {
           cursor: "pointer",
         }}
       >
-        <ArrowLeftOutlined /> {t("signup.back")}
+        <ArrowLeftOutlined />
+        <T>signup.back</T>
       </button>
       <div className="signup-container">
-        <h1 className="font-heading-white">{t("signup.join")}</h1>
+        <h1 className="font-heading-white">
+          <T>signup.join</T>
+        </h1>
         <p
           style={{
             color: "#00ffff",
@@ -168,7 +171,7 @@ function Signup(props) {
             textAlign: "left",
           }}
         >
-          {t("signup.weHaveDeveloped")}
+          <T>signup.weHaveDeveloped</T>
         </p>
         <div className="signup-container-columns">
           <div
@@ -176,7 +179,7 @@ function Signup(props) {
             style={{ textAlign: "left" }}
           >
             <p className="font-subheading-white" style={{ paddingTop: "12px" }}>
-              {t("signup.social")}
+              <T>signup.social</T>
             </p>
             <FacebookLogin
               appId={process.env.REACT_APP_FACEBOOK_APP_ID}
@@ -189,7 +192,7 @@ function Signup(props) {
                   style={{ width: "90%" }}
                   onClick={renderProps.onClick}
                 >
-                  {t("signup.signFacebook")}
+                  <T>signup.signFacebook</T>
                 </button>
               )}
             />
@@ -202,7 +205,7 @@ function Signup(props) {
                   style={{ width: "90%" }}
                   disabled={renderProps.disabled}
                 >
-                  {t("signup.signGoogle")}
+                  <T>signup.signGoogle</T>
                 </button>
               )}
               buttonText="Login"
@@ -222,13 +225,13 @@ function Signup(props) {
                 style={{ textAlign: "left" }}
               >
                 <p className="font-subheading-white">
-                  {t("signup.or_with_email")}
+                  <T>signup.or_with_email</T>
                 </p>
                 <Form.Item
                   label={
                     <div className="font-paragraph-white">
                       {" "}
-                      {t("signup.username")}
+                      <T>signup.username</T>
                     </div>
                   }
                   name="username"
@@ -246,7 +249,7 @@ function Signup(props) {
                 <Form.Item
                   label={
                     <div className="font-paragraph-white">
-                      {t("signup.firstName")}
+                      <T>signup.firstName</T>
                     </div>
                   }
                   name="firstName"
@@ -267,7 +270,7 @@ function Signup(props) {
                 <Form.Item
                   label={
                     <div className="font-paragraph-white">
-                      {t("signup.lastName")}
+                      <T>signup.lastName</T>
                     </div>
                   }
                   name="lastName"
@@ -285,7 +288,7 @@ function Signup(props) {
                 <Form.Item
                   label={
                     <div className="font-paragraph-white">
-                      {t("signup.email")}
+                      <T>signup.email</T>
                     </div>
                   }
                   name="email"
@@ -304,7 +307,7 @@ function Signup(props) {
                 <Form.Item
                   label={
                     <div className="font-paragraph-white">
-                      {t("signup.password")}
+                      <T>signup.password</T>
                     </div>
                   }
                   name="password"
@@ -324,7 +327,7 @@ function Signup(props) {
                   name="confirm"
                   label={
                     <div className="font-paragraph-white">
-                      {t("signup.confirm_password")}
+                      <T>signup.confirm_password</T>
                     </div>
                   }
                   dependencies={["password"]}
@@ -354,7 +357,7 @@ function Signup(props) {
                   style={{ color: "#72777B" }}
                   className="font-paragraph-white"
                 >
-                  {t("signup.by_creating")}
+                  <T>signup.by_creating</T>
                 </span>
               </div>
               {loading ? (
@@ -377,7 +380,7 @@ function Signup(props) {
                     className="font-paragraph-white"
                     style={{ textTransform: "uppercase", fontWeight: "600" }}
                   >
-                    {t("signup.create_account")}
+                    <T>signup.create_account</T>
                   </span>
                 </button>
               )}

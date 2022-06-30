@@ -16,7 +16,7 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Avatar, Input, Modal, Rate } from "antd";
-import { useTranslation } from "react-i18next";
+
 import { withRouter } from "react-router-dom";
 import {
   getRecipeById,
@@ -30,6 +30,7 @@ import moment from "moment";
 import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
 import ReactHtmlParser from "react-html-parser";
+import { T } from "../components/Translate";
 
 function RecipeProfile(props) {
   const [allComments, setAllComments] = useState([]);
@@ -38,7 +39,7 @@ function RecipeProfile(props) {
   const [userInfo, serUserInfo] = useContext(userInfoContext);
   const [reviewOpen, setReviewOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [t] = useTranslation();
+
   // eslint-disable-next-line
   const [recipe, setRecipe] = useState({});
 
@@ -137,7 +138,7 @@ function RecipeProfile(props) {
                     ))} */}
                 </div>
                 <span onClick={() => setReviewOpen(true)}>
-                  {t("recipe_profile.reviews")}
+                  <T>recipe_profile.reviews</T>
                 </span>
                 {localStorage.getItem("jwtToken") ? (
                   <div className="recipe-likes">
@@ -179,7 +180,7 @@ function RecipeProfile(props) {
                     <ClockCircleOutlined
                       style={{ color: "var(--color-orange)" }}
                     />{" "}
-                    {recipe.prepTime} {t("recipe_profile.minutes")}
+                    {recipe.prepTime} <T>recipe_profile.minutes</T>
                   </div>
                 ) : (
                   ""
@@ -187,7 +188,7 @@ function RecipeProfile(props) {
                 {recipe.persons ? (
                   <div className="recipe-info-block">
                     <UserOutlined style={{ color: "var(--color-orange)" }} />{" "}
-                    {recipe.persons} {t("recipe_profile.persons")}
+                    {recipe.persons} <T>recipe_profile.persons</T>
                   </div>
                 ) : (
                   ""
@@ -200,7 +201,7 @@ function RecipeProfile(props) {
           {/* hree we go */}
           <div className="recipe-mealValues">
             <div className="recipe-mealValues-heading font-paragraph-white">
-              {t("recipe_profile.meal_values")}
+              <T>recipe_profile.meal_values</T>
             </div>
             <div className="recipe-mealValues-container">
               {[
@@ -231,7 +232,7 @@ function RecipeProfile(props) {
           {/* sdadasd */}
           <div className="recipe-mealValues">
             <div className="recipe-mealValues-heading font-paragraph-white">
-              {t("recipe_profile.short_info")}
+              <T>recipe_profile.short_info</T>
             </div>
             <div className="recipe-mealValues-info">
               {recipe.description ? ReactHtmlParser(recipe.description) : ""}
@@ -240,7 +241,7 @@ function RecipeProfile(props) {
           {/* asdasdasd */}
           <div className="recipe-mealValues">
             <div className="recipe-mealValues-heading font-paragraph-white">
-              {t("recipe_profile.ingredients")}
+              <T>recipe_profile.ingredients</T>
             </div>
             <div className="recipe-ingredients-box">
               {recipe.ingredients &&
@@ -258,7 +259,7 @@ function RecipeProfile(props) {
           {/* sdcsadas */}
           <div className="recipe-mealValues">
             <div className="recipe-mealValues-heading font-paragraph-white">
-              {t("recipe_profile.prepration")}
+              <T>recipe_profile.prepration</T>
             </div>
             <div className="recipe-prepration-box">
               {recipe.cookingProcess
@@ -277,7 +278,7 @@ function RecipeProfile(props) {
           {/* dasdasdsad */}
           <div className="recipe-mealValues">
             <div className="recipe-mealValues-heading font-paragraph-white">
-              {t("recipe_profile.tips")}
+              <T>recipe_profile.tips</T>
             </div>
             <div
               className="recipe-mealValues-info"
@@ -293,7 +294,7 @@ function RecipeProfile(props) {
           {/* sdasdasdas */}
           <div className="recipe-mealValues">
             <div className="recipe-mealValues-heading font-paragraph-white">
-              {t("recipe_profile.notes")}
+              <T>recipe_profile.notes</T>
             </div>
             <div
               className="recipe-mealValues-info"
@@ -310,7 +311,7 @@ function RecipeProfile(props) {
           {/* sdasdasdas */}
           {/* <div className="trainer-profile-goals">
             <div className="recipe-mealValues-heading font-paragraph-white">
-              {t("recipe_profile.comments")}
+              <T>recipe_profile.comments</T>
             </div>
             <div
               className="trainer-profile-goals-container"
@@ -342,7 +343,7 @@ function RecipeProfile(props) {
                 textTransform: "uppercase",
               }}
             >
-              {t("challenge_profile.comments")}
+              <T>challenge_profile.comments</T>
             </div>
             {allComments.map((c) => (
               <div className="comment-container">
@@ -358,7 +359,7 @@ function RecipeProfile(props) {
                   className="font-paragraph-white comment-container-c3"
                   style={{ color: "#82868b" }}
                 >
-                  {moment(c.createdAt).format("MMM, Do YY")}
+                  {moment(c.createdAt).format("MMM, Do YYYY")}
                 </div>
               </div>
             ))}
@@ -393,7 +394,7 @@ function RecipeProfile(props) {
                       cursor: "pointer",
                     }}
                   >
-                    {t("common.postComment")}
+                    <T>common.postComment</T>
                   </button>
                 )}
               </>
@@ -409,7 +410,7 @@ function RecipeProfile(props) {
                 style={{ width: "80%" }}
               >
                 <span className="home-button-text">
-                  {t("recipe_profile.start_today")} <ArrowRightOutlined />
+                  <T>recipe_profile.start_today</T> <ArrowRightOutlined />
                 </span>
               </Link>
             </div>

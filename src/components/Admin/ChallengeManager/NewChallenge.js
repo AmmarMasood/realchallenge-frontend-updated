@@ -4,7 +4,7 @@ import NewChallengeMainTab from "./NewChallengeMainTab";
 import NewChallengeWorkoutTab from "./NewChallengeWorkoutTab";
 import NewChallengeMusicTab from "./NewChallengeMusicTab";
 import NewChallengeAdditionalTab from "./NewChallengeAdditionalTab";
-import { useTranslation } from "react-i18next";
+
 import { v4 } from "uuid";
 
 // services
@@ -14,12 +14,18 @@ import { getAllChallengeEquipments } from "../../../services/createChallenge/equ
 import { getAllBodyFocus } from "../../../services/createChallenge/bodyFocus";
 import { getAllTrainers } from "../../../services/trainers";
 import { getAllChallengeProducts } from "../../../services/createChallenge/products";
-import { createChallenge } from "../../../services/createChallenge/main";
+import {
+  createChallenge,
+  getAllUserChallenges,
+  updateChallenge,
+} from "../../../services/createChallenge/main";
 import setAuthToken from "../../../helpers/setAuthToken";
 import { userInfoContext } from "../../../contexts/UserStore";
 import { createPost } from "../../../services/posts";
 import slug from "elegant-slug";
 import { addChallengeToCustomerDetail } from "../../../services/customer";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import { T } from "../../Translate";
 
 const { TabPane } = Tabs;
 
@@ -28,7 +34,6 @@ function callback(key) {
 }
 
 function NewChallenge() {
-  const [t] = useTranslation();
   // state of main tab strats
   const [name, setName] = useState("");
   const [access, setAccess] = useState([]);
@@ -68,7 +73,6 @@ function NewChallenge() {
   const [allTags, setAllTags] = useState([]);
   const [newTagName, setNewTagName] = useState("");
   const [showTagModal, setShowTagModal] = useState(false);
-  const [language, setLanguage] = useState("eng");
   // state of main tab ends
 
   // state pf the new challenge tab starts
@@ -132,19 +136,20 @@ function NewChallenge() {
   const [userCreatePost, setUserCreatePost] = useState(false);
 
   const [userInfo, setUserInfo] = useContext(userInfoContext);
-
-  useEffect(() => {
-    setAuthToken(localStorage.getItem("jwtToken"));
-    fethData();
-  }, []);
+  const { language } = useContext(LanguageContext);
+  const [allChallenges, setAllChallenges] = useState([]);
+  const [selectedChallenge, setSelectedChallenge] = useState("");
 
   async function fethData() {
-    const bodyFocus = await getAllBodyFocus();
-    const goals = await getAllChallengeGoals();
-    const tags = await getAllChallengeTags();
-    const equipments = await getAllChallengeEquipments();
-    const trainers = await getAllTrainers();
-    const products = await getAllChallengeProducts();
+    const bodyFocus = await getAllBodyFocus(language);
+    const goals = await getAllChallengeGoals(language);
+    const tags = await getAllChallengeTags(language);
+    const equipments = await getAllChallengeEquipments(language);
+    const trainers = await getAllTrainers(language);
+    const products = await getAllChallengeProducts(language);
+    const challenges = await getAllUserChallenges(
+      language === "dutch" ? "english" : "dutch"
+    );
 
     setAllBodyfocus(bodyFocus.body);
     setAllEquipments(equipments.equipments);
@@ -153,7 +158,13 @@ function NewChallenge() {
     // console.log("trainers", trainers);
     setAllTrainers(trainers.trainers);
     setAllProducts(products.products);
+    setAllChallenges(challenges.challenges);
   }
+
+  useEffect(() => {
+    setAuthToken(localStorage.getItem("jwtToken"));
+    fethData();
+  }, [language]);
 
   const createChallengeButton = async () => {
     console.log("isRendered", renderWorkout);
@@ -234,6 +245,10 @@ function NewChallenge() {
       isPublic: makePublic,
     };
     console.log("create object", obj);
+    if (selectedChallenge) {
+      obj.alternativeLanguage = selectedChallenge;
+    }
+    // return;
     // return;
     const res = await createChallenge(obj);
     console.log("opp===========>", res);
@@ -243,6 +258,7 @@ function NewChallenge() {
     // console.log(error.response.headers);
     if (res && res.weeks) {
       userCreatePost && createAPost(res.weeks._id);
+      selectedChallenge && updateSelectedChallenge(res.weeks._id);
     }
     console.log("create response", res);
     console.log("userCreatePost", userCreatePost);
@@ -255,10 +271,15 @@ function NewChallenge() {
       image: typeof thumbnail === "object" ? thumbnail.link : "",
       type: "Challenge",
       url: `/challenge/${slug(name)}/${id}`,
+      language: language,
     };
     await createPost(values);
     // setCreatePostModalVisible(false);
     // console.log(values);
+  };
+
+  const updateSelectedChallenge = async (id) => {
+    await updateChallenge({ alternativeLanguage: id }, selectedChallenge);
   };
 
   return (
@@ -282,14 +303,15 @@ function NewChallenge() {
         </Button>
       </Modal> */}
       <h2 className="font-heading-black">
-        {t("adminDashboard.challenges.new")}
+        <T>adminDashboard.challenges.new</T>
       </h2>
       <div className="newchallenge-creator-container">
         <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="Main" key="1">
             <NewChallengeMainTab
-              language={language}
-              setLanguage={setLanguage}
+              allChallenges={allChallenges}
+              selectedChallenge={selectedChallenge}
+              setSelectedChallenge={setSelectedChallenge}
               name={name}
               setName={setName}
               access={access}

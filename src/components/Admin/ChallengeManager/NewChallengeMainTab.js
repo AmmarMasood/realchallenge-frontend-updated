@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Form,
   Input,
@@ -11,7 +11,6 @@ import {
 } from "antd";
 import { LoadingOutlined, CloseSquareOutlined } from "@ant-design/icons";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
-import { useTranslation } from "react-i18next";
 // services
 import {
   createChallengeGoal,
@@ -35,12 +34,16 @@ import {
   getAllTrainers,
 } from "../../../services/trainers";
 import EditTypeName from "./EditTypeName";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import LanguageSelector from "../../LanguageSelector/LanguageSelector";
+import { T } from "../../Translate";
 const { Option } = Select;
 
 function NewChallengeMainTab({
   form,
-  language,
-  setLanguage,
+  selectedChallenge,
+  setSelectedChallenge,
+  allChallenges,
   name,
   setName,
   access,
@@ -113,19 +116,18 @@ function NewChallengeMainTab({
   const [newTrainerFitnessInterest, setNewTrainerFitnessInterest] =
     useState("");
   const [filteredTrainers, setFilteredTrainers] = useState([]);
-
-  const [t] = useTranslation();
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     fethData();
-  }, []);
+  }, [language]);
 
   async function fethData() {
-    const bodyFocus = await getAllBodyFocus();
-    const goals = await getAllChallengeGoals();
-    const tags = await getAllChallengeTags();
-    const trainers = await getAllTrainers();
-    const res = await getAllTrainerGoals();
+    const bodyFocus = await getAllBodyFocus(language);
+    const goals = await getAllChallengeGoals(language);
+    const tags = await getAllChallengeTags(language);
+    const trainers = await getAllTrainers(language);
+    const res = await getAllTrainerGoals(language);
 
     setAllBodyfocus(bodyFocus.body);
     setAllGoals(goals.challengeGoals);
@@ -217,7 +219,10 @@ function NewChallengeMainTab({
             }}
             onClick={async () => {
               if (newTrainerFitnessInterest.length > 0) {
-                await createTrainerGoal({ name: newTrainerFitnessInterest });
+                await createTrainerGoal({
+                  name: newTrainerFitnessInterest,
+                  language: language,
+                });
                 // setShowBodyfocusModal(false);
                 fethData();
               }
@@ -280,7 +285,7 @@ function NewChallengeMainTab({
         visible={showGoalModal}
       >
         <p className="font-paragraph-white">
-          {t("adminDashboard.challenges.eng")}
+          <T>adminDashboard.challenges.eng</T>
         </p>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Input
@@ -303,7 +308,7 @@ function NewChallengeMainTab({
               }
             }}
           >
-            {t("adminDashboard.create")}
+            <T>adminDashboard.create</T>
           </Button>
         </div>
         <div style={{ height: "300px", overflow: "auto", marginTop: "10px" }}>
@@ -359,7 +364,7 @@ function NewChallengeMainTab({
               }
             }}
           >
-            {t("adminDashboard.create")}
+            <T>adminDashboard.create</T>
           </Button>
         </div>
         <div style={{ height: "300px", overflow: "auto", marginTop: "10px" }}>
@@ -396,7 +401,7 @@ function NewChallengeMainTab({
         {/* body focus stuff */}
         <p className="font-paragraph-white">
           {" "}
-          {t("adminDashboard.challenges.enterbf")}
+          <T>adminDashboard.challenges.enterbf</T>
         </p>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Input
@@ -420,7 +425,8 @@ function NewChallengeMainTab({
             }}
           >
             {/* Manage Body Focus */}
-            {t("adminDashboard.create")}
+
+            <T>adminDashboard.create</T>
           </Button>
         </div>
         <div style={{ height: "300px", overflow: "auto", marginTop: "10px" }}>
@@ -526,18 +532,25 @@ function NewChallengeMainTab({
         </div>
       </Modal> */}
 
-      <div style={{ marginTop: "-70px", float: "right" }}>
+      <div>
         <span style={{ marginRight: "5px" }}>Select Language:</span>
-        <Select
-          allowClear
-          style={{ width: "100px" }}
-          placeholder="Please select"
-          value={language}
-          onChange={(e) => setLanguage(e)}
-        >
-          <Option value={"eng"}>English</Option>
-          <Option value={"du"}>Dutch</Option>
-        </Select>
+
+        <LanguageSelector notFromNav={true} />
+        <div>
+          <span
+            style={{ marginRight: "5px" }}
+          >{`Select alternative language version`}</span>
+          <Select
+            style={{ width: "500px" }}
+            value={selectedChallenge}
+            onChange={(e) => setSelectedChallenge(e)}
+          >
+            <Option value={""}>-</Option>
+            {allChallenges.map((r, i) => (
+              <Option value={r._id}>{r.challengeName}</Option>
+            ))}
+          </Select>
+        </div>
       </div>
       {/* main form */}
       <Form

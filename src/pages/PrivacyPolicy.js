@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+
 import { Card } from "antd";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FileViewer from "react-file-viewer";
 import PrivacyPolicyDocument from "../assets/documents/Privacy Policy - Real Challenge.docx";
 import PrivacyPolicyDocumentDutch from "../assets/documents/Privacverklaring - Real Challenge.docx";
-import { languageContext } from "../contexts/LanguageContext";
+import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const bodyStyle = {
   display: "flex",
@@ -25,21 +26,17 @@ const onError = (e) => {
   console.log(e, "error in file-viewer");
 };
 function PrivacyPolicy() {
-  const [t] = useTranslation();
-  const [language, setLangauge] = useContext(languageContext);
-
+  const { language } = useContext(LanguageContext);
   return (
     <>
       <Navbar color="dark" />
       <div style={bodyStyle}>
         <h1 className="font-heading-black privacy-policy-heading">
-          {localStorage.getItem("locale") == "du"
-            ? "Privacyverklaring– Real Challenge"
-            : t("privacypolicy.heading")}
+          <T>privacypolicy.heading</T>
         </h1>
 
         <Card style={{ height: "650px" }}>
-          {localStorage.getItem("locale") === "du" ? (
+          {language === "dutch" ? (
             <FileViewer
               fileType={type}
               filePath={PrivacyPolicyDocumentDutch}

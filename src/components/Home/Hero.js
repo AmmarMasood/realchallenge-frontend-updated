@@ -3,10 +3,9 @@ import { Carousel } from "antd";
 import "../../assets/home-hero.css";
 import { Link } from "react-router-dom";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
+import { T } from "../Translate";
 
 function Hero() {
-  const [t] = useTranslation();
   return (
     <>
       <div className="hero-container">
@@ -20,34 +19,34 @@ function Hero() {
           <Carousel autoplay>
             <div className="carouselBody">
               <h1 className="font-heading-white">
-                {t("home.header.build_your_body_and_mind")}
+                <T>home.header.build_your_body_and_mind</T>
               </h1>
               <p className="font-subheading-white">
-                {t("home.header.reach_goals")}
+                <T>home.header.reach_goals</T>
               </p>
               <Link
                 className="home-button font-paragraph-white"
                 to="/challenges"
               >
                 <span className="home-button-text">
-                  {t("common.start_your_7day_free_trial")}{" "}
+                  <T>common.start_your_7day_free_trial</T>{" "}
                   <ArrowRightOutlined />
                 </span>
               </Link>
             </div>
             <div className="carouselBody">
               <h1 className="font-heading-white">
-                {t("home.header.result_with_personal")}
+                <T>home.header.result_with_personal</T>
               </h1>
               <p className="font-subheading-white">
-                {t("home.header.workout_at_home")}
+                <T>home.header.workout_at_home</T>
               </p>
               <Link
                 className="home-button font-paragraph-white"
                 to="/challenges"
               >
                 <span className="home-button-text">
-                  {t("common.start_your_7day_free_trial")}{" "}
+                  <T>common.start_your_7day_free_trial</T>{" "}
                   <ArrowRightOutlined />
                 </span>
               </Link>
@@ -55,17 +54,17 @@ function Hero() {
             <div className="carouselBody">
               <h1 className="font-heading-white">
                 {" "}
-                {t("home.header.pick_your_personal")}
+                <T>home.header.pick_your_personal</T>
               </h1>
               <p className="font-subheading-white">
-                {t("home.header.set_new")}
+                <T>home.header.set_new</T>
               </p>
               <Link
                 className="home-button font-paragraph-white"
                 to="/challenges"
               >
                 <span className="home-button-text">
-                  {t("common.start_your_7day_free_trial")}{" "}
+                  <T>common.start_your_7day_free_trial</T>{" "}
                   <ArrowRightOutlined />
                 </span>
               </Link>

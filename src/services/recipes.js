@@ -28,9 +28,11 @@ export function getAllRecipes(language) {
     });
 }
 
-export function getAllUserRecipes() {
+export function getAllUserRecipes(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/recipes/recipe/all/users`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/recipes/recipe/all/users?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -103,9 +105,11 @@ export function deleteRecipeWithId(id) {
     });
 }
 
-export function getAllMealTypes() {
+export function getAllMealTypes(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/recipes/mealType`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/recipes/mealType?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -135,10 +139,11 @@ export function removeMealType(id) {
     });
 }
 
-export function createMealType(name) {
+export function createMealType(name, language) {
   return axios
     .post(`${process.env.REACT_APP_SERVER}/api/recipes/mealType/create`, {
       name: name,
+      language,
     })
     .then((res) => {
       openNotificationWithIcon("success", "Meal Type created successfully", "");
@@ -176,9 +181,11 @@ export function updateMealType(name, id) {
     });
 }
 
-export function getAllFoodTypes() {
+export function getAllFoodTypes(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/recipes/foodType`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/recipes/foodType?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -192,10 +199,11 @@ export function getAllFoodTypes() {
     });
 }
 
-export function createFoodType(name) {
+export function createFoodType(name, language) {
   return axios
     .post(`${process.env.REACT_APP_SERVER}/api/recipes/foodType/create`, {
       name: name,
+      language,
     })
     .then((res) => {
       openNotificationWithIcon("success", "Food Type created successfully", "");
@@ -244,9 +252,11 @@ export function updateFoodType(name, id) {
     });
 }
 
-export function getAllDietTypes() {
+export function getAllDietTypes(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/recipes/diet`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/recipes/diet?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -260,10 +270,11 @@ export function getAllDietTypes() {
     });
 }
 
-export function createDiet(name) {
+export function createDiet(name, language) {
   return axios
     .post(`${process.env.REACT_APP_SERVER}/api/recipes/diet/create`, {
       name: name,
+      language,
     })
     .then((res) => {
       openNotificationWithIcon("success", "Diet created successfully", "");
@@ -312,9 +323,11 @@ export function removeDiet(id) {
     });
 }
 
-export function getAllIngredients() {
+export function getAllIngredients(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/recipes/ingredient`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/recipes/ingredient?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -328,10 +341,11 @@ export function getAllIngredients() {
     });
 }
 
-export function createIngredient(name) {
+export function createIngredient(name, language) {
   return axios
     .post(`${process.env.REACT_APP_SERVER}/api/recipes/ingredient/create`, {
       name: name,
+      language,
     })
     .then((res) => {
       openNotificationWithIcon(

@@ -31,7 +31,6 @@ import AllRecipes from "../components/Admin/RecipeManager/AllRecipes";
 import NewRecipe from "../components/Admin/RecipeManager/NewRecipe";
 import AllBlogs from "../components/Admin/BlogManager/AllBlogs";
 import NewBlog from "../components/Admin/BlogManager/NewBlog";
-import { useTranslation } from "react-i18next";
 import AllMemberships from "../components/Admin/MembershipManager/AllMemberships";
 import NewMembership from "../components/Admin/MembershipManager/NewMembership";
 import AllCoupons from "../components/Admin/Coupons/AllCoupons";
@@ -45,13 +44,14 @@ import NewPost from "../components/Admin/PostsManager/NewPost";
 import AllFaqs from "../components/Admin/FaqManager/AllFaqs";
 import NewFaq from "../components/Admin/FaqManager/NewFaq";
 import AllRequests from "../components/Admin/RequestManager/AllRequests";
+import { T } from "../components/Translate";
+import LanguageSelector from "../components/LanguageSelector/LanguageSelector";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 function AdminDashboard(props) {
   // eslint-disable-next-line
-  const [t] = useTranslation();
   const [adminInfo, setAdminInfo] = useContext(userInfoContext);
   const [currentSelection, setCurrentSelection] = useState(1);
   const [selectedChallengeForUpdate, setSelectedChallengeForUpdate] = useState(
@@ -60,13 +60,13 @@ function AdminDashboard(props) {
   const content = (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Link to="/user/profile" className="font-paragraph-white">
-        {t("admin.profile_setting")}
+        <T>admin.profile_setting</T>
       </Link>
       <Link
         className="font-paragraphw-white hover-orange"
         onClick={() => logoutUser(props.history, setAdminInfo)}
       >
-        {t("admin.logout")}
+        <T>admin.logout</T>
       </Link>
     </div>
   );
@@ -119,7 +119,12 @@ function AdminDashboard(props) {
             <img src={Logo} alt="logo" className="logo small-screenlogo" />
           </Link>
         </div>
-        <div className="loggedin-nav-userinfo" style={{ width: "150px" }}>
+
+        <div className="loggedin-nav-userinfo" style={{ width: "250px" }}>
+          <div style={{ marginRight: "20px" }}>
+            {" "}
+            <LanguageSelector />
+          </div>
           <Avatar
             shape="square"
             src={adminInfo.avatar}
@@ -162,7 +167,7 @@ function AdminDashboard(props) {
                 icon={<AuditOutlined />}
                 onClick={() => setCurrentSelection(0)}
               >
-                {t("admin.requests")}
+                <T>admin.requests</T>
               </Menu.Item> */}
 
               {adminInfo.role === "admin" && (
@@ -178,7 +183,7 @@ function AdminDashboard(props) {
                       color: currentSelection === 1.1 ? "#fff" : "",
                     }}
                   >
-                    {t("admin.all_products")}
+                    <T>admin.all_products</T>
                   </Menu.Item>
                   <Menu.Item
                     key="1.2"
@@ -191,7 +196,7 @@ function AdminDashboard(props) {
                       color: currentSelection === 1.2 ? "#fff" : "",
                     }}
                   >
-                    {t("admin.new_product")}
+                    <T>admin.new_product</T>
                   </Menu.Item>
                 </SubMenu>
               )}
@@ -224,7 +229,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(2.1)}
                   >
-                    {t("admin.all_blogs")}
+                    <T>admin.all_blogs</T>
                   </Menu.Item>
                   <Menu.Item
                     key="2.2"
@@ -237,7 +242,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(2.2)}
                   >
-                    {t("admin.new_blog")}
+                    <T>admin.new_blog</T>
                   </Menu.Item>
                 </SubMenu>
               )}
@@ -253,7 +258,7 @@ function AdminDashboard(props) {
                 }}
                 onClick={() => checkBeforeMoving(3)}
               >
-                {t("admin.media_manager")}
+                <T>admin.media_manager</T>
               </Menu.Item>
 
               {(adminInfo.role === "admin" || adminInfo.role === "nutrist") && (
@@ -269,7 +274,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(4.1)}
                   >
-                    {t("admin.all_recipes")}
+                    <T>admin.all_recipes</T>
                   </Menu.Item>
                   <Menu.Item
                     style={{
@@ -282,7 +287,7 @@ function AdminDashboard(props) {
                     key="4.2"
                     onClick={() => checkBeforeMoving(4.2)}
                   >
-                    {t("admin.new_recipe")}
+                    <T>admin.new_recipe</T>
                   </Menu.Item>
                 </SubMenu>
               )}
@@ -333,7 +338,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(6.1)}
                   >
-                    {t("admin.all_challenges")}
+                    <T>admin.all_challenges</T>
                   </Menu.Item>
                   <Menu.Item
                     key="6.2"
@@ -346,7 +351,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(6.2)}
                   >
-                    {t("admin.new_challenge")}
+                    <T>admin.new_challenge</T>
                   </Menu.Item>
                 </SubMenu>
               )}
@@ -367,7 +372,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(7.1)}
                   >
-                    {t("admin.all_users")}
+                    <T>admin.all_users</T>
                   </Menu.Item>
                   <Menu.Item
                     key="7.2"
@@ -380,7 +385,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(7.2)}
                   >
-                    {t("admin.new_user")}
+                    <T>admin.new_user</T>
                   </Menu.Item>
                 </SubMenu>
               )}
@@ -435,7 +440,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(9.1)}
                   >
-                    {t("admin.all_membership")}
+                    <T>admin.all_membership</T>
                   </Menu.Item>
                   <Menu.Item
                     key="9.2"
@@ -448,7 +453,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(9.2)}
                   >
-                    {t("admin.new_membership")}
+                    <T>admin.new_membership</T>
                   </Menu.Item>
                 </SubMenu>
               )} */}
@@ -469,7 +474,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(10.1)}
                   >
-                    {t("admin.all_coupons")}
+                    <T>admin.all_coupons</T>
                   </Menu.Item>
                   <Menu.Item
                     key="10.2"
@@ -482,7 +487,7 @@ function AdminDashboard(props) {
                     }}
                     onClick={() => checkBeforeMoving(10.2)}
                   >
-                    {t("admin.new_coupons")}
+                    <T>admin.new_coupons</T>
                   </Menu.Item>
                 </SubMenu>
               )}

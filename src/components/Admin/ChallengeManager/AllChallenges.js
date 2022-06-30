@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Tag, Table, Space, Input } from "antd";
 import moment from "moment";
-import { useTranslation } from "react-i18next";
 import {
   getAllUserChallenges,
   removeChallenge,
@@ -12,9 +11,9 @@ import { getAllTrainers } from "../../../services/trainers";
 import { userInfoContext } from "../../../contexts/UserStore";
 import slug from "elegant-slug";
 import { Link } from "react-router-dom";
+import { T } from "../../Translate";
 
 function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
-  const [t] = useTranslation();
   const [filterAllChallenges, setFilterAllChallenge] = useState([]);
   const [allChallenges, setAllChallenges] = useState([]);
   const [filter, setFilter] = useState("all");
@@ -37,7 +36,7 @@ function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
   }, []);
 
   const fetchChallenges = async () => {
-    const c = await getAllUserChallenges();
+    const c = await getAllUserChallenges("");
     const t = await getAllTrainers();
     console.log("trainers", t);
     console.log(c);
@@ -145,13 +144,16 @@ function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
             rel="noopener noreferrer"
           >
             {" "}
-            <Button type="primary">{t("adminDashboard.preview")}</Button>
+            <Button type="primary">
+              {" "}
+              <T>adminDashboard.preview</T>
+            </Button>
           </Link>
           <Button type="primary" onClick={() => openChallengeUpdater(record)}>
-            {t("adminDashboard.edit")}
+            <T>adminDashboard.edit</T>
           </Button>
           <Button type="danger" onClick={() => deleteChallenge(text)}>
-            {t("adminDashboard.delete")}
+            <T>adminDashboard.delete</T>
           </Button>
         </Space>
       ),
@@ -164,7 +166,7 @@ function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
   return (
     <div>
       <h2 className="font-heading-black">
-        {t("adminDashboard.challenges.all")}
+        <T>adminDashboard.challenges.all</T>
       </h2>
       <div className="admin-allchallenges-list-container">
         {userInfo.role === "admin" && (

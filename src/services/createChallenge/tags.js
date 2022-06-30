@@ -20,9 +20,9 @@ export function createChallengeTag(name) {
     });
 }
 
-export function getAllChallengeTags() {
+export function getAllChallengeTags(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/tags`)
+    .get(`${process.env.REACT_APP_SERVER}/api/tags?language=${language}`)
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

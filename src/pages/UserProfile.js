@@ -6,11 +6,11 @@ import Footer from "../components/Footer";
 import { StarOutlined, ForwardOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "react-modal-video/scss/modal-video.scss";
-import { useTranslation } from "react-i18next";
+
 import ChallengeCard from "../components/Cards/ChallengeCard";
+import { T } from "../components/Translate";
 
 function UserProfile() {
-  const [t] = useTranslation();
   // eslint-disable-next-line
   const [trainer, setTrainer] = useState({
     id: 12313123123,
@@ -68,7 +68,7 @@ function UserProfile() {
               className="trainer-profile-aboutme-heading font-paragraph-white"
               style={{ color: "#333b44", textTransform: "uppercase" }}
             >
-              {t("user_profile.about_me")}
+              <T>user_profile.about_me</T>
             </div>
             <div className="trainer-profile-aboutme-container font-paragraph-white">
               {trainer.about}
@@ -79,7 +79,7 @@ function UserProfile() {
               className="trainer-profile-challenges-heading font-paragraph-white"
               style={{ color: "#333b44", textTransform: "uppercase" }}
             >
-              {t("user_profile.challenges")}
+              <T>user_profile.challenges</T>
             </div>
             <div className="trainer-profile-challenges-container">
               {trainer.challenges.map((challenge) => (

@@ -1,12 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import "../../assets/newWelcome.css";
 import { withRouter, Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
 import { userInfoContext } from "../../contexts/UserStore";
 import PackageSelector from "./PackageSelector";
 
 function ChoosePlan(props) {
-  const [t] = useTranslation();
   const [userInfo, setUserInfo] = useContext(userInfoContext);
 
   useEffect(() => {

@@ -9,7 +9,6 @@ import Footer from "../components/Footer";
 import { Avatar } from "antd";
 import { UserOutlined, LoadingOutlined } from "@ant-design/icons";
 import moment from "moment";
-import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { getBlogById } from "../services/blogs";
 import {
@@ -25,9 +24,9 @@ import {
 import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
 import ReactHtmlParser from "react-html-parser";
+import { T } from "../components/Translate";
 
 function MagazineArticle(props) {
-  const [t] = useTranslation();
   const [blogInfo, setBlogInfo] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -117,14 +116,14 @@ function MagazineArticle(props) {
       </Helmet>
       <Navbar />
       {console.log(
-        `${process.env.REACT_APP_SERVER}/api${
+        `${process.env.REACT_APP_SERVER}/uploads/${
           blogInfo ? blogInfo.featuredImage : ""
         }`
       )}
       <div
         className="magazine-article-head"
         style={{
-          background: `url(${process.env.REACT_APP_SERVER}/api${
+          background: `url(${process.env.REACT_APP_SERVER}/uploads/${
             blogInfo ? blogInfo.featuredImage : ""
           }) no-repeat center center / cover`,
           backgroundSize: "cover",
@@ -137,7 +136,7 @@ function MagazineArticle(props) {
               shape="square"
               size="large"
               icon={<UserOutlined />}
-              src={`${process.env.REACT_APP_SERVER}/api${
+              src={`${process.env.REACT_APP_SERVER}/uploads/${
                 blogInfo && blogInfo.user ? blogInfo.user.avatarLink : ""
               }`}
             />{" "}
@@ -147,7 +146,7 @@ function MagazineArticle(props) {
             className="article-container-column1-row1 font-paragraph-black"
             style={{ color: "var(--color-orange)", padding: "15px 0" }}
           >
-            {t("magazine.share")}
+            <T>magazine.share</T>
 
             <div>
               <FacebookShareButton
@@ -183,7 +182,7 @@ function MagazineArticle(props) {
               </TwitterShareButton>
               <PinterestShareButton
                 url={window.location.href}
-                media={`${process.env.REACT_APP_SERVER}/api${blogInfo.featuredImage}`}
+                media={`${process.env.REACT_APP_SERVER}/uploads/${blogInfo.featuredImage}`}
                 description="Hi. Please checkout this amazing article I found at realchallenge.fit"
               >
                 <PinterestIcon
@@ -225,7 +224,7 @@ function MagazineArticle(props) {
             className="recipe-mealValues-heading font-paragraph-white"
             style={{ fontSize: "1.8rem", padding: "10px 0" }}
           >
-            {t("magazine.comments")}
+            <T>magazine.comments</T>
           </div>
           <div
             className="trainer-profile-goals-container"

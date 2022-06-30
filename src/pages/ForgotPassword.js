@@ -6,12 +6,11 @@ import "../assets/home.css";
 import Logo from "../images/logo.png";
 import { LoadingOutlined } from "@ant-design/icons";
 import { resetPassword } from "../services/authentication";
-import { useTranslation } from "react-i18next";
+import { T } from "../components/Translate";
 
 function ForgotPassword() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [t] = useTranslation();
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -29,7 +28,9 @@ function ForgotPassword() {
       <div className="login-container">
         <div className="login-container-column1">
           <img className="login-logo" src={Logo} alt="logo" />
-          <h1 className="font-heading-white">{t("forgot_password.reset")}</h1>
+          <h1 className="font-heading-white">
+            <T>forgot_password.reset</T>
+          </h1>
           <Form
             // form={form}
             name="register"
@@ -66,7 +67,7 @@ function ForgotPassword() {
                   border: "none",
                 }}
               >
-                {t("forgot_password.rp")}
+                <T>forgot_password.rp</T>
               </Button>
             )}
           </Form>

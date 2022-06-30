@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Select, Table, Space, Input } from "antd";
 import moment from "moment";
-import { useTranslation } from "react-i18next";
+
 import {
   getAllUserExercises,
   removeExercise,
@@ -9,10 +9,10 @@ import {
 import UpdateExercise from "./UpdateExercise";
 import { getAllTrainers } from "../../../services/trainers";
 import { userInfoContext } from "../../../contexts/UserStore";
+import { T } from "../../Translate";
 // import UpdateExercises from "./UpdateExercises";
 
 function AllExercises() {
-  const [t] = useTranslation();
   const [filterAllExercises, setFilterAllExercises] = useState([]);
   const [allExercises, setAllExercises] = useState([]);
   const [selectedExercisesForUpdate, setSelectedExercisesForUpdate] = useState(
@@ -46,7 +46,7 @@ function AllExercises() {
   };
 
   const fetchExercises = async () => {
-    const c = await getAllUserExercises();
+    const c = await getAllUserExercises("");
     console.log("===================>", c);
     setAllExercises(c.exercises);
     setFilterAllExercises(c.exercises);
@@ -106,10 +106,10 @@ function AllExercises() {
       render: (text, record) => (
         <Space size="middle">
           <Button type="primary" onClick={() => openExercisesUpdater(record)}>
-            {t("adminDashboard.edit")}
+            <T>adminDashboard.edit</T>
           </Button>
           <Button type="danger" onClick={() => deleteExercises(text)}>
-            {t("adminDashboard.delete")}
+            <T>adminDashboard.delete</T>
           </Button>
         </Space>
       ),

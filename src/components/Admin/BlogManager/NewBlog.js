@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Form, Input, Button, Select, Modal, List } from "antd";
-import { useTranslation } from "react-i18next";
 import { CloseSquareOutlined, LoadingOutlined } from "@ant-design/icons";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import {
   createBlog,
   createBlogCategory,
   getAllBlogCategories,
+  getAllBlogs,
+  getAllUserBlogs,
   removeBlogCategory,
+  updateBlog,
 } from "../../../services/blogs";
 import { userInfoContext } from "../../../contexts/UserStore";
 import EditCategoryName from "./EditCategoryName";
@@ -16,16 +18,20 @@ import Checkbox from "antd/lib/checkbox/Checkbox";
 import { createPost } from "../../../services/posts";
 import slug from "elegant-slug";
 import ReactHTMLParser from "react-html-parser";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import LanguageSelector from "../../LanguageSelector/LanguageSelector";
+import { T } from "../../Translate";
 const { Option } = Select;
 
 function NewBlog({ setCurrentSelection }) {
   // user context
   const [userInfo, setUserInfo] = useContext(userInfoContext);
+  const { language } = useContext(LanguageContext);
+
   // media manager stuff
   const [mediaManagerVisible, setMediaManagerVisible] = useState(false);
   const [mediaManagerType, setMediaManagerType] = useState("images");
   const [mediaManagerActions, setMediaManagerActions] = useState([]);
-  const [t] = useTranslation();
   const [title, setTitle] = useState("");
   const [paragraph, setParagraph] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
@@ -46,17 +52,39 @@ function NewBlog({ setCurrentSelection }) {
   const [allowComments, setAllowComments] = useState(false);
   const [allowReviews, setAllowReviews] = useState(false);
   const [userCreatePost, setUserCreatePost] = useState(false);
-  const [language, setLanguage] = useState("eng");
+  // ----
+  const [selectedBlog, setSelectedBlog] = useState("");
+  const [allBlogs, setAllBlogs] = useState([]);
 
   useEffect(() => {
     fethData();
-  }, []);
+    getAllBlogsFromBackend();
+  }, [language]);
+
   const fethData = async () => {
-    const data = await getAllBlogCategories();
+    const data = await getAllBlogCategories(language);
     setAllCategories(data.categories);
     console.log(data);
   };
 
+  async function getAllBlogsFromBackend() {
+    const data = await getAllUserBlogs(
+      language === "english" ? "dutch" : "english"
+    );
+    // console.log(data);
+    if (data && data.blogs) {
+      setAllBlogs(data.blogs);
+    }
+  }
+
+  async function updateSelectedBlog(id) {
+    await updateBlog(
+      {
+        alternativeLanguage: id,
+      },
+      selectedBlog
+    );
+  }
   const createNewBlog = async () => {
     let flag = false;
     if (title && paragraph && featuredImage && videoLink && category) {
@@ -78,12 +106,14 @@ function NewBlog({ setCurrentSelection }) {
         allowComments: allowComments,
         allowReviews: allowReviews,
       };
+      if (selectedBlog) vals.alternativeLanguage = selectedBlog;
+
       const res = await createBlog(vals);
-      console.log("ammarf", res);
       setLoading(false);
       if (res) {
         // return;
         userCreatePost && createAPost(res.newBlog._id);
+        selectedBlog && updateSelectedBlog(res.newBlog._id);
         setCurrentSelection(2.1);
       }
     }
@@ -92,9 +122,10 @@ function NewBlog({ setCurrentSelection }) {
   const createAPost = async (id) => {
     const values = {
       title: title,
-      text: ReactHTMLParser(paragraph),
       image: featuredImage.link,
+      text: "",
       type: "Magazine",
+      language: language,
       url: `/magazine/${slug(title)}/${id}`,
     };
     await createPost(values);
@@ -144,7 +175,10 @@ function NewBlog({ setCurrentSelection }) {
             htmlType="submit"
             onClick={async () => {
               if (newCategoryName.length > 0) {
-                await createBlogCategory(newCategoryName);
+                await createBlogCategory({
+                  name: newCategoryName,
+                  language: language,
+                });
                 // setEquipmentModal(false);
                 fethData();
               }
@@ -206,18 +240,25 @@ function NewBlog({ setCurrentSelection }) {
         className="admin-newuser-container"
         style={{ padding: "50px 50px 50px 20px" }}
       >
-        <div style={{ marginTop: "-40px", float: "right" }}>
+        <div style={{ marginTop: "-40px", marginBottom: "20px" }}>
           <span style={{ marginRight: "5px" }}>Select Language:</span>
-          <Select
-            allowClear
-            style={{ width: "100px" }}
-            placeholder="Please select"
-            value={language}
-            onChange={(e) => setLanguage(e)}
-          >
-            <Option value={"eng"}>English</Option>
-            <Option value={"du"}>Dutch</Option>
-          </Select>
+          <LanguageSelector notFromNav={true} />
+          <div>
+            <span
+              style={{ marginRight: "5px" }}
+            >{`Select alternative language version`}</span>
+            <Select
+              style={{ width: "500px" }}
+              onChange={(e) => setSelectedBlog(e)}
+            >
+              <Option value={""}>-</Option>
+              {allBlogs.map((r, i) => (
+                <Option key={i} value={r._id}>
+                  {r.title}
+                </Option>
+              ))}
+            </Select>
+          </div>
         </div>
         <Form
           layout="vertical"
@@ -380,7 +421,7 @@ function NewBlog({ setCurrentSelection }) {
               }}
               onClick={() => createNewBlog()}
             >
-              {t("adminDashboard.create")}
+              <T>adminDashboard.create</T>
             </Button>
           )}
         </Form>

@@ -5,11 +5,12 @@ import { Collapse, Input, Slider } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "../../assets/nutrition.css";
 import _ from "lodash";
-import { useTranslation } from "react-i18next";
+
 import ChallengeCard from "../Cards/ChallengeCard";
 import { Link } from "react-router-dom";
 import useWindowDimensions from "../../helpers/useWindowDimensions";
 import slug from "elegant-slug";
+import { T } from "../Translate";
 
 function SearchNutrition({
   allRecipies,
@@ -17,7 +18,6 @@ function SearchNutrition({
   allMealTypes,
   allIngredients,
 }) {
-  const [t] = useTranslation();
   const [mealName, setMealName] = useState("");
   const [allMeals, setAllMeals] = useState([]);
   const [mealTypeFilters, setMealTypeFilters] = useState([]);
@@ -201,7 +201,7 @@ function SearchNutrition({
                     style={{ color: "#fff", opacity: "0.8" }}
                     className="font-subheading-white"
                   >
-                    {t("userDashboard.nutrient.mealtype")}
+                    <T>userDashboard.nutrient.mealtype</T>
                   </h2>
                   <div className="selectable-values">
                     {allMealTypes.map((value) => (
@@ -224,7 +224,7 @@ function SearchNutrition({
                     style={{ color: "#fff", opacity: "0.8" }}
                     className="font-subheading-white"
                   >
-                    {t("userDashboard.nutrient.ingredients")}
+                    <T>userDashboard.nutrient.ingredients</T>
                   </h2>
                   <div className="selectable-values">
                     {allIngredients.map((value) => (
@@ -251,7 +251,7 @@ function SearchNutrition({
                     style={{ color: "#fff", opacity: "0.8" }}
                     className="font-subheading-white"
                   >
-                    {t("userDashboard.nutrient.pt")}
+                    <T>userDashboard.nutrient.pt</T>
                   </h2>
                   {console.log("recipes all meals", allMeals)}
                   <Slider
@@ -270,7 +270,7 @@ function SearchNutrition({
                     style={{ color: "#fff", opacity: "0.8" }}
                     className="font-subheading-white"
                   >
-                    {t("userDashboard.nutrient.calories")}
+                    <T>userDashboard.nutrient.calories</T>
                   </h2>
                   <Slider
                     min={100}
@@ -288,7 +288,7 @@ function SearchNutrition({
                     style={{ color: "#fff", opacity: "0.8" }}
                     className="font-subheading-white"
                   >
-                    {t("userDashboard.nutrient.diet")}
+                    <T>userDashboard.nutrient.diet</T>
                   </h2>
                   <div className="selectable-values">
                     {allDiets.map((value) => (
@@ -310,7 +310,7 @@ function SearchNutrition({
                   className="reset-all-filters"
                   onClick={() => removeAllFilters()}
                 >
-                  {t("userDashboard.nutrient.raf")}
+                  <T>userDashboard.nutrient.raf</T>
                 </div>
               </div>
             </Collapse.Panel>
@@ -328,7 +328,7 @@ function SearchNutrition({
                   style={{ color: "#fff", opacity: "0.8" }}
                   className="font-subheading-white"
                 >
-                  {t("userDashboard.nutrient.mealtype")}
+                  <T>userDashboard.nutrient.mealtype</T>
                 </h2>
                 <div className="selectable-values">
                   {allMealTypes.map((value) => (
@@ -351,7 +351,7 @@ function SearchNutrition({
                   style={{ color: "#fff", opacity: "0.8" }}
                   className="font-subheading-white"
                 >
-                  {t("userDashboard.nutrient.ingredients")}
+                  <T>userDashboard.nutrient.ingredients</T>
                 </h2>
                 <div className="selectable-values">
                   {allIngredients.map((value) => (
@@ -378,7 +378,7 @@ function SearchNutrition({
                   style={{ color: "#fff", opacity: "0.8" }}
                   className="font-subheading-white"
                 >
-                  {t("userDashboard.nutrient.pt")}
+                  <T>userDashboard.nutrient.pt</T>
                 </h2>
                 {console.log("recipes all meals", allMeals)}
                 <Slider
@@ -397,7 +397,7 @@ function SearchNutrition({
                   style={{ color: "#fff", opacity: "0.8" }}
                   className="font-subheading-white"
                 >
-                  {t("userDashboard.nutrient.calories")}
+                  <T>userDashboard.nutrient.calories</T>
                 </h2>
                 <Slider
                   min={100}
@@ -415,7 +415,7 @@ function SearchNutrition({
                   style={{ color: "#fff", opacity: "0.8" }}
                   className="font-subheading-white"
                 >
-                  {t("userDashboard.nutrient.diet")}
+                  <T>userDashboard.nutrient.diet</T>
                 </h2>
                 <div className="selectable-values">
                   {allDiets.map((value) => (
@@ -437,7 +437,7 @@ function SearchNutrition({
                 className="reset-all-filters"
                 onClick={() => removeAllFilters()}
               >
-                {t("userDashboard.nutrient.raf")}
+                <T>userDashboard.nutrient.raf</T>
               </div>
             </div>
           )}

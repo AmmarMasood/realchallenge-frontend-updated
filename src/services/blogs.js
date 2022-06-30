@@ -10,11 +10,7 @@ const openNotificationWithIcon = (type, message, description) => {
 
 export function getAllBlogs(language) {
   return axios
-    .get(
-      `${process.env.REACT_APP_SERVER}/api/blog/all?language=${
-        language ? language : "eng"
-      }`
-    )
+    .get(`${process.env.REACT_APP_SERVER}/api/blog/all?language=${language}`)
     .then((res) => {
       return res.data;
     })
@@ -23,9 +19,11 @@ export function getAllBlogs(language) {
       console.log(err);
     });
 }
-export function getAllUserBlogs() {
+export function getAllUserBlogs(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/blog/user/all`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/blog/user/all?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -71,9 +69,11 @@ export function updateBlog(values, id) {
     });
 }
 
-export function getAllBlogCategories() {
+export function getAllBlogCategories(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/blog/category/all`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/blog/category/all?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -87,11 +87,9 @@ export function getAllBlogCategories() {
     });
 }
 
-export function createBlogCategory(name) {
+export function createBlogCategory(values) {
   return axios
-    .post(`${process.env.REACT_APP_SERVER}/api/blog/category/create`, {
-      name: name,
-    })
+    .post(`${process.env.REACT_APP_SERVER}/api/blog/category/create`, values)
     .then((res) => {
       openNotificationWithIcon("success", "Category created!", "");
     })

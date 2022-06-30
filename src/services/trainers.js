@@ -18,9 +18,11 @@ export function getAllTrainers() {
     });
 }
 
-export function getAllTrainerGoals() {
+export function getAllTrainerGoals(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/trainers/trainerGoals/all`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/trainers/trainerGoals/all?language=${language}`
+    )
     .then((res) => res.data)
     .catch((err) => {
       openNotificationWithIcon("error", "Unable to get trainer goals");

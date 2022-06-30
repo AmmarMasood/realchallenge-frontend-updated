@@ -3,14 +3,14 @@ import "../assets/newWelcome.css";
 import { RightOutlined, CheckOutlined, EuroOutlined } from "@ant-design/icons";
 
 import { withRouter, Link, useHistory } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
 import VerifyUser from "../components/UserDashboard/VerifyUser";
 import { userInfoContext } from "../contexts/UserStore";
 import { selectedChallengeContext } from "../contexts/PaymentProcessStore";
 import { addFreeChallenge } from "../services/createChallenge/main";
+import { T } from "../components/Translate";
 
 function NewWelcome(props) {
-  const [t] = useTranslation();
   const history = useHistory();
   const userInfo = useContext(userInfoContext)[0];
   const selectedChallenge = useContext(selectedChallengeContext)[0];
@@ -78,7 +78,7 @@ function NewWelcome(props) {
             cursor: "pointer",
           }}
         >
-          {t("newWelcome.skip")} <RightOutlined />
+          <T>newWelcome.skip</T> <RightOutlined />
         </div>
       )}
 
@@ -91,15 +91,17 @@ function NewWelcome(props) {
             className="font-heading-white"
             style={{ fontSize: props.onPricingPage ? "25px" : "" }}
           >
-            {props.onPricingPage ? t("pricing.great") : "Welcome"}
+            {props.onPricingPage ? <T>pricing.great</T> : "Welcome"}
           </h1>
           <h3
             className="font-subheading-white"
             style={{ fontSize: props.onPricingPage ? "18px" : "" }}
           >
-            {props.onPricingPage ? t("pricing.p") : t("newWelcome.tyfjr")}
+            {props.onPricingPage ? <T>pricing.p</T> : <T>newWelcome.tyfjr</T>}
           </h3>
-          <p className="font-paragraph-white">{t("newWelcome.getAccess")}</p>
+          <p className="font-paragraph-white">
+            <T>newWelcome.getAccess</T>
+          </p>
           <div className="new-welcome-cards">
             {/* first card */}
             <div
@@ -113,23 +115,23 @@ function NewWelcome(props) {
               }}
             >
               <h2 className="font-paragraph-white">
-                {t("newWelcome.oneTime")} <br />
-                {t("newWelcome.challenge")}
+                <T>newWelcome.oneTime</T> <br />
+                <T>newWelcome.challenge</T>
               </h2>
               <span
                 className="font-paragraph-white"
                 style={{ fontWeight: "600", margin: "10px" }}
               >
-                {t("newWelcome.from")}{" "}
+                <T>newWelcome.from</T>{" "}
                 <span style={{ fontSize: "30px" }}>€29</span> /{" "}
-                {t("newWelcome.challenge")}
+                <T>newWelcome.challenge</T>
               </span>
 
               <span
                 className="font-paragraph-white"
                 style={{ color: "#969696", textAlign: "left" }}
               >
-                {t("newWelcome.ccfl")}
+                <T>newWelcome.ccfl</T>
               </span>
               <ul
                 className="features"
@@ -138,19 +140,19 @@ function NewWelcome(props) {
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.nsn")}
+                    <T>newWelcome.nsn</T>
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.billedOnce")}
+                    <T>newWelcome.billedOnce</T>
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.unlockAll")}
+                    <T>newWelcome.unlockAll</T>
                   </span>
                 </li>
               </ul>
@@ -166,7 +168,10 @@ function NewWelcome(props) {
                     : "2px solid #2a2f36",
               }}
             >
-              <h2 className="font-paragraph-white"> {t("newWelcome.rs")}</h2>
+              <h2 className="font-paragraph-white">
+                {" "}
+                <T>newWelcome.rs</T>
+              </h2>
               <span
                 className="font-paragraph-white"
                 style={{
@@ -179,7 +184,7 @@ function NewWelcome(props) {
                   marginBottom: "10px",
                 }}
               >
-                {t("newWelcome.saveUpTo")} 60%
+                <T>newWelcome.saveUpTo</T> 60%
               </span>
               <span
                 className="font-paragraph-white"
@@ -201,19 +206,19 @@ function NewWelcome(props) {
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.uac")}
+                    <T>newWelcome.uac</T>
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.bm")}
+                    <T>newWelcome.bm</T>
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.mtg")}
+                    <T>newWelcome.mtg</T>
                   </span>
                 </li>
               </ul>
@@ -229,7 +234,9 @@ function NewWelcome(props) {
                     : "2px solid #2a2f36",
               }}
             >
-              <h2 className="font-paragraph-white">{t("newWelcome.rs")}</h2>
+              <h2 className="font-paragraph-white">
+                <T>newWelcome.rs</T>
+              </h2>
               <span
                 className="font-paragraph-white"
                 style={{
@@ -242,20 +249,20 @@ function NewWelcome(props) {
                   marginBottom: "10px",
                 }}
               >
-                {t("newWelcome.saveUpTo")} 30%
+                <T>newWelcome.saveUpTo</T> 30%
               </span>
               <span
                 className="font-paragraph-white"
                 style={{ fontWeight: "600", margin: "10px" }}
               >
                 <span style={{ fontSize: "30px" }}>€6</span> /{" "}
-                {t("newWelcome.week")}
+                <T>newWelcome.week</T>
               </span>
               <span
                 className="font-paragraph-white"
                 style={{ color: "#969696", textAlign: "left" }}
               >
-                {t("newWelcome.tmp")}
+                <T>newWelcome.tmp</T>
               </span>
               <ul
                 className="features"
@@ -264,19 +271,19 @@ function NewWelcome(props) {
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.uac")}
+                    <T>newWelcome.uac</T>
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.bm")}
+                    <T>newWelcome.bm</T>
                   </span>
                 </li>
                 <li>
                   <CheckOutlined style={checkStyle} />
                   <span className="font-paragraph-white">
-                    {t("newWelcome.mtg")}
+                    <T>newWelcome.mtg</T>
                   </span>
                 </li>
               </ul>
@@ -305,7 +312,7 @@ function NewWelcome(props) {
                 className="font-paragraph-white"
                 style={{ fontWeight: "600" }}
               >
-                {t("newWelcome.choose")}
+                <T>newWelcome.choose</T>
               </span>
             </button>
           </div>
@@ -325,13 +332,13 @@ function NewWelcome(props) {
                   cursor: "pointer",
                 }}
               >
-                {t("newWelcome.dash")}
+                <T>newWelcome.dash</T>
               </div>
             </div>
           )}
         </div>
         <div className="money-back-guarantee font-paragraph-white">
-          <EuroOutlined /> {t("newWelcome.moneyBack")}
+          <EuroOutlined /> <T>newWelcome.moneyBack</T>
         </div>
       </div>
 

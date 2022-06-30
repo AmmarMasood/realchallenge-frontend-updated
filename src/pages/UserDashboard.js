@@ -6,7 +6,7 @@ import Challenges from "../components/UserDashboard/Challenges";
 import Feed from "../components/UserDashboard/Feed";
 import Community from "../components/UserDashboard/Community";
 import VerifyUser from "../components/UserDashboard/VerifyUser";
-import { useTranslation } from "react-i18next";
+
 import useWindowDimensions from "../helpers/useWindowDimensions";
 import NewsfeedGray from "../assets/icons/newsfeed-gray.svg";
 import NewsfeedOrange from "../assets/icons/newsfeed-orange.svg";
@@ -22,6 +22,7 @@ import {
   getRecommandedChallenges,
   getRecommandedWeeklyDiet,
 } from "../services/users";
+import { T } from "../components/Translate";
 
 const barIconsStyle = {
   fontSize: "20px",
@@ -34,7 +35,6 @@ function UserDashboard() {
   const [recommandedChallenges, setRecommandedChallenges] = useState([]);
   const [recommandedWeeklyDiet, setRecommandedWeeklyDiet] = useState([]);
   const [gender, setGender] = useState("");
-  const [t] = useTranslation();
   const { height, width } = useWindowDimensions();
 
   async function getUserDetails() {
@@ -90,7 +90,7 @@ function UserDashboard() {
                 <img src={NewsfeedGray} style={barIconsStyle} alt="feed-gray" />
               )}
 
-              {width > 750 && t("user_dashboard.news_feed")}
+              {width > 750 && <T>user_dashboard.news_feed</T>}
             </div>
             <div
               className={
@@ -106,7 +106,7 @@ function UserDashboard() {
               ) : (
                 <img src={FlagGray} style={barIconsStyle} alt="flag-gray" />
               )}
-              {width > 750 && t("user_dashboard.challenges")}
+              {width > 750 && <T>user_dashboard.challenges</T>}
             </div>
             <div
               className={
@@ -126,7 +126,7 @@ function UserDashboard() {
               ) : (
                 <img src={AvacadoGray} style={barIconsStyle} alt="food-gray" />
               )}
-              {width > 750 && t("user_dashboard.nutrients")}
+              {width > 750 && <T>user_dashboard.nutrients</T>}
             </div>
             <div
               className={
@@ -142,7 +142,7 @@ function UserDashboard() {
               ) : (
                 <img src={ChatGray} style={barIconsStyle} alt="chat-gray" />
               )}
-              {width > 750 && t("user_dashboard.community")}
+              {width > 750 && <T>user_dashboard.community</T>}
             </div>
           </div>
           <div className="user-dashboard-content">

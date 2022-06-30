@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { LoadingOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import { verifyEmail } from "../services/authentication";
-import { useTranslation } from "react-i18next";
+import { T } from "../components/Translate";
 
 // todo
 // add loading icon that says loading while you send a request to backend with the token from the params. once done redirect to login page.
 function EmailVerificationRedirect(props) {
-  const [t] = useTranslation();
   const [success, setSuccess] = useState(false);
   useEffect(() => {
     verifyEmailSendToken();
@@ -59,9 +58,11 @@ function EmailVerificationRedirect(props) {
           className="font-heading-black"
           style={{ margin: "0", padding: "0" }}
         >
-          {success
-            ? t("emailVerification.esv")
-            : t("emailVerification.challenge_profile.yourPersonalJourney")}
+          {success ? (
+            <T>emailVerification.esv</T>
+          ) : (
+            <T>emailVerification.challenge_profile.yourPersonalJourney</T>
+          )}
         </h1>
       </>
     </div>

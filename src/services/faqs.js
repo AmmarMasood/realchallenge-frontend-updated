@@ -8,9 +8,9 @@ const openNotificationWithIcon = (type, message, description) => {
   });
 };
 
-export function getAllFaqs() {
+export function getAllFaqs(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/faq/all`)
+    .get(`${process.env.REACT_APP_SERVER}/api/faq/all?language=${language}`)
     .then((res) => {
       return res.data;
     })
@@ -64,9 +64,11 @@ export function getFaqById(id) {
       console.log(err);
     });
 }
-export function getAllFaqCategories() {
+export function getAllFaqCategories(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/faq/category`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/faq/category?language=${language}`
+    )
     .then((res) => {
       return res.data;
     })
@@ -76,11 +78,9 @@ export function getAllFaqCategories() {
     });
 }
 
-export function createFaqCategory(name) {
+export function createFaqCategory(values) {
   return axios
-    .post(`${process.env.REACT_APP_SERVER}/api/faq/category/create`, {
-      name: name,
-    })
+    .post(`${process.env.REACT_APP_SERVER}/api/faq/category/create`, values)
     .then((res) => {
       openNotificationWithIcon("success", "Category created!", "");
     })

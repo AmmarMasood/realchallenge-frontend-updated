@@ -25,6 +25,9 @@ import {
   removeDiet,
   removeIngredient,
   createRecipe,
+  getAllRecipes,
+  getAllUserRecipes,
+  updateRecipe,
 } from "../../../services/recipes";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import { createPost } from "../../../services/posts";
@@ -33,11 +36,14 @@ import Checkbox from "antd/lib/checkbox/Checkbox";
 import EditTypeName from "./EditTypeName";
 import slug from "elegant-slug";
 import TextEditor from "../../TextEditor";
+import LanguageSelector from "../../LanguageSelector/LanguageSelector";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 const { Option } = Select;
 
 function NewRecipe({ setCurrentSelection }) {
   const [userInfo, setUserInfo] = useContext(userInfoContext);
+  const { language } = useContext(LanguageContext);
   // media manager stuff
   const [mediaManagerVisible, setMediaManagerVisible] = useState(false);
   const [mediaManagerType, setMediaManagerType] = useState("images");
@@ -46,7 +52,6 @@ function NewRecipe({ setCurrentSelection }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
-  const [language, setLanguage] = useState("eng");
   const [loading, setLoading] = useState(false);
   const [thumbnailBase64, setThumbnailBase64] = useState("");
   const [preprationTime, setPreprationTime] = useState("");
@@ -85,6 +90,9 @@ function NewRecipe({ setCurrentSelection }) {
   const [cookingProcess, setCookingProcess] = useState([]);
   const [notes, setNotes] = useState("");
   const [tips, setTips] = useState("");
+  // all recipes
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState("");
   // --------------
   // const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
   const [userCreatePost, setUserCreatePost] = useState(false);
@@ -96,19 +104,29 @@ function NewRecipe({ setCurrentSelection }) {
     useState("");
 
   async function fetchData() {
-    const diets = await getAllDietTypes();
-    const meals = await getAllMealTypes();
-    const foodTypes = await getAllFoodTypes();
-    const ingredients = await getAllIngredients();
+    const diets = await getAllDietTypes(language);
+    const meals = await getAllMealTypes(language);
+    const foodTypes = await getAllFoodTypes(language);
+    const ingredients = await getAllIngredients(language);
 
     setAllDiets(diets.diets);
     setAllMealTypes(meals.mealTypes);
     setAllFoodTypes(foodTypes.foodTypes);
     setAllIngredients(ingredients.ingredients);
   }
+
+  async function fetchAllRecipes() {
+    const res = await getAllUserRecipes(
+      language === "english" ? "dutch" : "english"
+    );
+    if (res && res.recipes) {
+      setAllRecipes(res.recipes);
+    }
+  }
   useEffect(() => {
     fetchData();
-  }, []);
+    fetchAllRecipes();
+  }, [language]);
 
   const ing = {
     id: v4(),
@@ -149,16 +167,25 @@ function NewRecipe({ setCurrentSelection }) {
       allowComments: allowComments,
       allowReviews: allowReviews,
     };
+    if (selectedRecipe) d.alternativeLanguage = selectedRecipe;
     // console.log("Success:", values);
     // console.log(values);
     const res = await createRecipe(d);
     if (res) {
       userCreatePost && createAPost(res.newRecipe._id);
+      selectedRecipe && updateSelectedRecipe(res.newRecipe._id);
       setCurrentSelection(4.1);
     }
 
     console.log("res", res);
   };
+
+  async function updateSelectedRecipe(id) {
+    const v = {
+      alternativeLanguage: id,
+    };
+    await updateRecipe(v, selectedRecipe);
+  }
 
   const createAPost = async (id) => {
     const values = {
@@ -167,6 +194,7 @@ function NewRecipe({ setCurrentSelection }) {
       image: featuredImage.link,
       type: "Recipe",
       url: `/recipe/${slug(name)}/${id}`,
+      language: language,
     };
     await createPost(values);
     // setCreatePostModalVisible(false);
@@ -333,7 +361,7 @@ function NewRecipe({ setCurrentSelection }) {
             htmlType="submit"
             onClick={async () => {
               if (newMealTypeName.length > 0) {
-                await createMealType(newMealTypeName);
+                await createMealType(newMealTypeName, language);
                 // setEquipmentModal(false);
                 fetchData();
               }
@@ -409,7 +437,7 @@ function NewRecipe({ setCurrentSelection }) {
             htmlType="submit"
             onClick={async () => {
               if (newFoodTypeName.length > 0) {
-                await createFoodType(newFoodTypeName);
+                await createFoodType(newFoodTypeName, language);
                 // setEquipmentModal(false);
                 fetchData();
               }
@@ -485,7 +513,7 @@ function NewRecipe({ setCurrentSelection }) {
             htmlType="submit"
             onClick={async () => {
               if (newDietName.length > 0) {
-                await createDiet(newDietName);
+                await createDiet(newDietName, language);
                 // setEquipmentModal(false);
                 fetchData();
               }
@@ -561,7 +589,7 @@ function NewRecipe({ setCurrentSelection }) {
             htmlType="submit"
             onClick={async () => {
               if (newIngredientName.length > 0) {
-                await createIngredient(newIngredientName);
+                await createIngredient(newIngredientName, language);
                 // setEquipmentModal(false);
                 fetchData();
               }
@@ -634,18 +662,25 @@ function NewRecipe({ setCurrentSelection }) {
         className="admin-newuser-container"
         style={{ padding: "50px 50px 50px 20px" }}
       >
-        <div style={{ marginTop: "-40px", float: "right" }}>
+        <div style={{ marginTop: "-40px", marginBottom: "20px" }}>
           <span style={{ marginRight: "5px" }}>Select Language:</span>
-          <Select
-            allowClear
-            style={{ width: "100px" }}
-            placeholder="Please select"
-            value={language}
-            onChange={(e) => setLanguage(e)}
-          >
-            <Option value={"eng"}>English</Option>
-            <Option value={"du"}>Dutch</Option>
-          </Select>
+          <LanguageSelector notFromNav={true} />
+          <div>
+            <span
+              style={{ marginRight: "5px" }}
+            >{`Select alternative language version`}</span>
+            <Select
+              style={{ width: "500px" }}
+              onChange={(e) => setSelectedRecipe(e)}
+            >
+              <Option value={""}>-</Option>
+              {allRecipes.map((r, i) => (
+                <Option key={i} value={r._id}>
+                  {r.name}
+                </Option>
+              ))}
+            </Select>
+          </div>
         </div>
         <Form
           layout="vertical"

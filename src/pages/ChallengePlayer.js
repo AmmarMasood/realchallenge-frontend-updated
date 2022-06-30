@@ -11,7 +11,7 @@ import {
 import PlayerVideoBrowser from "../components/Player/PlayerVideoBrowser";
 import { withRouter } from "react-router-dom";
 // import BreakTimer from "../components/Player/BreakTimer";
-import { useTranslation } from "react-i18next";
+
 import {
   getMusicByChallengeId,
   getWorkoutById,
@@ -31,10 +31,11 @@ import DumbbellIcon from "../assets/icons/Dumbell-icon.png";
 import ShopIcon from "../assets/icons/shoppingbag-icon.png";
 import useWindowDimensions from "../helpers/useWindowDimensions";
 import WorkoutCompleteModal from "../components/Challenge/WorkoutCompleteModal";
+import { T } from "../components/Translate";
 
 function ChallengePlayer(props) {
   // for non-rendered workouts
-  const [t] = useTranslation();
+
   const [loading, setLoading] = useState(false);
   const [workout, setWorkout] = useState({});
   const [userInfo, setUserInfo] = useContext(userInfoContext);
@@ -392,7 +393,7 @@ function ChallengePlayer(props) {
                   textTransform: "uppercase",
                 }}
               >
-                {t("player.today_workout_attachment")}
+                <T>player.today_woTkout_attachment</T>
               </p>
 
               <a
@@ -419,7 +420,7 @@ function ChallengePlayer(props) {
                   textTransform: "uppercase",
                 }}
               >
-                {t("player.today_equipment")}
+                <T>playerTtoday_equipment</T>
               </p>
               <div>
                 {workout.relatedEquipments.map((e) => (
@@ -448,7 +449,7 @@ function ChallengePlayer(props) {
                   textTransform: "uppercase",
                 }}
               >
-                {t("player.related")}
+                <T>player.related</T>
               </p>
               <div>
                 {workout.relatedProducts.map((e) => (
@@ -473,7 +474,6 @@ function ChallengePlayer(props) {
             challengeId={props.match.params.challengeId}
             challengeSlug={props.match.params.challengeName}
             history={props.history}
-            t={t}
           />
 
           {/* <div className="buy-related-products">

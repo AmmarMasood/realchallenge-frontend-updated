@@ -20,9 +20,11 @@ export function createChallengeGoal(name) {
     });
 }
 
-export function getAllChallengeGoals() {
+export function getAllChallengeGoals(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/challengeGoals/`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/challengeGoals?language=${language}`
+    )
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

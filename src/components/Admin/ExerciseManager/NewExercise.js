@@ -4,6 +4,8 @@ import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import { createExercise } from "../../../services/createChallenge/main";
 import { getAllTrainers } from "../../../services/trainers";
 import { userInfoContext } from "../../../contexts/UserStore";
+import LanguageSelector from "../../LanguageSelector/LanguageSelector";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 const { Option } = Select;
 
 function NewExercise({ setCurrentSelection, home }) {
@@ -17,6 +19,7 @@ function NewExercise({ setCurrentSelection, home }) {
   const [allTrainers, setAllTrainers] = useState([]);
   const [filteredTrainers, setFilteredTrainers] = useState([]);
   const userInfo = useContext(userInfoContext)[0];
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     if (userInfo.role === "trainer") {
@@ -40,7 +43,8 @@ function NewExercise({ setCurrentSelection, home }) {
       const data = {
         videoURL: videoLink.link,
         voiceOverLink: voiceOverLink.link,
-        trainer: trainer,
+        trainer,
+        language,
         ...values,
       };
       const res = await createExercise(data);
@@ -68,6 +72,10 @@ function NewExercise({ setCurrentSelection, home }) {
         className="admin-newuser-container"
         style={{ padding: "50px 50px 50px 20px" }}
       >
+        <div>
+          <span>Select Language: </span>
+          <LanguageSelector notFromNav={true} />
+        </div>
         <Form
           layout="vertical"
           name="basic"
@@ -106,7 +114,6 @@ function NewExercise({ setCurrentSelection, home }) {
           <Form.Item label="Trainer" required="true">
             {/* {console.log("trainers", trainers)} */}
             <Select
-              mode="multiple"
               allowClear
               style={{ width: "100%" }}
               placeholder="Please select"

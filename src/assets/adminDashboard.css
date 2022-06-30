@@ -75,6 +75,10 @@
   /* padding: 10px; */
   overflow-y: scroll;
 }
+
+.new-workout-creator-container-2-nonrender > .ant-collapse > .ant-collapse-item > .ant-collapse-content  > .ant-collapse-content > .ant-collapse-content-box{
+background: red !important;
+}
 .new-workout-creator-container-1-btn {
   background-color: var(--color-orange);
   border-color: var(--color-orange);

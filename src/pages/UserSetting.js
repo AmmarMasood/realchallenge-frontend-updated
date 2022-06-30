@@ -9,12 +9,12 @@ import {
 } from "@ant-design/icons";
 import { Input } from "antd";
 import moment from "moment";
-import { useTranslation } from "react-i18next";
 import { getUserProfileInfo } from "../services/users";
 import { userInfoContext } from "../contexts/UserStore";
 import { getSubscribtionInformation } from "../services/payment";
 import { logoutUser, resetPassword } from "../services/authentication";
 import { useHistory } from "react-router";
+import { T } from "../components/Translate";
 
 const emailIconStyle = {
   fontSize: "5rem",
@@ -48,7 +48,6 @@ function UserSetting() {
     date: null,
   });
   const [userInfo, setUserInfo] = useContext(userInfoContext);
-  const [t] = useTranslation();
 
   const fetchData = async () => {
     const res = await getUserProfileInfo(userInfo.id);
@@ -99,7 +98,8 @@ function UserSetting() {
       <div className="user-setting-container">
         <div className="user-setting-container-heading font-paragraph-white">
           <UserOutlined style={{ paddingRight: "10px" }} />
-          {t("user_setting.account_setting")}
+
+          <T>user_setting.account_setting</T>
         </div>
         <div className="user-setting-container-body">
           <div className="user-setting-container-body1">
@@ -163,7 +163,7 @@ function UserSetting() {
                   style={{ marginLeft: "10px" }}
                   onClick={updatePasswordButtonClick}
                 >
-                  {t("user_setting.update_password")}
+                  <T>user_setting.update_password</T>
                 </button>
               )}
             </div>
@@ -172,7 +172,7 @@ function UserSetting() {
             <div className="user-setting-container-body2-row1">
               <div className="user-setting-container-body2-row1-column1">
                 <div className="font-paragraph-white">
-                  {t("user_setting.membership")}
+                  <T>user_setting.membership</T>
                 </div>
               </div>
               <div className="user-setting-container-body2-row1-column2">
@@ -181,7 +181,7 @@ function UserSetting() {
                     className="font-paragraph-white"
                     style={{ fontSize: "1.8rem" }}
                   >
-                    {t("user_setting.subscription")}
+                    <T>user_setting.subscription</T>
                   </span>
                   <span className="font-paragraph-white">
                     {membershipDetails.name === "CHALLENGE_12"
@@ -196,7 +196,7 @@ function UserSetting() {
                     className="font-paragraph-white"
                     style={{ fontSize: "1.8rem" }}
                   >
-                    {t("user_setting.active")}
+                    <T>user_setting.active</T>
                   </span>
                   <span className="font-paragraph-white">
                     {membershipDetails.isValid === "active" ||
@@ -217,7 +217,7 @@ function UserSetting() {
                       className="font-paragraph-white"
                       style={{ fontSize: "1.8rem" }}
                     >
-                      {t("user_setting.created")}
+                      <T>user_setting.created</T>
                     </span>
                     <span className="font-paragraph-white">
                       {membershipDetails.name === "CHALLENGE_1"
@@ -238,7 +238,7 @@ function UserSetting() {
                       className="font-paragraph-white"
                       style={{ fontSize: "1.8rem" }}
                     >
-                      {t("user_setting.expires_on")}
+                      <T>user_setting.expires_on</T>
                     </span>
                     <span className="font-paragraph-white">
                       {membershipDetails.name === "CHALLENGE_1"
@@ -255,32 +255,32 @@ function UserSetting() {
               <div className="font-paragraph-white">
                 <span style={{ fontSize: "1.8rem" }}>
                   {" "}
-                  {t("user_setting.date")}{" "}
+                  <T>user_setting.date</T>{" "}
                 </span>
                 <span>{moment(new Date()).format("DD/MM/YYYY")}</span>
               </div>
               <div className="font-paragraph-white">
                 <span style={{ fontSize: "1.8rem" }}>
                   {" "}
-                  {t("user_setting.methods")}{" "}
+                  <T>user_setting.methods</T>{" "}
                 </span>
                 <span>{membershipDetails.methods}</span>
               </div>
               <div className="font-paragraph-white">
                 <span style={{ fontSize: "1.8rem" }}>
-                  {t("user_setting.total")}{" "}
+                  <T>user_setting.total</T>{" "}
                 </span>
                 <span>{membershipDetails.total}</span>
               </div>
               <div className="font-paragraph-white">
                 <span style={{ fontSize: "1.8rem" }}>
-                  {t("user_setting.status")}{" "}
+                  <T>user_setting.status</T>
                 </span>
                 <span>{membershipDetails.status}</span>
               </div>
               <div className="font-paragraph-white">
                 <span style={{ fontSize: "1.8rem" }}>
-                  {t("user_setting.membership")}
+                  <T>user_setting.membership</T>
                 </span>
                 <span>
                   {moment(membershipDetails.date).format("DD/MM/YYYY")}

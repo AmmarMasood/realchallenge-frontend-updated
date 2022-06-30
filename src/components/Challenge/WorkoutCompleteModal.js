@@ -2,7 +2,7 @@ import React from "react";
 import { SmileOutlined, FireOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import useWindowDimensions from "../../helpers/useWindowDimensions";
-
+import { T } from "../Translate";
 
 function WorkoutCompleteModal({
   finishWorkoutPopupVisible,
@@ -10,9 +10,8 @@ function WorkoutCompleteModal({
   challengeId,
   challengeSlug,
   history,
-  t,
 }) {
-  const {width} = useWindowDimensions()
+  const { width } = useWindowDimensions();
   return (
     <Modal
       visible={finishWorkoutPopupVisible}
@@ -29,21 +28,45 @@ function WorkoutCompleteModal({
         style={{ color: "var(--color-orange)", fontSize: "60px" }}
       />
       {console.log(width)}
-      <h1 className="font-heading-white">{t("player.well")}</h1>
-      <p className="font-subheading-white">{t("player.congrats")} </p>
-      <p className="font-paragraph-white">{t("player.pls_let")}</p>
+      <h1 className="font-heading-white">
+        <T>player.well</T>
+      </h1>
+      <p className="font-subheading-white">
+        <T>player.congrats</T>{" "}
+      </p>
+      <p className="font-paragraph-white">
+        <T>player.pls_let</T>
+      </p>
       <div className="finish-workout-popup-container--reviewbox">
-        <div onClick={() => history.push(`/challenge/${challengeSlug}/${challengeId}`)}>
-            <SmileOutlined style={{ fontSize: "30px" }} />
-          <span className="font-paragraph-black">{t("player.great_exp")}</span>
+        <div
+          onClick={() =>
+            history.push(`/challenge/${challengeSlug}/${challengeId}`)
+          }
+        >
+          <SmileOutlined style={{ fontSize: "30px" }} />
+          <span className="font-paragraph-black">
+            <T>player.great_exp</T>
+          </span>
         </div>
-        <div onClick={() => history.push(`/challenge/${challengeSlug}/${challengeId}`)}>
-            <SmileOutlined style={{ fontSize: "30px" }} />
-          <span className="font-paragraph-black">{t("player.avg_stuff")}</span>
+        <div
+          onClick={() =>
+            history.push(`/challenge/${challengeSlug}/${challengeId}`)
+          }
+        >
+          <SmileOutlined style={{ fontSize: "30px" }} />
+          <span className="font-paragraph-black">
+            <T>player.avg_stuff</T>
+          </span>
         </div>
-        <div onClick={() => history.push(`/challenge/${challengeSlug}/${challengeId}`)}>
-            <SmileOutlined style={{ fontSize: "30px" }} />
-          <span className="font-paragraph-black">{t("player.very_diff")}</span>
+        <div
+          onClick={() =>
+            history.push(`/challenge/${challengeSlug}/${challengeId}`)
+          }
+        >
+          <SmileOutlined style={{ fontSize: "30px" }} />
+          <span className="font-paragraph-black">
+            <T>player.very_diff</T>
+          </span>
         </div>
       </div>
     </Modal>

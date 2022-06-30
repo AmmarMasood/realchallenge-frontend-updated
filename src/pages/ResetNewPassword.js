@@ -7,12 +7,11 @@ import Logo from "../images/logo.png";
 import { useParams, useHistory } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { newPassword } from "../services/authentication";
-import { useTranslation } from "react-i18next";
+import { T } from "../components/Translate";
 
 function ResetNewPassword() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [t] = useTranslation();
   const { token } = useParams();
   let history = useHistory();
 
@@ -34,7 +33,9 @@ function ResetNewPassword() {
       <div className="login-container">
         <div className="login-container-column1">
           <img className="login-logo" src={Logo} alt="logo" />
-          <h1 className="font-heading-white">{t("forgot_password.reset")}</h1>
+          <h1 className="font-heading-white">
+            <T>forgot_password.reset</T>
+          </h1>
           <Form
             // form={form}
             name="register"
@@ -47,7 +48,7 @@ function ResetNewPassword() {
                 name="password"
                 label={
                   <span className="font-paragraph-white">
-                    {t("forgot_password.new")}
+                    <T>forgot_password.new</T>
                   </span>
                 }
                 rules={[
@@ -66,7 +67,7 @@ function ResetNewPassword() {
                 name="confirm"
                 label={
                   <span className="font-paragraph-white">
-                    {t("forgot_password.confirmNew")}
+                    <T>forgot_password.confirmNew</T>
                   </span>
                 }
                 dependencies={["password"]}
@@ -104,7 +105,7 @@ function ResetNewPassword() {
                   border: "none",
                 }}
               >
-                {t("forgot_password.confirmPassReset")}
+                <T>forgot_password.confirmPassReset</T>
               </Button>
             )}
           </Form>

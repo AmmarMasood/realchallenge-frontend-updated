@@ -7,13 +7,14 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowRightOutlined, SearchOutlined } from "@ant-design/icons";
 import { Input, Collapse } from "antd";
-import { useTranslation } from "react-i18next";
+
 import { getAllChallenges } from "../services/createChallenge/main";
 import ChallengeCard from "../components/Cards/ChallengeCard";
 import { getAllChallengeGoals } from "../services/createChallenge/goals";
 import { getAllBodyFocus } from "../services/createChallenge/bodyFocus";
 import { getAllChallengeEquipments } from "../services/createChallenge/equipments";
 import slug from "elegant-slug";
+import { T } from "../components/Translate";
 
 const { Panel } = Collapse;
 
@@ -28,7 +29,6 @@ const filterTextStyle = {
 };
 
 function AllChallenges() {
-  const [t] = useTranslation();
   const [name, setName] = useState("");
   const [filterChallenges, setFilterChallenges] = useState([]);
   // eslint-disable-next-line
@@ -108,8 +108,12 @@ function AllChallenges() {
           className="page-header-textbox"
           style={{ padding: "50px", width: "600px" }}
         >
-          <h1 className="font-heading-white">{t("challenges.find_the")}</h1>
-          <p className="font-paragraph-white">{t("challenges.our_real")}</p>
+          <h1 className="font-heading-white">
+            <T>challenges.find_the</T>
+          </h1>
+          <p className="font-paragraph-white">
+            <T>challenges.our_real</T>
+          </p>
         </div>
       </div>
       {/* challanges */}
@@ -149,7 +153,7 @@ function AllChallenges() {
                   fontSize: "18px",
                 }}
               >
-                F{t("challenges.filter")}
+                F<T>challenges.filter</T>
               </p>
             }
             key="1"
@@ -161,7 +165,9 @@ function AllChallenges() {
               }}
             >
               <div>
-                <p className="font-paragraph-white">{t("challenges.goals")}</p>
+                <p className="font-paragraph-white">
+                  <T>challenges.goals</T>
+                </p>
                 <div
                   style={{
                     display: "flex",
@@ -191,7 +197,7 @@ function AllChallenges() {
               </div>
               <div>
                 <p className="font-paragraph-white">
-                  {t("challenges.intensity")}
+                  <T>challenges.intensity</T>
                 </p>
                 <div
                   style={{
@@ -222,7 +228,7 @@ function AllChallenges() {
               </div>
               <div>
                 <p className="font-paragraph-white">
-                  {t("challenges.body_focus")}
+                  <T>challenges.body_focus</T>
                 </p>
                 <div
                   style={{
@@ -253,7 +259,7 @@ function AllChallenges() {
               </div>
               <div>
                 <p className="font-paragraph-white">
-                  {t("challenges.equipments")}
+                  <T>challenges.equipments</T>
                 </p>
                 <div
                   style={{
@@ -306,20 +312,20 @@ function AllChallenges() {
         <div className="home-row-7-container">
           <div className="home-row-7-container-text">
             <h2 style={{ fontSize: "2rem" }} className="font-subheading-black">
-              {t("challenges.start_today")}
+              <T>challenges.start_today</T>
             </h2>
             <h1 style={{ fontSize: "4.5rem" }} className="font-heading-black">
-              {t("challenges.optimal")}
+              <T>challenges.optimal</T>
             </h1>
             <p
               style={{ fontSize: "1.8rem", paddingBottom: "10px" }}
               className="font-paragraph-black"
             >
-              {t("challenges.a_personal")}
+              <T>challenges.a_personal</T>
             </p>
             <Link className="home-button" to="/challenges">
               <span className="home-button-text font-paragraph-white">
-                {t("challenges.start_now")} <ArrowRightOutlined />
+                <T>challenges.start_now</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>

@@ -5,7 +5,7 @@ import NewChallengeMainTab from "./NewChallengeMainTab";
 import NewChallengeWorkoutTab from "./NewChallengeWorkoutTab";
 import NewChallengeMusicTab from "./NewChallengeMusicTab";
 import NewChallengeAdditionalTab from "./NewChallengeAdditionalTab";
-import { useTranslation } from "react-i18next";
+
 import { v4 } from "uuid";
 
 // services
@@ -17,6 +17,7 @@ import { getAllTrainers } from "../../../services/trainers";
 import { getAllChallengeProducts } from "../../../services/createChallenge/products";
 import {
   createChallenge,
+  getAllChallenges,
   updateChallenge,
 } from "../../../services/createChallenge/main";
 import setAuthToken from "../../../helpers/setAuthToken";
@@ -30,7 +31,6 @@ function callback(key) {
 }
 
 function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
-  const [t] = useTranslation();
   const [form] = Form.useForm();
   // state of main tab strats
   const [name, setName] = useState("");
@@ -69,8 +69,8 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
   const [newTagName, setNewTagName] = useState("");
   const [showTagModal, setShowTagModal] = useState(false);
 
-    //fitness interest
-    const [selectedFitnessInterest, setSelectedFitnessInterest] = useState("");
+  //fitness interest
+  const [selectedFitnessInterest, setSelectedFitnessInterest] = useState("");
 
   // state of main tab ends
 
@@ -137,6 +137,9 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
   const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
   const [weeksToBeUpdated, setWeeksToBeUpdated] = useState([]);
   const [userInfo, setUserInfo] = useContext(userInfoContext);
+  //
+  const [selectedChallenge, setSelectedChallenge] = useState("");
+  const [allChallenges, setAllChallenges] = useState([]);
 
   useEffect(() => {
     setAuthToken(localStorage.getItem("jwtToken"));
@@ -171,10 +174,12 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
       informationList,
       weeks,
       trainersFitnessInterest,
+      alternativeLanguage,
     } = selectedChallengeForUpdate;
 
     console.log(selectedChallengeForUpdate);
     // return;
+    alternativeLanguage && setSelectedChallenge(alternativeLanguage._id);
     setName(challengeName);
     setAccess(access);
     setPrice(price);
@@ -186,7 +191,9 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
     setTrainers(trainers.map((t) => t._id));
     setDescription(description);
     setDifficulty(difficulty);
-    setSelectedFitnessInterest(trainersFitnessInterest ? trainersFitnessInterest : "")
+    setSelectedFitnessInterest(
+      trainersFitnessInterest ? trainersFitnessInterest : ""
+    );
     setGoals(challengeGoals.map((t) => t._id));
     setBodyFocus(body.map((t) => t._id));
     setDuration(duration);
@@ -234,7 +241,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
               link: workout.introVideoLink,
             }
           : { name: "", link: "" },
-          workoutIntroVideoLength: workout.introVideoLength
+        workoutIntroVideoLength: workout.introVideoLength
           ? workout.introVideoLength
           : "",
         relatedProducts: workout.relatedProducts
@@ -279,12 +286,13 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
     });
   };
   async function fethData() {
-    const bodyFocus = await getAllBodyFocus();
-    const goals = await getAllChallengeGoals();
-    const tags = await getAllChallengeTags();
-    const equipments = await getAllChallengeEquipments();
-    const trainers = await getAllTrainers();
-    const products = await getAllChallengeProducts();
+    const bodyFocus = await getAllBodyFocus("");
+    const goals = await getAllChallengeGoals("");
+    const tags = await getAllChallengeTags("");
+    const equipments = await getAllChallengeEquipments("");
+    const trainers = await getAllTrainers("");
+    const products = await getAllChallengeProducts("");
+    const challenges = await getAllChallenges("");
 
     setAllBodyfocus(bodyFocus.body);
     setAllEquipments(equipments.equipments);
@@ -293,6 +301,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
     // console.log("trainers", trainers);
     setAllTrainers(trainers.trainers);
     setAllProducts(products.products);
+    setAllChallenges(challenges.challenges);
   }
 
   // const updateWorkouts = (weeks) => {
@@ -367,6 +376,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
       allowComments,
       allowReviews,
       isPublic: makePublic,
+      alternativeLanguage: selectedChallenge,
     };
     console.log(obj, selectedChallengeForUpdate._id);
     // return;
@@ -437,8 +447,11 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
         <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="Main" key="1">
             <NewChallengeMainTab
+              allChallenges={allChallenges}
+              selectedChallenge={selectedChallenge}
+              setSelectedChallenge={setSelectedChallenge}
               form={form}
-              selectedFitnessInterest={selectedFitnessInterest} 
+              selectedFitnessInterest={selectedFitnessInterest}
               setSelectedFitnessInterest={setSelectedFitnessInterest}
               id={selectedChallengeForUpdate._id}
               name={name}

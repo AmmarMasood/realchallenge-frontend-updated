@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {
   Collapse,
   Button,
@@ -38,6 +38,7 @@ import {
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import EditTypeName from "./EditTypeName";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -114,7 +115,9 @@ function NewChallengeWorkoutTab({
   const [mediaManagerActions, setMediaManagerActions] = useState([]);
   const [equipmentModal, setEquipmentModal] = useState(false);
   const [newEquipmentName, setNewEquipmentName] = useState("");
+
   const workoutModalRef = useRef(null);
+  const { language } = useContext(LanguageContext);
 
   // for updating equpments
 
@@ -131,7 +134,7 @@ function NewChallengeWorkoutTab({
   }, [trainers]);
 
   const fetchExercises = async () => {
-    const allExe = await getAllExercises();
+    const allExe = await getAllExercises(language);
     const g = allExe.exercises.map((e) => ({ ...e, trainer: e.trainer._id }));
     var e = trainers ? g.filter((f) => trainers.includes(f.trainer)) : g;
     console.log("eee", e, allExe, trainers);
@@ -156,8 +159,8 @@ function NewChallengeWorkoutTab({
   };
 
   const fethData = async () => {
-    const data = await getAllChallengeEquipments();
-    const products = await getAllProdcuts();
+    const data = await getAllChallengeEquipments(language);
+    const products = await getAllProdcuts(language);
     setAllProducts(products.products);
     setAllEquipments(data.equipments);
   };
@@ -832,12 +835,16 @@ function NewChallengeWorkoutTab({
       return (
         <div
           className="new-workout-creator-container-2-nonrender"
-          style={{ height: workoutModalFullscreen ? "60vh" : "50vh" }}
+          style={{
+            height: workoutModalFullscreen ? "60vh" : "50vh",
+            background: "#232932",
+          }}
         >
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
+              background: "#232932",
               // padding: "10px",
             }}
           >
@@ -866,155 +873,165 @@ function NewChallengeWorkoutTab({
                 header={`Exercise ${i + 1}`}
                 key={update ? e._id : e.exerciseId}
               >
-                <Button
-                  type="danger"
-                  onClick={() =>
-                    nonRenderedWorkoutExerciseRemove(
-                      update ? e._id : e.exerciseId
-                    )
-                  }
-                  style={{ float: "right" }}
-                >
-                  Remove
-                </Button>
-                <Select
-                  showSearch
-                  style={{ width: "100%", marginTop: "10px" }}
-                  placeholder="Select a exercise"
-                  optionFilterProp="children"
-                  value={update ? e.exerciseId : e._id}
-                  onChange={(exe) =>
-                    handleNonRenderedWorkoutExerciseName(
-                      update ? e._id : e.exerciseId,
-                      exe
-                    )
-                  }
-                  filterOption={(input, option) =>
-                    option.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  {allExercises.map((e, i) => (
-                    <Option value={e._id} key={i}>
-                      {e.title}
-                    </Option>
-                  ))}
-                </Select>
-
                 <div
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                    gridGap: "10px",
+                    background: "#232932",
+                    margin: "-10px",
+                    padding: "10px",
                   }}
                 >
-                  <div>
-                    <p
-                      className="font-paragraph-black"
-                      style={{
-                        color: "var(--color-orange)",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Exercise Title
-                    </p>
-                    <Input value={e.exerciseName} disabled={true} />
-                  </div>
-                  <div>
-                    <p
-                      className="font-paragraph-black"
-                      style={{
-                        color: "var(--color-orange)",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Exercise Length- must be in seconds
-                    </p>
-                    <Input
-                      value={e.videoLength}
-                      onChange={(l) =>
-                        handleNonRenderedWorkoutExerciseWorkoutLength(
-                          update ? e._id : e.exerciseId,
-                          l.target.value
-                        )
-                      }
-                    />
-                  </div>
+                  <Button
+                    type="danger"
+                    onClick={() =>
+                      nonRenderedWorkoutExerciseRemove(
+                        update ? e._id : e.exerciseId
+                      )
+                    }
+                    style={{ float: "right" }}
+                  >
+                    Remove
+                  </Button>
+                  <Select
+                    showSearch
+                    style={{ width: "100%", marginTop: "10px" }}
+                    placeholder="Select a exercise"
+                    optionFilterProp="children"
+                    value={update ? e.exerciseId : e._id}
+                    onChange={(exe) =>
+                      handleNonRenderedWorkoutExerciseName(
+                        update ? e._id : e.exerciseId,
+                        exe
+                      )
+                    }
+                    filterOption={(input, option) =>
+                      option.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    {allExercises.map((e, i) => (
+                      <Option value={e._id} key={i}>
+                        {e.title}
+                      </Option>
+                    ))}
+                  </Select>
 
-                  <div>
-                    <p
-                      className="font-paragraph-black"
-                      style={{
-                        color: "var(--color-orange)",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Break after exercise- must be in seconds
-                    </p>
-                    <Input
-                      placeholder="eg. 10"
-                      type="number"
-                      value={e.breakAfterExercise}
-                      onChange={(l) =>
-                        handleNonRenderedWorkoutExerciseBreak(
-                          update ? e._id : e.exerciseId,
-                          l.target.value
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div>
-                    <p
-                      className="font-paragraph-black"
-                      style={{
-                        color: "var(--color-orange)",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Exercise Group Name
-                    </p>
-                    <Input
-                      placeholder="eg. Round 1/3"
-                      value={e.exerciseGroupName}
-                      onChange={(l) =>
-                        handleNonRenderedWorkoutExerciseGroupName(
-                          update ? e._id : e.exerciseId,
-                          l.target.value
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div>
-                    <p
-                      className="font-paragraph-white"
-                      style={{
-                        color: "var(--color-orange)",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Uploaded Video
-                    </p>
-                    <div className="font-paragraph-white">
-                      {e.exerciseVideo}{" "}
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns:
+                        "repeat(auto-fit, minmax(220px, 1fr))",
+                      gridGap: "10px",
+                      background: "#232932 !important",
+                    }}
+                  >
+                    <div>
+                      <p
+                        className="font-paragraph-black"
+                        style={{
+                          color: "var(--color-orange)",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Exercise Title
+                      </p>
+                      <Input value={e.exerciseName} disabled={true} />
                     </div>
-                  </div>
+                    <div>
+                      <p
+                        className="font-paragraph-black"
+                        style={{
+                          color: "var(--color-orange)",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Exercise Length- must be in seconds
+                      </p>
+                      <Input
+                        value={e.videoLength}
+                        onChange={(l) =>
+                          handleNonRenderedWorkoutExerciseWorkoutLength(
+                            update ? e._id : e.exerciseId,
+                            l.target.value
+                          )
+                        }
+                      />
+                    </div>
 
-                  <div>
-                    <p
-                      className="font-paragraph-white"
-                      style={{
-                        color: "var(--color-orange)",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Uploaded Voiceover
-                    </p>
+                    <div>
+                      <p
+                        className="font-paragraph-black"
+                        style={{
+                          color: "var(--color-orange)",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Break after exercise- must be in seconds
+                      </p>
+                      <Input
+                        placeholder="eg. 10"
+                        type="number"
+                        value={e.breakAfterExercise}
+                        onChange={(l) =>
+                          handleNonRenderedWorkoutExerciseBreak(
+                            update ? e._id : e.exerciseId,
+                            l.target.value
+                          )
+                        }
+                      />
+                    </div>
 
-                    <div className="font-paragraph-white">
-                      {e.voiceOverFile}{" "}
+                    <div>
+                      <p
+                        className="font-paragraph-black"
+                        style={{
+                          color: "var(--color-orange)",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Exercise Group Name
+                      </p>
+                      <Input
+                        placeholder="eg. Round 1/3"
+                        value={e.exerciseGroupName}
+                        onChange={(l) =>
+                          handleNonRenderedWorkoutExerciseGroupName(
+                            update ? e._id : e.exerciseId,
+                            l.target.value
+                          )
+                        }
+                      />
+                    </div>
+
+                    <div>
+                      <p
+                        className="font-paragraph-white"
+                        style={{
+                          color: "var(--color-orange)",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Uploaded Video
+                      </p>
+                      <div className="font-paragraph-white">
+                        {e.exerciseVideo}{" "}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p
+                        className="font-paragraph-white"
+                        style={{
+                          color: "var(--color-orange)",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Uploaded Voiceover
+                      </p>
+
+                      <div className="font-paragraph-white">
+                        {e.voiceOverFile}{" "}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1160,7 +1177,10 @@ function NewChallengeWorkoutTab({
             htmlType="submit"
             onClick={async () => {
               if (newEquipmentName.length > 0) {
-                await createChallengeEquipment(newEquipmentName);
+                await createChallengeEquipment({
+                  name: newEquipmentName,
+                  language,
+                });
                 // setEquipmentModal(false);
                 fethData();
               }

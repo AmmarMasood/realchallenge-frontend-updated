@@ -6,10 +6,11 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Input, Collapse } from "antd";
 import { ArrowRightOutlined, SearchOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
+
 import ChallengeCard from "../components/Cards/ChallengeCard";
 import { getAllTrainers } from "../services/trainers";
 import slug from "elegant-slug";
+import { T } from "../components/Translate";
 
 const { Panel } = Collapse;
 
@@ -24,7 +25,7 @@ const filterTextStyle = {
 
 function Trainers() {
   const [name, setName] = useState("");
-  const [t] = useTranslation();
+
   // eslint-disable-next-line
   const [allTrainers, setAllTrainers] = useState([]);
   const [filterTrainers, setFilterTrainers] = useState([]);
@@ -55,15 +56,21 @@ function Trainers() {
       {/* <Hero /> */}
       <div className="page-header">
         <div className="page-header-textbox">
-          <h1 className="font-heading-white">{t("trainers.skill")}</h1>
-          <p className="font-paragraph-white">{t("trainers.let_us")}</p>
+          <h1 className="font-heading-white">
+            {" "}
+            <T>trainers.skill</T>
+          </h1>
+          <p className="font-paragraph-white">
+            {" "}
+            <T>trainers.let_us</T>
+          </p>
         </div>
       </div>
       {/* 2nd row */}
       <div style={{ backgroundColor: "#222932" }}>
         <div className="trainers-2-row">
           <p className="font-paragraph-white">
-            {t("trainers.real_challenge_coach")}
+            <T>trainers.real_challenge_coach</T>
           </p>
         </div>
       </div>
@@ -105,13 +112,13 @@ function Trainers() {
                     fontSize: "18px",
                   }}
                 >
-                  {t("trainers.filter_trainer")}
+                  <T>trainers.filter_trainer</T>
                 </p>
               }
               key="1"
             >
               <p className="font-paragraph-white">
-                {t("trainers.filter_gender")}
+                <T>trainers.filter_gender</T>
               </p>
               <div style={{ display: "flex" }}>
                 <p
@@ -127,7 +134,7 @@ function Trainers() {
                       filterGender === "male" ? "#ff7700" : "#454b52",
                   }}
                 >
-                  {t("trainers.male")}
+                  <T>trainers.male</T>
                 </p>
                 <p
                   className="font-paragraph-white"
@@ -142,7 +149,7 @@ function Trainers() {
                       filterGender === "female" ? "#ff7700" : "#454b52",
                   }}
                 >
-                  {t("trainers.female")}
+                  <T>trainers.female</T>
                 </p>
                 <p
                   className="font-paragraph-white"
@@ -157,7 +164,7 @@ function Trainers() {
                       filterGender === "other" ? "#ff7700" : "#454b52",
                   }}
                 >
-                  {t("trainers.other")}
+                  <T>trainers.other</T>
                 </p>
               </div>
             </Panel>
@@ -186,20 +193,21 @@ function Trainers() {
         <div className="home-row-7-container" style={{ minHeight: "350px" }}>
           <div className="home-row-7-container-text">
             <h2 style={{ fontSize: "2rem" }} className="font-subheading-black">
-              {t("trainers.need_more")}
+              <T>trainers.need_more</T>
             </h2>
             <h1 style={{ fontSize: "4.5rem" }} className="font-heading-black">
-              {t("trainers.feel_better")}
+              <T>trainers.feel_better</T>
             </h1>
             <p
               style={{ fontSize: "1.8rem", paddingBottom: "10px" }}
               className="font-paragraph-black"
             >
-              {t("trainers.become")}
+              <T>trainers.become</T>
             </p>
             <Link className="home-button" to="/how-it-works">
               <span className="home-button-text font-paragraph-white">
-                {t("trainers.inspire")} <ArrowRightOutlined />
+                <T>trainers.inspire</T>
+                <ArrowRightOutlined />
               </span>
             </Link>
           </div>

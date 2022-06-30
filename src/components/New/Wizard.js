@@ -13,13 +13,13 @@ import FemaleSexLogo from "../../assets/icons/female.svg";
 import WaistLogo from "../../assets/icons/waist-icon.svg";
 import HeartcheckFont from "../../assets/icons/heart-icon.svg";
 import DumbellIcon from "../../assets/icons/dumbell-icon.svg";
-import { useTranslation } from "react-i18next";
+
 import { getAllTrainerGoals } from "../../services/trainers";
+import { T } from "../Translate";
 
 const { Step } = Steps;
 
 function Wizard({ setWizardCompleted }) {
-  const [t] = useTranslation();
   const [allFitnessInterests, setAllFitnessInterests] = useState([]);
   const [selectedFitnessInterests, setSelectedFitnessInterests] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -137,8 +137,12 @@ function Wizard({ setWizardCompleted }) {
       // title: "",
       content: (
         <div style={{ textAlign: "center" }}>
-          <h1 className="font-heading-white">{t("wizard.wg")}</h1>
-          <p className="font-paragraph-white">{t("wizard.yd")}</p>
+          <h1 className="font-heading-white">
+            <T>wizard.wg</T>
+          </h1>
+          <p className="font-paragraph-white">
+            <T>wizard.yd</T>
+          </p>
           <div className="wizard-gender-selection-container">
             <div
               onClick={() => {
@@ -154,7 +158,7 @@ function Wizard({ setWizardCompleted }) {
             >
               <img src={MaleSexLogo} alt="" />
               <p className="font-paragraph-white" style={{ fontSize: "20px" }}>
-                {t("wizard.man")}
+                <T>wizard.man</T>
               </p>
             </div>
             <div
@@ -171,7 +175,7 @@ function Wizard({ setWizardCompleted }) {
             >
               <img src={FemaleSexLogo} alt="" />
               <p className="font-paragraph-white" style={{ fontSize: "20px" }}>
-                {t("wizard.woman")}
+                <T>wizard.woman</T>
               </p>
             </div>
           </div>
@@ -198,8 +202,12 @@ function Wizard({ setWizardCompleted }) {
     {
       content: (
         <div style={{ textAlign: "center" }}>
-          <h1 className="font-heading-white">{t("wizard.whatg")}</h1>
-          <p className="font-paragraph-white">{t("wizard.sgda")}</p>
+          <h1 className="font-heading-white">
+            <T>wizard.whatg</T>
+          </h1>
+          <p className="font-paragraph-white">
+            <T>wizard.sgda</T>
+          </p>
           <div className="wizard-goal-selection-container">
             <div
               style={{
@@ -216,7 +224,7 @@ function Wizard({ setWizardCompleted }) {
               <img src={DumbellIcon} alt="" />
               <span className="font-paragraph-white">
                 {" "}
-                {t("wizard.gainmuslce")} (Bulk)
+                <T>wizard.gainmuslce</T> (Bulk)
               </span>
             </div>
             <div
@@ -232,7 +240,9 @@ function Wizard({ setWizardCompleted }) {
               }}
             >
               <img src={HeartcheckFont} alt="" />
-              <span className="font-paragraph-white">{t("wizard.getfit")}</span>
+              <span className="font-paragraph-white">
+                <T>wizard.getfit</T>
+              </span>
             </div>
             <div
               style={{
@@ -248,7 +258,7 @@ function Wizard({ setWizardCompleted }) {
             >
               <img src={WaistLogo} alt="" />
               <span className="font-paragraph-white">
-                {t("wizard.loseweight")} (Cut)
+                <T>wizard.loseweight</T> (Cut)
               </span>
             </div>
           </div>
@@ -276,9 +286,11 @@ function Wizard({ setWizardCompleted }) {
       content: (
         <div style={{ textAlign: "center" }}>
           <h2 className="font-heading-white" style={{ fontSize: "23px" }}>
-            {t("wizard.currentfitness")}
+            <T>wizard.currentfitness</T>
           </h2>
-          <p className="font-paragraph-white">{t("wizard.smatch")}</p>
+          <p className="font-paragraph-white">
+            <T>wizard.smatch</T>
+          </p>
           <div className="wizard-goal-selection-container">
             <div
               style={{
@@ -296,7 +308,7 @@ function Wizard({ setWizardCompleted }) {
                 style={{ fontSize: "25px", paddingRight: "10px" }}
               />{" "}
               <div>
-                {t("wizard.inactive")}
+                <T>wizard.inactive</T>
                 <br />
                 <span
                   style={{
@@ -304,7 +316,7 @@ function Wizard({ setWizardCompleted }) {
                     display: "block",
                   }}
                 >
-                  {t("wizard.sjn")}
+                  <T>wizard.sjn</T>
                 </span>
               </div>
             </div>
@@ -324,7 +336,7 @@ function Wizard({ setWizardCompleted }) {
                 style={{ fontSize: "25px", paddingRight: "10px" }}
               />{" "}
               <div>
-                {t("wizard.la")}
+                <T>wizard.la</T>
                 <br />
                 <span
                   style={{
@@ -332,7 +344,7 @@ function Wizard({ setWizardCompleted }) {
                     display: "block",
                   }}
                 >
-                  {t("wizard.seated")}
+                  <T>wizard.seated</T>
                 </span>
               </div>
             </div>
@@ -352,14 +364,14 @@ function Wizard({ setWizardCompleted }) {
                 style={{ fontSize: "25px", paddingRight: "10px" }}
               />{" "}
               <div>
-                {t("wizard.avgactive")} <br />
+                <T>wizard.avgactive</T> <br />
                 <span
                   style={{
                     fontSize: "1.3rem",
                     display: "block",
                   }}
                 >
-                  {t("wizard.sj3")}
+                  <T>wizard.sj3</T>
                 </span>
               </div>
             </div>
@@ -379,14 +391,14 @@ function Wizard({ setWizardCompleted }) {
                 style={{ fontSize: "25px", paddingRight: "10px" }}
               />{" "}
               <div>
-                {t("wizard.active")} <br />
+                <T>wizard.active</T> <br />
                 <span
                   style={{
                     fontSize: "1.3rem",
                     display: "block",
                   }}
                 >
-                  {t("wizard.sj4")}
+                  <T>wizard.sj4</T>
                 </span>
               </div>
             </div>
@@ -406,14 +418,14 @@ function Wizard({ setWizardCompleted }) {
                 style={{ fontSize: "25px", paddingRight: "10px" }}
               />{" "}
               <div>
-                {t("wizard.veryactive")} <br />
+                <T>wizard.veryactive</T> <br />
                 <span
                   style={{
                     fontSize: "1.3rem",
                     display: "block",
                   }}
                 >
-                  {t("wizard.hw")}
+                  <T>wizard.hw</T>
                 </span>
               </div>
             </div>
@@ -520,8 +532,12 @@ function Wizard({ setWizardCompleted }) {
     {
       content: (
         <div style={{ textAlign: "center" }}>
-          <h1 className="font-heading-white">{t("wizard.fd")}</h1>
-          <p className="font-paragraph-white">{t("wizard.almost")}</p>
+          <h1 className="font-heading-white">
+            <T>wizard.fd</T>
+          </h1>
+          <p className="font-paragraph-white">
+            <T>wizard.almost</T>
+          </p>
           <div className="finaldetails-field-container">
             <InputNumber
               size="large"
@@ -571,14 +587,19 @@ function Wizard({ setWizardCompleted }) {
     {
       content: (
         <div style={{ textAlign: "center" }}>
-          <h2 className="font-heading-white">{t("wizard.improve")}</h2>
-          <p className="font-paragraph-white"> {t("wizard.joinfree")}</p>
+          <h2 className="font-heading-white">
+            <T>wizard.improve</T>
+          </h2>
+          <p className="font-paragraph-white">
+            {" "}
+            <T>wizard.joinfree</T>
+          </p>
           <div
             className="finaldetails-field-container"
             style={{ textAlign: "left" }}
           >
             <div className="show-detail-field font-paragraph-white">
-              {t("wizard.bmi")}: {bmi}
+              <T>wizard.bmi</T>: {bmi}
             </div>
             <div className="show-detail-field font-paragraph-white">
               Your Body Fat is:{" "}
@@ -588,7 +609,7 @@ function Wizard({ setWizardCompleted }) {
               %
             </div>
             <div className="show-detail-field font-paragraph-white">
-              {t("wizard.kal")}: {calories}
+              <T>wizard.kal</T>: {calories}
             </div>
           </div>
           <div
@@ -600,7 +621,7 @@ function Wizard({ setWizardCompleted }) {
               textAlign: "left",
             }}
           >
-            {t("wizard.gettailor")}
+            <T>wizard.gettailor</T>
           </div>
 
           <div
@@ -615,7 +636,9 @@ function Wizard({ setWizardCompleted }) {
             }}
             onClick={() => onSetWizardComplete()}
           >
-            <span className="font-paragraph-white">{t("wizard.tryfree")}</span>
+            <span className="font-paragraph-white">
+              <T>wizard.tryfree</T>
+            </span>
             <ArrowRightOutlined
               style={{ color: "#fff", fontSize: "20px", marginLeft: "10px" }}
             />
@@ -666,13 +689,13 @@ function Wizard({ setWizardCompleted }) {
                 onClick={() => prev()}
                 className="font-paragraph-white"
               >
-                {t("wizard.back")}
+                <T>wizard.back</T>
               </Button>
             )} */}
             {/* {current === steps.length - 1 && (
             <Button
               type="primary"
-              onClick={() => message.success("Processing complete!")}
+              onClick={() => message.success("Processing complete!</T>
             >
               Done
             </Button>

@@ -25,6 +25,7 @@ import {
   removeDiet,
   createIngredient,
   removeIngredient,
+  getAllUserRecipes,
 } from "../../../services/recipes";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import EditTypeName from "./EditTypeName";
@@ -81,6 +82,9 @@ function UpdateRecipe(props) {
   const [cookingProcess, setCookingProcess] = useState([]);
   const [notes, setNotes] = useState("");
   const [tips, setTips] = useState("");
+  // recipe version selector
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState("");
 
   // update stuff
   const [editItemNameModalVisible, setEditItemModelVisible] = useState(false);
@@ -91,18 +95,29 @@ function UpdateRecipe(props) {
   const userInfo = useContext(userInfoContext)[0];
 
   async function fetchData() {
-    const diets = await getAllDietTypes();
-    const meals = await getAllMealTypes();
-    const foodTypes = await getAllFoodTypes();
-    const ingredients = await getAllIngredients();
+    const diets = await getAllDietTypes("");
+    const meals = await getAllMealTypes("");
+    const foodTypes = await getAllFoodTypes("");
+    const ingredients = await getAllIngredients("");
 
     setAllDiets(diets.diets);
     setAllMealTypes(meals.mealTypes);
     setAllFoodTypes(foodTypes.foodTypes);
     setAllIngredients(ingredients.ingredients);
   }
+
+  // async function fetchAllRecipes() {
+  //   const res = await getAllUserRecipes(
+  //     language === "english" ? "dutch" : "english"
+  //   );
+  //   console.log("testing", res);
+  //   if (res && res.recipes) {
+  //     setAllRecipes(res.recipes);
+  //   }
+  // }
+
   useEffect(() => {
-    console.log("props", props);
+    console.log("ammar", props.selectedProduct);
     form.setFieldsValue({
       recipeName: props.selectedProduct.name,
       recipeDescription: props.selectedProduct.description,
@@ -155,7 +170,10 @@ function UpdateRecipe(props) {
     setIsPublic(props.selectedProduct.isPublic);
     setAllowComments(props.selectedProduct.allowComments);
     setAllowReviews(props.selectedProduct.allowReviews);
+    props.selectedProduct.alternativeLanguage &&
+      setSelectedRecipe(props.selectedProduct.alternativeLanguage._id);
     fetchData();
+    fetchAllRecipes();
   }, []);
 
   const ing = {
@@ -192,11 +210,23 @@ function UpdateRecipe(props) {
       isPublic: isPublic,
       allowComments: allowComments,
     };
-    console.log("Success:", d);
-    console.log(values);
-    console.log(props.selectedProduct._id, d);
+    if (selectedRecipe) {
+      d.alternativeLanguage = selectedRecipe;
+
+      await updateRecipe(
+        { alternativeLanguage: props.selectedProduct._id },
+        selectedRecipe
+      );
+    }
     await updateRecipe(d, props.selectedProduct._id);
   };
+
+  async function fetchAllRecipes() {
+    const res = await getAllUserRecipes("");
+    if (res && res.recipes) {
+      setAllRecipes(res.recipes);
+    }
+  }
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -667,10 +697,28 @@ function UpdateRecipe(props) {
           actions={mediaManagerActions}
         />
         <h2 className="font-heading-white">Update Recipe</h2>
+
         <div
           className="admin-newuser-container"
           style={{ padding: "50px 50px 50px 20px" }}
         >
+          <div>
+            <span
+              style={{ marginRight: "5px" }}
+            >{`Select alternative language version`}</span>
+            <Select
+              style={{ width: "500px" }}
+              value={selectedRecipe}
+              onChange={(e) => setSelectedRecipe(e)}
+            >
+              <Option value={""}>-</Option>
+              {allRecipes.map((r, i) => (
+                <Option key={i} value={r._id}>
+                  {r.name}
+                </Option>
+              ))}
+            </Select>
+          </div>
           <Form
             layout="vertical"
             name="basic"

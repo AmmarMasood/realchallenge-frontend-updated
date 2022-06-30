@@ -11,7 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { Avatar, Modal, Pagination } from "antd";
 import CommentSection from "./CommentSection";
-import { useTranslation } from "react-i18next";
+
 import ChatWhite from "../../assets/icons/chat-white.svg";
 import Clap from "../../assets/icons/clap-orange.svg";
 import Clock from "../../assets/icons/feed-clock.svg";
@@ -23,7 +23,6 @@ import {
 } from "../../services/communityPosts";
 
 function Community({ userInfo }) {
-  const [t] = useTranslation();
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
   // eslint-disable-next-line
@@ -148,7 +147,7 @@ function Community({ userInfo }) {
                 <div
                   className="dashboard-feed-container-card-row2"
                   style={{
-                    background: `url(${process.env.REACT_APP_SERVER}/api${d.image})`,
+                    background: `url(${process.env.REACT_APP_SERVER}/uploads/${d.image})`,
                     backgroundSize: "cover",
                     cursor: "pointer",
                   }}

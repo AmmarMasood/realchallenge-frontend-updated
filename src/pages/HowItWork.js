@@ -9,12 +9,11 @@ import { Link } from "react-router-dom";
 import { ArrowRightOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/scss/modal-video.scss";
-import { useTranslation } from "react-i18next";
+import { T } from "../components/Translate";
 
 function HowItWork() {
   const [link, setLink] = useState("");
   const [isOpen, setOpen] = useState(false);
-  const [t] = useTranslation();
 
   return (
     <div>
@@ -31,12 +30,14 @@ function HowItWork() {
       <div className="page-header howitworks-background">
         <div className="page-header-textbox" style={{ padding: "50px" }}>
           <h1 className="font-heading-white">
-            {t("how_it_works.workout")} <br /> {t("how_it_works.start")}
+            <T>how_it_works.workout</T> <br /> <T>how_it_works.start</T>
           </h1>
-          <p className="font-paragraph-white">{t("how_it_works.month")}</p>
+          <p className="font-paragraph-white">
+            <T>how_it_works.month</T>
+          </p>
           <Link className="home-button" to="/new">
             <span className="home-button-text font-paragraph-white">
-              {t("how_it_works.start_d")} <ArrowRightOutlined />
+              <T>how_it_works.start_d</T> <ArrowRightOutlined />
             </span>
           </Link>
         </div>
@@ -46,17 +47,17 @@ function HowItWork() {
         <div className="home-row-2" style={{ backgroundColor: "#171e27" }}>
           <div className="home-row-2-col-1">
             <h3 className="home-row-2-col-1-heading font-subheading-white">
-              {t("how_it_works.all")}
+              <T>how_it_works.all</T>
             </h3>
             <h2 className="home-row-2-col-1-subheading font-heading-white">
-              {t("how_it_works.all_tools")}
+              <T>how_it_works.all_tools</T>
             </h2>
             <p className="home-text font-paragraph-white">
-              {t("how_it_works.rc")}
+              <T>how_it_works.rc</T>
             </p>
             <Link className="home-button" to="/new">
               <span className="home-button-text font-paragraph-white">
-                {t("how_it_works.accept")} <ArrowRightOutlined />
+                <T>how_it_works.accept</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>
@@ -73,7 +74,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.we")}
+                <T>how_it_works.we</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -88,7 +89,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.choose")}
+                <T>how_it_works.choose</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -103,7 +104,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.gt")}
+                <T>how_it_works.gt</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -118,7 +119,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.ad")}
+                <T>how_it_works.ad</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -133,7 +134,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.start_over")}
+                <T>how_it_works.start_over</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -148,7 +149,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.start_first")}
+                <T>how_it_works.start_first</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -163,7 +164,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.update_your")}
+                <T>how_it_works.update_your</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -178,7 +179,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.track_your")}
+                <T>how_it_works.track_your</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -193,7 +194,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.fc")}
+                <T>how_it_works.fc</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -208,7 +209,7 @@ function HowItWork() {
                 className="home-text font-heading-white"
                 style={{ lineHeight: "20px" }}
               >
-                {t("how_it_works.psm")}
+                <T>how_it_works.psm</T>
               </span>
             </div>
           </div>
@@ -218,10 +219,10 @@ function HowItWork() {
       {/* 6th row */}
       <div className="home-row-6" style={{ padding: "30px 50px" }}>
         <h1 className="home-row-6-heading font-heading-black">
-          {t("how_it_works.we_share_exp")}
+          <T>how_it_works.we_share_exp</T>
         </h1>
         <p style={{ fontSize: "18px" }} className="font-paragraph-black">
-          {t("how_it_works.this_is")}
+          <T>how_it_works.this_is</T>
         </p>
         <div
           className="home-row-6-video-container"
@@ -240,7 +241,7 @@ function HowItWork() {
               style={{ textAlign: "left" }}
             >
               <PlayCircleOutlined className="play-icon" />
-              {t("how_it_works.find_the")}
+              <T>how_it_works.find_the</T>
             </div>
           </div>
           <div
@@ -256,7 +257,7 @@ function HowItWork() {
               style={{ textAlign: "left" }}
             >
               <PlayCircleOutlined className="play-icon" />
-              {t("how_it_works.cnp")}
+              <T>how_it_works.cnp</T>
               <br />
             </div>
           </div>
@@ -273,7 +274,7 @@ function HowItWork() {
               style={{ textAlign: "left" }}
             >
               <PlayCircleOutlined className="play-icon" />
-              {t("how_it_works.exercise_when_and")}
+              <T>how_it_works.exercise_when_and</T>
             </div>
           </div>
         </div>
@@ -284,26 +285,26 @@ function HowItWork() {
         <div className="home-row-7-container">
           <div className="home-row-7-container-text">
             <h2 style={{ fontSize: "2rem" }} className="font-subheading-black">
-              {t("how_it_works.start_today")}
+              <T>how_it_works.start_today</T>
             </h2>
             <h1 style={{ fontSize: "4.5rem" }} className="font-heading-black">
-              {t("how_it_works.optimal")}
+              <T>how_it_works.optimal</T>
             </h1>
             <p
               style={{ fontSize: "1.8rem", paddingBottom: "10px" }}
               className="font-paragraph-black"
             >
-              {t("how_it_works.a_personal")}
+              <T>how_it_works.a_personal</T>
             </p>
             <Link className="home-button" to="/new">
               <span className="home-button-text font-paragraph-white">
-                {t("how_it_works.start_now")} <ArrowRightOutlined />
+                <T>how_it_works.start_now</T> <ArrowRightOutlined />
               </span>
             </Link>
             <p style={{ paddingTop: "10px" }} className="font-paragraph-black">
-              {t("how_it_works.less")}{" "}
+              <T>how_it_works.less</T>{" "}
               <Link to="/pricing" style={{ color: "#ff7700" }}>
-                {t("how_it_works.see_all")}
+                <T>how_it_works.see_all</T>
               </Link>
             </p>
           </div>

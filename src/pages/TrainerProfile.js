@@ -7,7 +7,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Link, withRouter } from "react-router-dom";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/scss/modal-video.scss";
-import { useTranslation } from "react-i18next";
 import ChallengeCard from "../components/Cards/ChallengeCard";
 import { addCommentToTrainer, getTrainerById } from "../services/trainers";
 import QuoteIcon from "../assets/icons/quote-icon.png";
@@ -18,10 +17,11 @@ import StarFilled from "../assets/icons/star-orange.svg";
 import StartTransparent from "../assets/icons/star-transparent.svg";
 import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
+import { T } from "../components/Translate";
 
 function TrainerProfile(props) {
   const [open, setOpen] = useState(false);
-  const [t] = useTranslation();
+
   // eslint-disable-next-line
   const [challenges, setChallenges] = useState([]);
   const [filterChallenges, setFilterChallenges] = useState([]);
@@ -95,7 +95,7 @@ function TrainerProfile(props) {
         autoplay
         isOpen={open}
         controlsList="nodownload"
-        videoId={`${process.env.REACT_APP_SERVER}/api${trainer.videoTrailerLink}`}
+        videoId={`${process.env.REACT_APP_SERVER}/uploads/${trainer.videoTrailerLink}`}
         onClose={() => setOpen(false)}
       />
       <div className="trainer-profile-container">
@@ -110,7 +110,7 @@ function TrainerProfile(props) {
           }}
         >
           {console.log(
-            `${process.env.REACT_APP_SERVER}/api${trainer.heroBanner}`
+            `${process.env.REACT_APP_SERVER}/uploads/${trainer.heroBanner}`
           )}
           <div className="profile-box">
             <div className="profile-box-row1">
@@ -209,7 +209,7 @@ function TrainerProfile(props) {
               className="trainer-profile-aboutme-heading font-paragraph-white"
               style={{ color: "#333b44", textTransform: "uppercase" }}
             >
-              {t("trainer_profile.about_me")}
+              <T>trainer_profile.about_me</T>
             </div>
             <div className="trainer-profile-aboutme-container font-paragraph-white">
               {trainer.bio ? trainer.bio : ""}
@@ -220,7 +220,7 @@ function TrainerProfile(props) {
               className="trainer-profile-challenges-heading font-paragraph-white"
               style={{ color: "#333b44", textTransform: "uppercase" }}
             >
-              {t("trainer_profile.challenges")}
+              <T>trainer_profile.challenges</T>
             </div>
             <div className="trainer-profile-challenges-container">
               <Input
@@ -268,7 +268,7 @@ function TrainerProfile(props) {
                 textTransform: "uppercase",
               }}
             >
-              {t("challenge_profile.comments")}
+              <T>challenge_profile.comments</T>
             </div>
             {allComments.map((c) => (
               <div className="comment-container">
@@ -319,7 +319,7 @@ function TrainerProfile(props) {
                       cursor: "pointer",
                     }}
                   >
-                    {t("common.postComment")}
+                    <T>common.postComment</T>
                   </button>
                 )}
               </>

@@ -8,13 +8,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { getAllBlogs } from "../services/blogs";
 import slug from "elegant-slug";
+import { T } from "../components/Translate";
 
 function Magazine() {
   const [allBlogs, setAllBlogs] = useState([]);
-  const [t] = useTranslation();
 
   const fetchBlogs = async () => {
     const res = await getAllBlogs(localStorage.getItem("locale"));
@@ -40,7 +39,7 @@ function Magazine() {
             <div
               className="home-row-8-blog-container-box home-8-box-1"
               style={{
-                background: `url(${process.env.REACT_APP_SERVER}/api${
+                background: `url(${process.env.REACT_APP_SERVER}/uploads/${
                   allBlogs[0] ? allBlogs[0].featuredImage : ""
                 }) no-repeat center center / cover`,
                 width: "100%",
@@ -83,10 +82,12 @@ function Magazine() {
       {/* 3rd row */}
       <div style={{ backgroundColor: "#222932" }}>
         <div className="magazine-row-3">
-          <p className="font-paragraph-white">{t("magazine.as")}</p>
+          <p className="font-paragraph-white">
+            <T>magazine.as</T>
+          </p>
           <Link className="home-button" to="/new">
             <span className="home-button-text font-paragraph-white">
-              {t("magazine.start_challenge")}
+              <T>magazine.start_challenge</T>
               <ArrowRightOutlined />
             </span>
           </Link>
@@ -96,10 +97,10 @@ function Magazine() {
       {/* 8th row */}
       <div className="home-row-6" style={{ backgroundColor: "#fff" }}>
         <h1 className="home-row-6-heading font-heading-black">
-          {t("magazine.recent")}
+          <T>magazine.recent</T>
         </h1>
         <p style={{ fontSize: "18px" }} className="font-paragraph-black">
-          {t("magazine.be_sure")}
+          <T>magazine.be_sure</T>
         </p>
         <div className="home-row-6-video-container">
           <Link
@@ -117,7 +118,7 @@ function Magazine() {
               <div
                 className="home-row-8-blog-container-box home-8-box-1"
                 style={{
-                  background: `url(${process.env.REACT_APP_SERVER}/api${
+                  background: `url(${process.env.REACT_APP_SERVER}/uploads/${
                     allBlogs[1] ? allBlogs[1].featuredImage : ""
                   }) no-repeat center center / cover`,
                   width: "100%",
@@ -156,7 +157,7 @@ function Magazine() {
               <div
                 className="home-row-8-blog-container-box home-8-box-2"
                 style={{
-                  background: `url(${process.env.REACT_APP_SERVER}/api${
+                  background: `url(${process.env.REACT_APP_SERVER}/uploads/${
                     allBlogs[2] ? allBlogs[2].featuredImage : ""
                   }) no-repeat center center / cover`,
                   width: "100%",

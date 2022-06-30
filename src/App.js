@@ -54,10 +54,8 @@ function App() {
   const [userPoints, setUserPoints] = useContext(userPointsContext);
 
   let history = useHistory();
+
   useEffect(() => {
-    if (!localStorage.getItem("locale")) {
-      localStorage.setItem("locale", "eng");
-    }
     checkUserInfo();
   }, []);
 

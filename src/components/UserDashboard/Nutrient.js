@@ -30,7 +30,7 @@ import SwapIcon from "../../assets/icons/swapIcon.png";
 import GrayPin from "../../assets/icons/pushpin-gray.png";
 
 import { Scrollbars } from "react-custom-scrollbars";
-import { useTranslation } from "react-i18next";
+
 import {
   getAllDietTypes,
   getAllRecipes,
@@ -40,6 +40,7 @@ import {
 import { createCustomerDetails } from "../../services/customer";
 import { swapRecipeInRecommandedNutrients } from "../../services/users";
 import slug from "elegant-slug";
+import { T } from "../Translate";
 
 const iconsStyle = {
   color: "var(--color-orange)",
@@ -86,7 +87,6 @@ function Nutrient({
   recommandedWeekDiet,
   getUserDetails,
 }) {
-  const [t] = useTranslation();
   const [userInfo, setUserInfo] = useContext(userInfoContext);
   const { height, width } = useWindowDimensions();
   const [selectedSuplementType, setSelectedSuplementType] = useState("none");
@@ -321,7 +321,7 @@ function Nutrient({
         title={
           <>
             <div className="font-card-heading">
-              {t("userDashboard.nutrient.sup")}
+              <T>userDashboard.nutrient.sup</T>
             </div>
             <div className="divider"></div>
           </>
@@ -338,7 +338,7 @@ function Nutrient({
             onClick={() => setSelectedSuplementType("none")}
           >
             <span className="font-paragraph-white">
-              {t("userDashboard.nutrient.none")}
+              <T>userDashboard.nutrient.none</T>
             </span>
             <Checkbox
               checked={selectedSuplementType === "none" ? true : false}
@@ -350,7 +350,7 @@ function Nutrient({
             onClick={() => setSelectedSuplementType("during-the-day")}
           >
             <span className="font-paragraph-white">
-              {t("userDashboard.nutrient.du")}
+              <T>userDashboard.nutrient.du</T>
             </span>
             <Checkbox
               checked={
@@ -364,7 +364,7 @@ function Nutrient({
             onClick={() => setSelectedSuplementType("extra-meal")}
           >
             <span className="font-paragraph-white">
-              {t("userDashboard.nutrient.meal")}
+              <T>userDashboard.nutrient.meal</T>
             </span>
             <Checkbox
               checked={selectedSuplementType === "extra-meal" ? true : false}
@@ -401,7 +401,7 @@ function Nutrient({
                     className="common-orange-button font-paragraph-white"
                     onClick={() => remmoveFromSelectedSuplemets(meal._id)}
                   >
-                    {t("userDashboard.nutrient.unselect")}
+                    <T>userDashboard.nutrient.unselect</T>
                   </button>
                   <Link to={`/recipe/${slug(meal.name)}/${meal._id}`}>
                     <button
@@ -409,7 +409,7 @@ function Nutrient({
                       onClick={() => console.log(false)}
                       style={{ marginLeft: "10px" }}
                     >
-                      {t("userDashboard.nutrient.mi")}
+                      <T>userDashboard.nutrient.mi</T>
                     </button>
                   </Link>
                 </div>
@@ -418,7 +418,7 @@ function Nutrient({
             <Scrollbars style={{ height: "400px" }}>
               <div className="meals-list-container">
                 <h3 className="font-card-heading">
-                  {t("userDashboard.nutrient.selectPi")}
+                  <T>userDashboard.nutrient.selectPi</T>
                 </h3>
                 <div className="divider"></div>
                 {suggestedSupplements.map((meal) => (
@@ -452,7 +452,7 @@ function Nutrient({
                         setSelectedSupplements([...selectedSupplements, meal]);
                       }}
                     >
-                      {t("userDashboard.nutrient.select")}
+                      <T>userDashboard.nutrient.select</T>
                     </button>
                     <Link to={`/recipe/${slug(meal.name)}/${meal._id}`}>
                       <button
@@ -460,7 +460,7 @@ function Nutrient({
                         onClick={() => console.log(false)}
                         style={{ marginLeft: "10px" }}
                       >
-                        {t("userDashboard.nutrient.moreInfo")}
+                        <T>userDashboard.nutrient.moreInfo</T>
                       </button>
                     </Link>
                   </div>
@@ -476,7 +476,7 @@ function Nutrient({
           className="common-orange-button font-paragraph-white"
           onClick={() => saveUserSupplementSettings()}
         >
-          {t("userDashboard.nutrient.done")}
+          <T>userDashboard.nutrient.done</T>
         </button>
       </Modal>
       {/* suplemet modal ends */}
@@ -485,7 +485,7 @@ function Nutrient({
         title={
           <>
             <div className="font-card-heading">
-              {t("userDashboard.nutrient.ds")}
+              <T>userDashboard.nutrient.ds</T>
             </div>
             <div className="divider"></div>
           </>
@@ -516,20 +516,20 @@ function Nutrient({
           className="common-orange-button font-paragraph-white"
           onClick={() => saveUserDietSetup()}
         >
-          {t("userDashboard.nutrient.done")}
+          <T>userDashboard.nutrient.done</T>
         </button>
       </Modal>
       {/* diet setup modal ends */}
       <div className="dashboard-feed-container">
         <div className="dashboard-nutrient-row1">
           <div className="dashboard-challenges-mychallenge-heading font-card-heading">
-            {t("userDashboard.nutrient.currentV")}
+            <T>userDashboard.nutrient.currentV</T>
           </div>
           <div className="divider"></div>
           <div className="dashboard-nutrient-row1-container">
             <div className="dashboard-nutrient-row1-col dashboard-nutrient-row1-col1">
               <div className="dashboard-nutrient-row1-col-heading font-card-heading-light">
-                {t("userDashboard.nutrient.bodyV")}
+                <T>userDashboard.nutrient.bodyV</T>
               </div>
               <div className="divider"></div>
               <div className="dashboard-nutrient-row1-col-container">
@@ -538,7 +538,7 @@ function Nutrient({
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <span>{bodyOverview.calories}</span>
                     <span style={{ fontSize: "1.5rem" }}>
-                      {t("userDashboard.nutrient.calories")}
+                      <T>userDashboard.nutrient.calories</T>
                     </span>
                   </div>
                 </div>
@@ -547,7 +547,7 @@ function Nutrient({
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <span>{bodyOverview.bmi}</span>
                     <span style={{ fontSize: "1.5rem" }}>
-                      {t("userDashboard.nutrient.your-bmi")}
+                      <T>userDashboard.nutrient.your-bmi</T>
                     </span>
                   </div>
                 </div>
@@ -556,7 +556,7 @@ function Nutrient({
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <span>{bodyOverview.bmr}</span>
                     <span style={{ fontSize: "1.5rem" }}>
-                      {t("userDashboard.nutrient.your-bmr")}
+                      <T>userDashboard.nutrient.your-bmr</T>
                     </span>
                   </div>
                 </div>
@@ -564,7 +564,7 @@ function Nutrient({
             </div>
             <div className="dashboard-nutrient-row1-col dashboard-nutrient-row1-col2">
               <div className="dashboard-nutrient-row1-col-heading font-card-heading-light">
-                {t("userDashboard.nutrient.nr")}
+                <T>userDashboard.nutrient.nr</T>
               </div>
               <div className="divider"></div>
               <div className="dashboard-nutrient-row1-col-container">
@@ -573,7 +573,7 @@ function Nutrient({
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <span>{recommandedNutrition.protein} %</span>
                     <span style={{ fontSize: "1.5rem" }}>
-                      {t("userDashboard.nutrient.protein")}
+                      <T>userDashboard.nutrient.protein</T>
                     </span>
                   </div>
                 </div>
@@ -582,7 +582,7 @@ function Nutrient({
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <span>{recommandedNutrition.carbohydrates} %</span>
                     <span style={{ fontSize: "1.5rem" }}>
-                      {t("userDashboard.nutrient.carbohydrates")}
+                      <T>userDashboard.nutrient.carbohydrates</T>
                     </span>
                   </div>
                 </div>
@@ -591,7 +591,7 @@ function Nutrient({
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <span>{recommandedNutrition.fat} %</span>
                     <span style={{ fontSize: "1.5rem" }}>
-                      {t("userDashboard.nutrient.fat")}
+                      <T>userDashboard.nutrient.fat</T>
                     </span>
                   </div>
                 </div>
@@ -599,7 +599,7 @@ function Nutrient({
             </div>
             <div className="dashboard-nutrient-row1-col dashboard-nutrient-row1-col3">
               <div className="dashboard-nutrient-row1-col-heading font-card-heading-light">
-                {t("userDashboard.nutrient.eb")}
+                <T>userDashboard.nutrient.eb</T>
               </div>
               <div className="divider"></div>
               <div className="dashboard-nutrient-row1-col-container">
@@ -703,7 +703,7 @@ function Nutrient({
           }}
         >
           <span className="font-card-heading">
-            {t("userDashboard.nutrient.nfrw")}
+            <T>userDashboard.nutrient.nfrw</T>
           </span>
 
           {width > 700 && (
@@ -712,14 +712,14 @@ function Nutrient({
                 to="/nutrition"
                 className="common-orange-button font-paragraph-white"
               >
-                {t("userDashboard.nutrient.discoverR")}
+                <T>userDashboard.nutrient.discoverR</T>
               </Link>
               <Link
                 to="/pricing"
                 style={{ marginLeft: "10px" }}
                 className="common-transparent-button font-paragraph-white"
               >
-                {t("userDashboard.nutrient.seeP")}
+                <T>userDashboard.nutrient.seeP</T>
               </Link>
             </div>
           )}
@@ -737,7 +737,7 @@ function Nutrient({
             {currentDay === "monday" && (
               <img src={pin} alt="" style={{ marginRight: "10px" }} />
             )}
-            {t("userDashboard.nutrient.monday")}
+            <T>userDashboard.nutrient.monday</T>
           </span>
           <span
             style={{
@@ -751,7 +751,7 @@ function Nutrient({
             {currentDay === "tuesday" && (
               <img src={pin} alt="" style={{ marginRight: "10px" }} />
             )}
-            {t("userDashboard.nutrient.tuesday")}
+            <T>userDashboard.nutrient.tuesday</T>
           </span>
           <span
             style={{
@@ -764,7 +764,7 @@ function Nutrient({
             {currentDay === "wednesday" && (
               <img src={pin} alt="" style={{ marginRight: "10px" }} />
             )}
-            {t("userDashboard.nutrient.wednesday")}
+            <T>userDashboard.nutrient.wednesday</T>
           </span>
           <span
             style={{
@@ -778,7 +778,7 @@ function Nutrient({
               <img src={pin} alt="" style={{ marginRight: "10px" }} />
             )}
 
-            {t("userDashboard.nutrient.thursday")}
+            <T>userDashboard.nutrient.thursday</T>
           </span>
           <span
             style={{
@@ -791,7 +791,7 @@ function Nutrient({
             {currentDay === "friday" && (
               <img src={pin} alt="" style={{ marginRight: "10px" }} />
             )}
-            {t("userDashboard.nutrient.friday")}
+            <T>userDashboard.nutrient.friday</T>
           </span>
           <span
             style={{
@@ -804,7 +804,7 @@ function Nutrient({
             {currentDay === "saturday" && (
               <img src={pin} alt="" style={{ marginRight: "10px" }} />
             )}
-            {t("userDashboard.nutrient.saturday")}
+            <T>userDashboard.nutrient.saturday</T>
           </span>
           <span
             style={{
@@ -817,7 +817,7 @@ function Nutrient({
             {currentDay === "sunday" && (
               <img src={pin} alt="" style={{ marginRight: "10px" }} />
             )}
-            {t("userDashboard.nutrient.sunday")}
+            <T>userDashboard.nutrient.sunday</T>
           </span>
         </div>
         <div className="divider"></div>
@@ -882,7 +882,7 @@ function Nutrient({
                       onClick={() => addToShoppingCart(currentDay, meal)}
                     >
                       <PlusOutlined style={{ color: "#fff" }} />
-                      {t("userDashboard.nutrient.atsl")}
+                      <T>userDashboard.nutrient.atsl</T>
                     </button>
                   </div>
                 </div>
@@ -915,21 +915,21 @@ function Nutrient({
               to="/nutrition"
               className="common-orange-button font-paragraph-white"
             >
-              {t("userDashboard.nutrient.discoverR")}
+              <T>userDashboard.nutrient.discoverR</T>
             </Link>
             <Link
               to="/pricing"
               style={{ marginLeft: "10px" }}
               className="common-transparent-button font-paragraph-white"
             >
-              {t("userDashboard.nutrient.seeP")}
+              <T>userDashboard.nutrient.seeP</T>
             </Link>
           </div>
         )}
       </div>
       <div className="dashboard-nutrient-row3">
         <div className="dashboard-challenges-mychallenge-heading font-card-heading">
-          {t("userDashboard.nutrient.mysl")}
+          <T>userDashboard.nutrient.mysl</T>
         </div>
         <div className="divider"></div>
         <div className="dashboard-nutrient-row3-container">
@@ -938,7 +938,7 @@ function Nutrient({
               className="font-paragraph-white"
               style={{ fontSize: "1.8rem" }}
             >
-              {t("userDashboard.nutrient.sr")}
+              <T>userDashboard.nutrient.sr</T>
             </div>
             <div className="dashboard-nutrient-row3-container-selectedRecipes-container">
               {selectedrRecipes.map((recipe) => (
@@ -966,7 +966,7 @@ function Nutrient({
               className="font-paragraph-white"
               style={{ fontSize: "1.8rem" }}
             >
-              {t("userDashboard.nutrient.ingres")}
+              <T>userDashboard.nutrient.ingres</T>
             </div>
             <div className="dashboard-nutrient-row3-container-ingredientsSummary-container">
               {ingredientsSummary.map((ingredient) => (
@@ -984,7 +984,7 @@ function Nutrient({
                 className="font-paragraph-white"
                 style={{ width: "200px", padding: "10px", margin: "10px" }}
               >
-                {t("userDashboard.nutrient.ogl")}
+                <T>userDashboard.nutrient.ogl</T>
               </button>
             </div>
           </div>
@@ -992,7 +992,7 @@ function Nutrient({
       </div>
       <div className="dashboard-nutrient-row4">
         <div className="dashboard-challenges-mychallenge-heading font-card-heading">
-          {t("userDashboard.nutrient.mfr")}
+          <T>userDashboard.nutrient.mfr</T>
         </div>
         <div className="divider"></div>
         {fav.length <= 0 ? (
@@ -1007,7 +1007,7 @@ function Nutrient({
                   paddingTop: "5px",
                 }}
               >
-                {t("userDashboard.nutrient.nrf")}
+                <T>userDashboard.nutrient.nrf</T>
               </div>
             </div>
           </div>
@@ -1022,7 +1022,7 @@ function Nutrient({
                 <Link to={`/recipe/${slug(meal.name)}/${meal._id}`}>
                   <div
                     style={{
-                      background: `url(${process.env.REACT_APP_SERVER}/api${meal.image})`,
+                      background: `url(${process.env.REACT_APP_SERVER}/uploads/${meal.image})`,
                       backgroundSize: "cover",
                       height: "200px",
                     }}

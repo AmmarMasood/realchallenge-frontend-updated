@@ -140,7 +140,7 @@ function UpdateExercise({
                 setMediaManagerActions([voiceOverLink, setVoiceOverLink]);
               }}
             >
-              Upload Video
+              Upload Voiceover
             </Button>
             <div
               className="font-paragraph-white"

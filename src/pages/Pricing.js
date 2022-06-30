@@ -13,12 +13,12 @@ import Footer from "../components/Footer";
 //   PlayCircleOutlined,
 // } from "@ant-design/icons";
 // import ModalVideo from "react-modal-video";
-import { useTranslation } from "react-i18next";
+
 import NewWelcome from "./NewWelcome";
 import "react-modal-video/scss/modal-video.scss";
 function Pricing() {
   // const [isOpen, setIsOpen] = useState(false);
-  const [t] = useTranslation();
+
   return (
     <div>
       <Navbar />

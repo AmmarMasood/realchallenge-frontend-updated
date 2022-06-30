@@ -16,7 +16,7 @@ import { addComment, getChallengeById } from "../services/createChallenge/main";
 import { Link, withRouter } from "react-router-dom";
 import ModalVideo from "react-modal-video";
 import { Tooltip, Collapse, Input, Avatar, Progress } from "antd";
-import { useTranslation } from "react-i18next";
+
 import { userInfoContext } from "../contexts/UserStore";
 import { checkUserPackage } from "../services/payment";
 import { selectedChallengeContext } from "../contexts/PaymentProcessStore";
@@ -36,6 +36,7 @@ import ChallengeReviewModal from "../components/Challenge/ChallengeReviewModal";
 import { set } from "lodash";
 import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
+import { T } from "../components/Translate";
 
 const tooltipText = `
 If you don’t choose any plan and hit start now, you can go through the wizard, get your free intake, make a free account and enjoy our free challenges collection and one week meal plan. 
@@ -44,7 +45,7 @@ function ChallengeProfile(props) {
   const [reviewOpen, setReviewOpen] = useState(false);
   const [open, setOpen] = useState(false);
   // eslint-disable-next-line
-  const [t] = useTranslation();
+
   const [challenge, setChallenge] = useState({});
   const [usereDtails, setUserDetails] = useState({});
   const [loading, setLoading] = useState(false);
@@ -196,7 +197,7 @@ function ChallengeProfile(props) {
           className="trainer-profile-goals-heading font-paragraph-white"
           style={{ color: "#72777B", textTransform: "uppercase" }}
         >
-          {t("challenge_profile.equipments")}
+          <T>challenge_profile.equipments</T>
         </div>
         <div className="trainer-profile-goals-container">
           {/* {getEquipmentsFromWorkouts(challenge.weeks)} */}
@@ -263,28 +264,28 @@ function ChallengeProfile(props) {
               className="trainer-profile-goals-heading font-paragraph-white"
               style={{ color: "#72777B", textTransform: "uppercase" }}
             >
-              {t("challenge_profile.sub")}
+              <T>challenge_profile.sub</T>
               <Tooltip placement="top" title={tooltipText}>
                 <img src={HelpIcon} alt="" style={{ marginLeft: "5px" }} />
               </Tooltip>
             </div>
             <div className="font-paragraph-white">
-              {t("challenge_profile.gataf")}
+              <T>challenge_profile.gataf</T>
             </div>
 
             <div className="unlock-challenge-div font-paragraph-white">
               <span style={{ fontSize: "20px", fontWeight: "600" }}>
-                {t("challenge_profile.ofc")}
+                <T>challenge_profile.ofc</T>
               </span>
               <span style={{ fontSize: "26px", fontWeight: "600" }}>€0</span>
               <span className="font-paragraph-white">
-                {t("challenge_profile.nosub")}
+                <T>challenge_profile.nosub</T>
               </span>
               <span
                 className="font-paragraph-white"
                 style={{ color: "#9F9F9F" }}
               >
-                {t("challenge_profile.hsn")}
+                <T>challenge_profile.hsn</T>
               </span>
             </div>
           </>
@@ -304,14 +305,14 @@ function ChallengeProfile(props) {
                 className="trainer-profile-goals-heading font-paragraph-white"
                 style={{ color: "#72777B", textTransform: "uppercase" }}
               >
-                {t("player.related")}
-                {t("challenge_profile.sub")}
+                <T>player.related</T>
+                <T>challenge_profile.sub</T>
                 <Tooltip placement="top" title={tooltipText}>
                   <img src={HelpIcon} alt="" style={{ marginLeft: "5px" }} />
                 </Tooltip>
               </div>
               <div className="font-paragraph-white">
-                {t("challenge_profile.gataf")}
+                <T>challenge_profile.gataf</T>
               </div>
               <div className="unlock-challenge-packages">
                 <div
@@ -795,7 +796,7 @@ function ChallengeProfile(props) {
                     ))}
                 </div>
                 <span onClick={() => setReviewOpen(true)}>
-                  {t("challenge_profile.reviews")}
+                  <T>challenge_profile.reviews</T>
                 </span>
               </div>
               <div className="challenge-profile-box-2-info">
@@ -822,7 +823,7 @@ function ChallengeProfile(props) {
               className="trainer-profile-goals-heading font-paragraph-white"
               style={{ color: "#72777B", textTransform: "uppercase" }}
             >
-              {t("challenge_profile.trainers")}
+              <T>challenge_profile.trainers</T>
             </div>
             <div className="challenge-trainers-container">
               {challenge.trainers &&
@@ -861,7 +862,7 @@ function ChallengeProfile(props) {
                 className="trainer-profile-goals-heading font-paragraph-white"
                 style={{ color: "#72777B", textTransform: "uppercase" }}
               >
-                {t("challenge_profile.fitnessInterests")}
+                <T>challenge_profile.fitnessInterests</T>
               </div>
               <div className="trainer-profile-goals-container">
                 {challenge.trainersFitnessInterest &&
@@ -882,7 +883,7 @@ function ChallengeProfile(props) {
               className="trainer-profile-goals-heading font-paragraph-white"
               style={{ color: "#72777B", textTransform: "uppercase" }}
             >
-              {t("challenge_profile.body_focus")}
+              <T>challenge_profile.body_focus</T>
             </div>
             <div className="trainer-profile-goals-container">
               {challenge.body &&
@@ -907,7 +908,7 @@ function ChallengeProfile(props) {
               className="trainer-profile-goals-heading font-paragraph-white"
               style={{ color: "#72777B", textTransform: "uppercase" }}
             >
-              {t("challenge_profile.yourPersonalJourney")}
+              <T>challenge_profile.yourPersonalJourney</T>
             </div>
             {getWeeks()}
           </div>
@@ -943,7 +944,7 @@ function ChallengeProfile(props) {
                   className="font-paragraph-white"
                   style={{ fontWeight: "600" }}
                 >
-                  {t("challenge_profile.start_today")} <ArrowRightOutlined />
+                  <T>challenge_profile.start_today</T> <ArrowRightOutlined />
                 </span>
               </button>
             )}
@@ -960,7 +961,7 @@ function ChallengeProfile(props) {
                 textTransform: "uppercase",
               }}
             >
-              {t("challenge_profile.comments")}
+              <T>challenge_profile.comments</T>
             </div>
             {allComments.map((c) => (
               <div className="comment-container">
@@ -1011,7 +1012,7 @@ function ChallengeProfile(props) {
                       cursor: "pointer",
                     }}
                   >
-                    {t("common.postComment")}
+                    <T>common.postComment</T>
                   </button>
                 )}
               </>

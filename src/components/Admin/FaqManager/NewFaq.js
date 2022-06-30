@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Input, Button, Select, Modal, List, Checkbox } from "antd";
 import { CloseSquareOutlined } from "@ant-design/icons";
 import { createPost } from "../../../services/posts";
@@ -9,6 +9,8 @@ import {
   removeFaqCategory,
 } from "../../../services/faqs";
 import EditTypeName from "./EditTypeName";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import LanguageSelector from "../../LanguageSelector/LanguageSelector";
 const { Option } = Select;
 
 function NewFaq({ setCurrentSelection, home }) {
@@ -25,9 +27,10 @@ function NewFaq({ setCurrentSelection, home }) {
   const [selectedItemForUpdate, setSelectedItemForUpdate] = useState({});
   const [selectedItemForUpdateTitle, setSelectedItemForUpdateTitle] =
     useState("");
+  const { language } = useContext(LanguageContext);
 
   const fetchData = async () => {
-    const aC = await getAllFaqCategories();
+    const aC = await getAllFaqCategories(language);
     // console.log(aC);
     if (aC) {
       setAllCategories(aC.categories);
@@ -36,7 +39,7 @@ function NewFaq({ setCurrentSelection, home }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
 
   const removeCategory = async (id) => {
     await removeFaqCategory(id);
@@ -47,6 +50,7 @@ function NewFaq({ setCurrentSelection, home }) {
       ...values,
       category,
       isPublic,
+      language,
     };
     console.log(data);
     await createFaq(data);
@@ -89,7 +93,7 @@ function NewFaq({ setCurrentSelection, home }) {
             }}
             onClick={async () => {
               if (newCategoryName.length > 0) {
-                await createFaqCategory(newCategoryName);
+                await createFaqCategory({ name: newCategoryName, language });
                 // setShowGoalModal(false);
                 fetchData();
               }
@@ -155,6 +159,10 @@ function NewFaq({ setCurrentSelection, home }) {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
+          <div>
+            <span style={{ marginRight: "10px" }}>Select Language</span>
+            <LanguageSelector notFromNav={true} />
+          </div>
           <Form.Item
             label="Question"
             name="question"

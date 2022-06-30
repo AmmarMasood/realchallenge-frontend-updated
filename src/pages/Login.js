@@ -7,7 +7,7 @@ import "../assets/home.css";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import GoogleLogin from "react-google-login";
 import Logo from "../images/logo.png";
-import { useTranslation } from "react-i18next";
+
 import {
   loginUser,
   loginUserWithGoogle,
@@ -16,6 +16,7 @@ import {
 import { userInfoContext, userPointsContext } from "../contexts/UserStore";
 import setAuthToken from "../helpers/setAuthToken";
 import { getUserPoints } from "../services/users";
+import { T } from "../components/Translate";
 
 function Login(props) {
   const [userInfo, setUserInfo] = useContext(userInfoContext);
@@ -24,7 +25,6 @@ function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errror, setError] = useState("");
-  const [t] = useTranslation();
 
   useEffect(() => {
     if (localStorage.getItem("jwtToken")) {
@@ -165,7 +165,9 @@ function Login(props) {
       <div className="login-container">
         <div className="login-container-column1">
           <img className="login-logo" src={Logo} alt="logo" />
-          <h1 className="font-heading-white">{t("login.login")}</h1>
+          <h1 className="font-heading-white">
+            <T>login.login</T>
+          </h1>
           <Form
             layout="vertical"
             name="basic"
@@ -176,7 +178,7 @@ function Login(props) {
               <Form.Item
                 label={
                   <span className="font-paragraph-white">
-                    {t("login.username")}
+                    <T>lTgin.username</T>
                   </span>
                 }
                 name="username"
@@ -191,7 +193,7 @@ function Login(props) {
               <Form.Item
                 label={
                   <span className="font-paragraph-white">
-                    {t("login.password")}
+                    <T>lTgin.password</T>
                   </span>
                 }
                 name="password"
@@ -204,7 +206,7 @@ function Login(props) {
               </Form.Item>
             </div>
             <Link to="/forgot-password" className="login-forgot-password">
-              {t("login.forgot_pass")}
+              <T>logiT.forgot_pass</T>
             </Link>
             <div style={{ textAlign: "center", margin: "10px 0" }}>
               {loading ? (
@@ -217,7 +219,7 @@ function Login(props) {
                   htmlType="submit"
                 >
                   <span className="font-paragraph-white">
-                    {t("login.login")}
+                    <T>login.login</T>
                   </span>
                 </button>
               )}

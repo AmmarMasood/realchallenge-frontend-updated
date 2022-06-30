@@ -142,7 +142,7 @@ function CommentSection({ post, updatePosts, visible, setVisible, community }) {
         <div style={{ marginTop: "10px" }}>
           <div style={{ display: "flex", alignItems: "flex-start" }}>
             <Avatar
-              src={`${process.env.REACT_APP_SERVER}/api${userInfo.avatar}`}
+              src={`${process.env.REACT_APP_SERVER}/uploads/${userInfo.avatar}`}
               shape="square"
               style={{ marginRight: "10px" }}
             />{" "}

@@ -2,16 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./index.css";
-import "./i18next";
 import App from "./App";
 import UserStore from "./contexts/UserStore";
-import LanguageStore from "./contexts/LanguageContext";
+import LanguageStore, { LanguageProvider } from "./contexts/LanguageContext";
 import reportWebVitals from "./reportWebVitals";
 import "./App.css";
 import { setChonkyDefaults } from "chonky";
 import { ChonkyIconFA } from "chonky-icon-fontawesome";
 import "react-modal-video/scss/modal-video.scss";
 import PaymentProcessStore from "./contexts/PaymentProcessStore";
+import { fetchTranslations } from "./helpers/translationHelpers";
 
 // Somewhere in your `index.ts`:
 setChonkyDefaults({ iconComponent: ChonkyIconFA, disableDragAndDrop: true });
@@ -20,9 +20,9 @@ ReactDOM.render(
   <React.StrictMode>
     <UserStore>
       <PaymentProcessStore>
-        <LanguageStore>
+        <LanguageProvider fetchTranslations={fetchTranslations}>
           <App />
-        </LanguageStore>
+        </LanguageProvider>
       </PaymentProcessStore>
     </UserStore>
   </React.StrictMode>,

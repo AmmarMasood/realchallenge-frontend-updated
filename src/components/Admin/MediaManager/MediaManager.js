@@ -781,7 +781,6 @@ function checkForType(file, fileType) {
   } else if (fileType === "voiceOvers") {
     switch (ext.toLowerCase()) {
       case "mp3":
-      case "mp4":
         // etc
         return true;
     }

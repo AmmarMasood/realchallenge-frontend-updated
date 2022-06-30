@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { Card } from "antd";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FileViewer from "react-file-viewer";
 import PrivacyPolicyDocument from "../assets/documents/Terms and Conditions - Real Challenge.docx";
 import PrivacyPolicyDocumentDutch from "../assets/documents/Algemene Voorwaarden - Real Challenge.docx";
-import { languageContext } from "../contexts/LanguageContext";
+import { T } from "../components/Translate";
 
 const bodyStyle = {
   display: "flex",
@@ -25,17 +24,12 @@ const onError = (e) => {
   console.log(e, "error in file-viewer");
 };
 function TermsAndCondition() {
-  const [t] = useTranslation();
-  const [language, setLangauge] = useContext(languageContext);
-
   return (
     <>
       <Navbar color="dark" />
       <div style={bodyStyle}>
         <h1 className="font-heading-black privacy-policy-heading">
-          {localStorage.getItem("locale") == "du"
-            ? "Voorwaarden"
-            : t("toc.heading")}
+          <T>toc.heading</T>
         </h1>
 
         <Card style={{ height: "650px" }}>

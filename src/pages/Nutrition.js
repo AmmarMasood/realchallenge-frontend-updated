@@ -7,16 +7,16 @@ import { Link } from "react-router-dom";
 import { ArrowRightOutlined, CheckOutlined } from "@ant-design/icons";
 import "../assets/nutrition.css";
 import SearchNutrition from "../components/Nutrition/SearchNutrition";
-import { useTranslation } from "react-i18next";
+
 import {
   getAllDietTypes,
   getAllIngredients,
   getAllMealTypes,
   getAllRecipes,
 } from "../services/recipes";
+import { T } from "../components/Translate";
 
 function Nutrition() {
-  const [t] = useTranslation();
   const [recipes, setRecipes] = useState([]);
   const [allMealTypes, setAllMealTypes] = useState([]);
   const [allIngredients, setAllIngredients] = useState([]);
@@ -55,9 +55,11 @@ function Nutrition() {
       {/* <Hero /> */}
       <div className="page-header nutrition-header background-nutrition">
         <div className="page-header-textbox">
-          <h1 className="font-heading-white">{t("nutrition.skill")}</h1>
+          <h1 className="font-heading-white">
+            <T>nutrition.skill</T>
+          </h1>
           <p style={{ width: "50vw" }} className="font-paragraph-white">
-            {t("nutrition.select")}
+            <T>nutrition.select</T>
           </p>
         </div>
       </div>
@@ -77,9 +79,11 @@ function Nutrition() {
             style={{ fontSize: "5rem", color: "#fff" }}
             className="font-heading-white"
           >
-            {t("nutrition.let_us")}
+            <T>nutrition.let_us</T>
           </h1>
-          <p className="font-paragraph-white">{t("nutrition.your_personal")}</p>
+          <p className="font-paragraph-white">
+            <T>nutrition.your_personal</T>
+          </p>
         </div>
       </div>
       {/* 4th row */}
@@ -88,13 +92,13 @@ function Nutrition() {
           <div className="home-row-7-container-text">
             {/* <h2 style={{ fontSize: "2rem" }}>Need more inspiration?</h2> */}
             <h1 style={{ fontSize: "4.5rem" }} className="font-heading-black">
-              {t("nutrition.1_week")}
+              <T>nutrition.1_week</T>
             </h1>
             <p
               style={{ fontSize: "1.8rem", paddingBottom: "10px" }}
               className="font-paragraph-black"
             >
-              {t("nutrition.start_now")}
+              <T>nutrition.start_now</T>
             </p>
             <div className="home-row-2-col-2-box">
               <CheckOutlined
@@ -105,7 +109,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.nutrition_plan")}
+                <T>nutrition.nutrition_plan</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -117,7 +121,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.no_calories")}
+                <T>nutrition.no_calories</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -129,7 +133,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.choose")}
+                <T>nutrition.choose</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -141,7 +145,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.keep")}
+                <T>nutrition.keep</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -153,7 +157,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.change_goal")}
+                <T>nutrition.change_goal</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -165,7 +169,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.swap")}
+                <T>nutrition.swap</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -177,7 +181,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.weekly")}
+                <T>nutrition.weekly</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -189,7 +193,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.order_online")}
+                <T>nutrition.order_online</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -201,7 +205,7 @@ function Nutrition() {
                 }}
               />
               <span className="home-text font-paragraph-black">
-                {t("nutrition.add_fav")}
+                <T>nutrition.add_fav</T>
               </span>
             </div>
 
@@ -211,7 +215,7 @@ function Nutrition() {
               style={{ marginTop: "20px" }}
             >
               <span className="home-button-text font-paragraph-white">
-                {t("nutrition.start_7")} <ArrowRightOutlined />
+                <T>nutrition.start_7</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>

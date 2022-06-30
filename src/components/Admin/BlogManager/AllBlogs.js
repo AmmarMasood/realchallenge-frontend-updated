@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table, Space, Input } from "antd";
 import moment from "moment";
-import { useTranslation } from "react-i18next";
 import UpdateBlog from "./UpdateBlog";
 import {
   getAllUserBlogs,
   removeBlog,
   updateBlog,
 } from "../../../services/blogs";
+import { T } from "../../Translate";
 
 function AllBlogs() {
-  const [t] = useTranslation();
   const [filterAllBlogs, setFilterAllBlogs] = useState([]);
   const [allBlogs, setAllBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState({});
@@ -28,7 +27,7 @@ function AllBlogs() {
   };
 
   const fetchData = async () => {
-    const data = await getAllUserBlogs();
+    const data = await getAllUserBlogs("");
     setAllBlogs(data.blogs);
     setFilterAllBlogs(data.blogs);
     console.log("all blogs", data.blogs);
@@ -89,10 +88,10 @@ function AllBlogs() {
               setShow(true);
             }}
           >
-            {t("adminDashboard.edit")}
+            <T>adminDashboard.edit</T>
           </Button>
           <Button type="danger" onClick={() => deleteBlog(record)}>
-            {t("adminDashboard.delete")}
+            <T>adminDashboard.delete</T>
           </Button>
         </Space>
       ),
@@ -107,7 +106,10 @@ function AllBlogs() {
         blogInfo={selectedBlog}
         key={selectedBlog ? selectedBlog._id : ""}
       />
-      <h2 className="font-heading-black">{t("adminDashboard.blogs.all")}</h2>
+      <h2 className="font-heading-black">
+        {" "}
+        <T>adminDashboard.blogs.alL</T>
+      </h2>
       <div className="admin-allchallenges-list-container">
         <Input
           placeholder="Search Blogs By Name"

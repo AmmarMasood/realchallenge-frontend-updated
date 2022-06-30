@@ -3,7 +3,7 @@ import "../assets/home.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Hero from "../components/Home/Hero";
-import { useTranslation } from "react-i18next";
+
 import { Link, withRouter } from "react-router-dom";
 import {
   ArrowRightOutlined,
@@ -19,12 +19,12 @@ import MobileScreen from "../images/ipx-dash-515x1024.png";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/scss/modal-video.scss";
 import { userInfoContext } from "../contexts/UserStore";
+import { T } from "../components/Translate";
 
 function Home(props) {
   const [isOpen, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useContext(userInfoContext);
   const [link, setLink] = useState("");
-  const [t] = useTranslation();
 
   useEffect(() => {
     if (userInfo.authenticated) {
@@ -54,17 +54,17 @@ function Home(props) {
         <div className="home-row-2">
           <div className="home-row-2-col-1">
             <h3 className="home-row-2-col-1-heading font-subheading-white">
-              {t("home.home-row-2.pick_first")}
+              <T>home.home-row-2.pick_first</T>
             </h3>
             <h2 className="home-row-2-col-1-subheading font-heading-white">
-              {t("home.home-row-2.personal_train")}
+              <T>home.home-row-2.personal_train</T>
             </h2>
             <p className="home-text font-paragraph-white">
-              {t("home.home-row-2.real_challenge_offers")}
+              <T>home.home-row-2.real_challenge_offers</T>
             </p>
             <Link className="home-button font-paragraph-white" to="/challenges">
               <span className="home-button-text">
-                {t("common.accept_the_challenge")} <ArrowRightOutlined />
+                <T>common.accepT_the_challenge</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>
@@ -78,7 +78,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-2.free_digital_intake")}
+                <T>home.home-row-2.freedigital_intake</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -90,7 +90,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-2.success_monitor")}
+                <T>home.home-row-2.Tuccess_monitor</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -102,7 +102,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-2.for_starters")}
+                <T>home.home-row-2.for_starters</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -114,7 +114,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-2.free_weekly")}
+                <T>home.home-row-2.free_weekly</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -126,7 +126,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-2.adapts_to_you")}
+                <T>home.home-row-2.adapts_to_you</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -138,7 +138,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-2.motivating")}
+                <T>home.home-row-2.motivating</T>
               </span>
             </div>
           </div>
@@ -153,10 +153,10 @@ function Home(props) {
             <div className="home-row-3-col-1-box goal-1">
               <div className="home-row-3-col-1-box-textbox">
                 <h3 className="home-row-3-col-1-box-textbox-heading font-subheading-white">
-                  {t("home.home-row-3.become_fit")}
+                  <T>home.home-row-3.become_fit</T>
                 </h3>
                 <div className="home-row-3-col-1-box-textbox-text font-paragraph-white">
-                  {t("home.home-row-3.stay_active")}
+                  <T>home.home-row-3.stay_active</T>
                 </div>
               </div>
             </div>
@@ -165,10 +165,10 @@ function Home(props) {
             <div className="home-row-3-col-1-box goal-2">
               <div className="home-row-3-col-1-box-textbox">
                 <h3 className="home-row-3-col-1-box-textbox-heading font-subheading-white">
-                  {t("home.home-row-3.lose_weight")}
+                  <T>home.home-row-3.lose_weight</T>
                 </h3>
                 <div className="home-row-3-col-1-box-textbox-text font-paragraph-white">
-                  {t("home.home-row-3.discover_how")}
+                  <T>home.home-row-3.discover_how</T>
                 </div>
               </div>
             </div>
@@ -177,10 +177,10 @@ function Home(props) {
             <div className="home-row-3-col-1-box goal-3">
               <div className="home-row-3-col-1-box-textbox">
                 <h3 className="home-row-3-col-1-box-textbox-heading font-subheading-white">
-                  {t("home.home-row-3.building_muscles")}
+                  <T>home.home-row-3.building_muscles</T>
                 </h3>
                 <div className="home-row-3-col-1-box-textbox-text font-paragraph-white">
-                  {t("home.home-row-3.strong_body")}
+                  <T>home.home-row-3.strong_body</T>
                 </div>
               </div>
             </div>
@@ -189,10 +189,10 @@ function Home(props) {
             <div className="home-row-3-col-1-box goal-4">
               <div className="home-row-3-col-1-box-textbox">
                 <h3 className="home-row-3-col-1-box-textbox-heading font-subheading-white">
-                  {t("home.home-row-3.master_mindset")}
+                  <T>home.home-row-3Tmaster_mindset</T>
                 </h3>
                 <div className="home-row-3-col-1-box-textbox-text font-paragraph-white">
-                  {t("home.home-row-3.think_fit")}
+                  <T>home.home-row-3.think_fit</T>
                 </div>
               </div>
             </div>
@@ -200,19 +200,19 @@ function Home(props) {
           </div>
           <div className="home-row-3-col-2">
             <h3 className="home-row-2-col-1-heading font-subheading-white">
-              {t("home.home-row-3.pick_your")}
+              <T>home.home-row-3.pick_your</T>
             </h3>
             <h2 className="home-row-2-col-1-subheading font-heading-white">
-              {t("home.home-row-3.daily_challenges")}
-              <br /> {t("home.home-row-3.monthly_goals")}
+              <T>home.home-row-3.dTily_challenges</T>
+              <br /> <T>home.home-row-3.monthly_goals</T>
             </h2>
             <p className="home-text font-paragraph-white">
-              {t("home.home-row-3.real_challenge_analyse")}
+              <T>home.home-row-3.real_challenge_analyse</T>
             </p>
             <div>
               <Link className="home-button" to="/new">
                 <span className="home-button-text">
-                  {t("common.how_it_works")} <ArrowRightOutlined />
+                  <T>common.how_it_works</T> <ArrowRightOutlined />
                 </span>
               </Link>
               <Link
@@ -222,7 +222,7 @@ function Home(props) {
               >
                 <span className="home-button-text">
                   {" "}
-                  {t("common.how_it_works")}
+                  <T>common.how_it_works</T>
                 </span>
               </Link>
             </div>
@@ -233,16 +233,16 @@ function Home(props) {
       {/* 4th row */}
       <div className="home-row-4">
         <div className="home-row-4-heading font-subheading-black">
-          {t("home.home-row-4.your_change")}
+          <T>home.home-row-4.your_change</T>
         </div>
         <div
           className="home-row-4-subheading font-heading-black"
           style={{ margin: "20px 0" }}
         >
-          {t("home.home-row-4.exercise_whenever")}
+          <T>home.home-row-4.exTrcise_whenever</T>
         </div>
         <div className="home-row-4-text font-paragraph-black">
-          {t("home.home-row-4.working_out")}
+          <T>home.home-row-4.working_out</T>
         </div>
         <div className="home-row-4-heading-icons">
           <LaptopOutlined className="home-row-4-heading-icon" />{" "}
@@ -264,14 +264,14 @@ function Home(props) {
         <div className="home-row-5">
           <div className="home-row-5-column-1">
             <h3 className="home-row-2-col-1-heading font-heading-white">
-              {t("common.how_it_works")}
+              <T>common.how_it_works</T>
             </h3>
             <h2 className="home-row-2-col-1-subheading font-subheading-white">
-              {t("home.home-row-5.personal_succ")}
+              <T>home.home-row-5.personal_succ</T>
             </h2>
             <p className="home-text font-paragraph-white">
               {" "}
-              {t("home.home-row-5.what")}
+              <T>home.home-row-5.what</T>
             </p>
             <div className="home-row-2-col-2-box">
               <CheckOutlined
@@ -282,7 +282,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-5.all_the_tools")}
+                <T>home.home-row-5.all_the_tools</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -294,7 +294,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-5.daily_updates")}
+                <T>home.home-row-5.daily_updates</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -306,7 +306,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-5.your_personal")}
+                <T>home.home-row-5.your_personal</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -318,7 +318,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-5.choose")}
+                <T>home.home-row-5.choose</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -330,7 +330,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-5.week")}
+                <T>home.home-row-5.week</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -342,14 +342,14 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                {t("home.home-row-5.comm")}
+                <T>home.home-row-5.comm</T>
               </span>
             </div>
 
             <div style={{ paddingTop: "20px" }}>
               <Link className="home-button" to="/new">
                 <span className="home-button-text">
-                  {t("common.free_intake")} <ArrowRightOutlined />
+                  <T>common.free_intake</T> <ArrowRightOutlined />
                 </span>
               </Link>
               <Link
@@ -358,7 +358,7 @@ function Home(props) {
                 style={{ marginLeft: "10px" }}
               >
                 <span className="home-button-text">
-                  {t("common.how_it_works")}
+                  <T>common.how_it_works</T>
                 </span>
               </Link>
             </div>
@@ -376,10 +376,10 @@ function Home(props) {
       {/* 6th row */}
       <div className="home-row-6">
         <h1 className="home-row-6-heading font-heading-black">
-          {t("home.home-row-6.we_share_exp")}
+          <T>home.home-row-6.we_share_exp</T>
         </h1>
         <p style={{ fontSize: "18px" }} className="font-paragraph-black">
-          {t("home.home-row-6.this_is")}
+          <T>home.home-row-6.this_is</T>
         </p>
         <div className="home-row-6-video-container">
           <div
@@ -393,7 +393,7 @@ function Home(props) {
             <div className="pricing-video-box-overlay"></div>
             <div className="home-row-6-text font-paragraph-white">
               <PlayCircleOutlined className="play-icon" />{" "}
-              {t("home.home-row-6.find_the_right")}
+              <T>home.home-row-6.find_the_right</T>
             </div>
           </div>
           <div
@@ -407,7 +407,7 @@ function Home(props) {
             <div className="pricing-video-box-overlay"></div>
             <div className="home-row-6-text font-paragraph-white">
               <PlayCircleOutlined className="play-icon" />{" "}
-              {t("home.home-row-6.customized_plan")}
+              <T>home.home-row-6.customized_plan</T>
             </div>
           </div>
           <div
@@ -421,7 +421,7 @@ function Home(props) {
             <div className="pricing-video-box-overlay"></div>
             <div className="home-row-6-text font-paragraph-white">
               <PlayCircleOutlined className="play-icon" />{" "}
-              {t("home.home-row-6.exercise_whenever")}
+              <T>home.home-row-6.exercise_whenever</T>
             </div>
           </div>
         </div>
@@ -432,26 +432,26 @@ function Home(props) {
         <div className="home-row-7-container">
           <div className="home-row-7-container-text">
             <h2 style={{ fontSize: "2rem" }} className="font-subheading-black">
-              {t("home.home-row-7.quit")}
+              <T>home.home-row-7.quit</T>
             </h2>
             <h1 style={{ fontSize: "4.5rem" }} className="font-heading-black">
-              {t("home.home-row-7.feel")}
+              <T>home.home-row-7.feel</T>
             </h1>
             <p
               style={{ fontSize: "1.8rem", paddingBottom: "10px" }}
               className="font-paragraph-black"
             >
-              {t("home.home-row-7.together")}
+              <T>home.homeTrow-7.together</T>
             </p>
             <Link className="home-button" to="/challenges">
               <span className="home-button-text font-paragraph-white">
-                {t("common.start_your_challenge_today")} <ArrowRightOutlined />
+                <T>common.start_your_challenge_today</T> <ArrowRightOutlined />
               </span>
             </Link>
             <p style={{ paddingTop: "10px" }} className="font-paragraph-black">
-              {t("common.price")}{" "}
+              <T>common.price</T>{" "}
               <Link to="/how-it-works" style={{ color: "#ff7700" }}>
-                {t("common.how_it_works_small")}
+                <T>common.how_it_works_small</T>
               </Link>
             </p>
           </div>
@@ -461,10 +461,10 @@ function Home(props) {
       {/* 8th row */}
       <div className="home-row-6" style={{ padding: "100px 50px" }}>
         <h1 className="home-row-6-heading font-heading-black">
-          {t("home.home-row-8.how")}
+          <T>home.home-row-8.how</T>
         </h1>
         <p style={{ fontSize: "18px" }} className="font-paragraph-black">
-          {t("home.home-row-8.be_sure")}
+          <T>home.home-row-8.be_sure</T>
         </p>
         <div className="home-row-6-video-container">
           <Link
@@ -545,13 +545,13 @@ function Home(props) {
           style={{ color: "#fff", fontSize: "4rem" }}
           className="font-heading-white"
         >
-          {t("footer.community")}
+          <T>footer.community</T>
         </h1>
         <h2
           style={{ color: "#fff", fontSize: "2.5rem" }}
           className="font-subheading-white"
         >
-          {t("footer.follow")}
+          <T>footer.follow</T>
         </h2>
       </div>
       {/* 9th row */}

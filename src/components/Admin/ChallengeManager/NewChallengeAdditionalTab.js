@@ -2,9 +2,9 @@ import React, { useState, useContext } from "react";
 import { Select, Input, Button, Checkbox, Upload, List, message } from "antd";
 import { v4 } from "uuid";
 import { UploadOutlined, PlusOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import { userInfoContext } from "../../../contexts/UserStore";
+import { T } from "../../Translate";
 
 const Option = Select.Option;
 
@@ -29,8 +29,6 @@ function NewChallengeAdditionalTab({
   userCreatePost,
   setUserCreatePost,
 }) {
-  const [t] = useTranslation();
-
   // media manager stuff
   const [mediaManagerVisible, setMediaManagerVisible] = useState(false);
   const [mediaManagerType, setMediaManagerType] = useState("images");
@@ -90,7 +88,7 @@ function NewChallengeAdditionalTab({
           actions={mediaManagerActions}
         />
         <p className="font-subheading-black">
-          {t("adminDashboard.challenges.sp")}
+          <T>adminDashboard.challenges.sp</T>
         </p>
         <Select
           mode="multiple"
@@ -118,7 +116,7 @@ function NewChallengeAdditionalTab({
       </div>
       <div>
         <p className="font-subheading-black">
-          {t("adminDashboard.challenges.il")}
+          <T>adminDashboard.challenges.il</T>
         </p>
         {/* <Input.TextArea
           maxLength={200}
@@ -131,7 +129,7 @@ function NewChallengeAdditionalTab({
           header={
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <Button onClick={addInfoToList}>
-                {t("adminDashboard.challenges.af")}
+                <T>adminDashboard.challenges.af</T>
               </Button>
             </div>
           }
@@ -211,7 +209,7 @@ function NewChallengeAdditionalTab({
               onChange={(e) => setAllowComments(e.target.checked)}
               className="font-paragraph-black"
             >
-              {t("adminDashboard.challenges.allowcb")}
+              <T>adminDashboard.challenges.allowcb</T>
             </Checkbox>
           </div>
           <div>
@@ -220,7 +218,7 @@ function NewChallengeAdditionalTab({
               onChange={(e) => setAllowReviews(e.target.checked)}
               className="font-paragraph-black"
             >
-              {t("adminDashboard.challenges.allowrv")}
+              <T>adminDashboard.challenges.allowrv</T>
             </Checkbox>
           </div>
           <div>
@@ -229,7 +227,7 @@ function NewChallengeAdditionalTab({
               onChange={(e) => setMakePublic(e.target.checked)}
               className="font-paragraph-black"
             >
-              {t("adminDashboard.challenges.mp")}
+              <T>adminDashboard.challenges.mp</T>
             </Checkbox>
           </div>
           {!update && (
@@ -267,7 +265,7 @@ function NewChallengeAdditionalTab({
           }}
           onClick={createChallenge}
         >
-          {t("adminDashboard.challenges.createAC")}
+          <T>adminDashboard.challenges.createAC</T>
         </Button>
       )}
     </div>

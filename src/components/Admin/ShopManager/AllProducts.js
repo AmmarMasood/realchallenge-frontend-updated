@@ -45,7 +45,7 @@ function AllProducts() {
       key: "uploadImages",
       render: (text) => (
         <Avatar
-          src={`${process.env.REACT_APP_SERVER}/api${text[0]}`}
+          src={`${process.env.REACT_APP_SERVER}/uploads/${text[0]}`}
           shape="square"
           size={64}
           icon={<GiftOutlined />}

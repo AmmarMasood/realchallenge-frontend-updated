@@ -8,10 +8,9 @@ import {
   YoutubeOutlined,
 } from "@ant-design/icons";
 import FooterImage from "../images/real-challenge-w-1024x323.png";
-import { useTranslation } from "react-i18next";
+import { T } from "./Translate";
 
 function Footer() {
-  const [t] = useTranslation();
   return (
     <div className="footer">
       <div className="footer-row-1">
@@ -33,79 +32,79 @@ function Footer() {
       <div className="footer-row-2">
         <div className="footer-row-2-column">
           <h3 className="footer-row-2-column-heading font-subheading-white">
-            {t("footer.product")}
+            <T>footer.product</T>
           </h3>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.challenge")}
+            <T>footer.challenge</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.nutrient")}
+            <T>footer.nutrient</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.trainers")}
+            <T>footer.trainers</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.join_now")}
+            <T>footer.join_now</T>
           </Link>
         </div>
         <div className="footer-row-2-column">
           <h3 className="footer-row-2-column-heading font-subheading-white">
-            {t("footer.company")}
+            <T>footer.company</T>
           </h3>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.how_it_works")}
+            <T>footer.how_it_works</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.pricing")}
+            <T>footer.pricing</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.magazine")}
+            <T>footer.magazine</T>
           </Link>
         </div>
         <div className="footer-row-2-column">
           <h3 className="footer-row-2-column-heading font-subheading-white">
-            {t("footer.shop")}
+            <T>footer.shop</T>
           </h3>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.men")}
+            <T>footer.men</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.women")}
+            <T>footer.women</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.gear")}
+            <T>footer.gear</T>
           </Link>
           <Link to="" className="footer-row-2-column-link font-paragraph-white">
-            {t("footer.sale")}
+            <T>footer.sale</T>
           </Link>
         </div>
         <div className="footer-row-2-column">
           <h3 className="footer-row-2-column-heading font-subheading-white">
-            {t("footer.about")}
+            <T>footer.about</T>
           </h3>
           <Link
             to="/help-center"
             className="footer-row-2-column-link font-paragraph-white"
           >
-            {t("footer.help_center")}
+            <T>footer.help_center</T>
           </Link>
           <Link
             to="/terms-condition"
             className="footer-row-2-column-link font-paragraph-white"
           >
-            {t("footer.terms_and_condition")}
+            <T>footer.terms_and_condition</T>
           </Link>
           <Link
             to="/privacy-policy"
             className="footer-row-2-column-link font-paragraph-white"
           >
-            {t("footer.privacy_policy")}
+            <T>footer.privacy_policy</T>
           </Link>
           <Link
             to="/cookie-policy"
             className="footer-row-2-column-link font-paragraph-white"
           >
-            {t("footer.cookie_policy")}
+            <T>footer.cookie_policy</T>
           </Link>
         </div>
       </div>
@@ -117,8 +116,8 @@ function Footer() {
         />
         <p className="footer-row-3-text">
           {" "}
-          {t("footer.copyright")} &copy; <span>{new Date().getFullYear()}</span>
-          ,{t("footer.all_rights_reserved")}
+          <T>footer.copyright</T> &copy; <span>{new Date().getFullYear()}</span>
+          ,<T>footer.all_rights_reserved</T>
         </p>
       </div>
     </div>

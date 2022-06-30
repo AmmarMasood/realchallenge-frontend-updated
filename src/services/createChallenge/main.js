@@ -128,9 +128,11 @@ export function getAllChallenges(language) {
     });
 }
 
-export function getAllUserChallenges() {
+export function getAllUserChallenges(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/challenges/users/all`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/challenges/users/all?language=${language}`
+    )
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);
@@ -138,9 +140,9 @@ export function getAllUserChallenges() {
     });
 }
 //
-export function getAllExercises() {
+export function getAllExercises(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/exercise/`)
+    .get(`${process.env.REACT_APP_SERVER}/api/exercise?language=${language}`)
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);
@@ -148,9 +150,11 @@ export function getAllExercises() {
     });
 }
 
-export function getAllUserExercises() {
+export function getAllUserExercises(language) {
   return axios
-    .get(`${process.env.REACT_APP_SERVER}/api/exercise/user/all`)
+    .get(
+      `${process.env.REACT_APP_SERVER}/api/exercise/user/all?language=${language}`
+    )
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

@@ -14,7 +14,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import "../../assets/userDashboard.css";
 
 import { ReactCompareSlider } from "react-compare-slider";
-import { useTranslation } from "react-i18next";
+
 import useWindowDimensions from "../../helpers/useWindowDimensions";
 import ForwardIcon from "../../assets/icons/forward-arrows.png";
 import WhiteClock from "../../assets/icons/clock-white.svg";
@@ -23,6 +23,7 @@ import PlayerIcon from "../../assets/icons/player-icon.svg";
 import Carousel from "react-multi-carousel";
 import slug from "elegant-slug";
 import { getChallengeProgress } from "../../services/users";
+import { T } from "../Translate";
 
 const responsive = {
   superLargeDesktop: {
@@ -49,7 +50,6 @@ const responsive = {
 };
 
 function Challenges({ userProfile, gender, recommandedChal }) {
-  const [t] = useTranslation();
   const { height, width } = useWindowDimensions();
   // eslint-disable-next-line
   const [myChallenges, setMyChallenges] = useState([]);
@@ -123,7 +123,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
               className="user-update-container-box-row2-heading font-card-heading-light"
               style={{ marginTop: "8px" }}
             >
-              {t("userDashboard.challenges.mcc")}
+              <T>userDashboard.challenges.mcc</T>
             </div>
             <div className="divider"></div>
             <Scrollbars style={{ height: "500px" }}>
@@ -137,7 +137,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                       <div
                         className="dashboard-challenges-mychallenge-body-box"
                         style={{
-                          background: `url(${process.env.REACT_APP_SERVER}/api${d.thumbnailLink})`,
+                          background: `url(${process.env.REACT_APP_SERVER}/uploads/${d.thumbnailLink})`,
                           backgroundSize: "cover",
                           backgroundPosition: "50% 50%",
                           position: "relative",
@@ -203,7 +203,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
               }}
             >
               <span className="user-update-container-box-row2-heading font-card-heading-light">
-                {t("userDashboard.challenges.ms")}
+                <T>userDashboard.challenges.ms</T>
               </span>
 
               <div style={{ marginBottom: "10px" }}>
@@ -212,7 +212,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                   className="font-paragraph-white hover-orange"
                   style={{ fontSize: "15px" }}
                 >
-                  {t("userDashboard.challenges.update")}
+                  <T>userDashboard.challenges.update</T>
                 </Link>
               </div>
               <div className="divider"></div>
@@ -249,7 +249,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
       <div className="dashboard-challenges-row2">
         <div className="dashboard-challenges-row2-mydevelopment">
           <div className="user-update-container-box-row2-heading font-card-heading-light">
-            {t("userDashboard.challenges.mydev")}
+            <T>userDashboard.challenges.mydev</T>
           </div>
           <div className="divider"></div>
           <div className="dashboard-challenges-row2-mydevelopment-insidebox-1">
@@ -274,7 +274,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
             <div className="dashboard-challenges-row2-mydevelopment-insidebox-1-text">
               <span className="font-paragraph-white">
                 {" "}
-                {t("userDashboard.challenges.bf")}
+                <T>userDashboard.challenges.bf</T>
               </span>
               <span
                 className="font-paragraph-white"
@@ -315,7 +315,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
         </div>
         <div className="dashboard-challenges-row2-mybody">
           <div className="user-update-container-box-row2-heading font-card-heading-light">
-            {t("userDashboard.challenges.mybody")}
+            <T>userDashboard.challenges.mybody</T>
           </div>
           <div className="divider"></div>
           <div style={{ paddingTop: "30px" }}>
@@ -327,26 +327,26 @@ function Challenges({ userProfile, gender, recommandedChal }) {
               {console.log(gender)}
               <div className="body-line body-line1">
                 <span className="font-paragraph-white">
-                  {t("userDashboard.challenges.breast")} ({myBody.breast})
+                  <T>userDashboard.challenges.breast</T> ({myBody.breast})
                 </span>{" "}
                 <div></div>
               </div>
               <div className="body-line body-line2">
                 <span className="font-paragraph-white">
-                  {t("userDashboard.challenges.hips")} ({myBody.hip})
+                  <T>userDashboard.challenges.hips</T> ({myBody.hip})
                 </span>{" "}
                 <div></div>
               </div>
               <div className="body-line body-line3">
                 <div></div>
                 <span className="font-paragraph-white">
-                  {t("userDashboard.challenges.shoulders")} ({myBody.shoulders})
+                  <T>userDashboard.challenges.shoulders</T> ({myBody.shoulders})
                 </span>{" "}
               </div>
               <div className="body-line body-line4">
                 <div></div>
                 <span className="font-paragraph-white">
-                  {t("userDashboard.challenges.waist")} ({myBody.waist})
+                  <T>userDashboard.challenges.waist</T> ({myBody.waist})
                 </span>{" "}
               </div>
             </div>
@@ -363,7 +363,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
           }}
         >
           <span className="user-update-container-box-row2-heading font-card-heading-light">
-            {t("userDashboard.challenges.ccfy")}
+            <T>userDashboard.challenges.ccfy</T>
           </span>
 
           {width > 700 && (
@@ -372,14 +372,14 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                 to="/challenges"
                 className="common-orange-button font-paragraph-white"
               >
-                {t("userDashboard.challenges.vac")}
+                <T>userDashboard.challenges.vac</T>
               </Link>
               <Link
                 to="/pricing"
                 style={{ marginLeft: "10px" }}
                 className="common-transparent-button font-paragraph-white"
               >
-                {t("userDashboard.challenges.sp")}
+                <T>userDashboard.challenges.sp</T>
               </Link>
             </div>
           )}
@@ -397,7 +397,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                   <div
                     className="dashboard-challenges-row3-inbox-challenge"
                     style={{
-                      background: `url(${process.env.REACT_APP_SERVER}/api${challenge.thumbnailLink})`,
+                      background: `url(${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink})`,
                       backgroundSize: "cover",
                       backgroundPosition: "50% 50%",
                       position: "relative",

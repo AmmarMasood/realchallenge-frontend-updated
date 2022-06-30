@@ -4,13 +4,13 @@ import Footer from "../components/Footer";
 import { Input, Tag, Card } from "antd";
 
 import "../assets/helpcenter.css";
-import { useTranslation } from "react-i18next";
+
 import { getAllFaqCategories, getAllFaqs } from "../services/faqs";
 import { includes } from "lodash";
+import { T } from "../components/Translate";
 const { CheckableTag } = Tag;
 
 function HelpCenter() {
-  const [t] = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [filteredQuestion, setFilteredQuestions] = useState([]);
@@ -62,7 +62,9 @@ function HelpCenter() {
       <div className="helpcenter-container">
         <div className="helpcenter-top">
           <div className="helpcenter-top-con">
-            <h1 className="font-heading-white">{t("helpcenter.howcan")}</h1>
+            <h1 className="font-heading-white">
+              <T>helpcenter.howcan</T>
+            </h1>
             <Input
               placeholder="Type keyword"
               className="font-paragraph-white"
@@ -74,7 +76,9 @@ function HelpCenter() {
               onChange={onChange}
             />
             <div style={{ marginTop: "20px" }}>
-              <h3 className="font-paragraph-white">{t("helpcenter.sc")}</h3>
+              <h3 className="font-paragraph-white">
+                <T>helpcenter.sc</T>
+              </h3>
               <div style={{ paddingTop: "10px" }}>
                 {allCategories.map((tag) => (
                   <CheckableTag

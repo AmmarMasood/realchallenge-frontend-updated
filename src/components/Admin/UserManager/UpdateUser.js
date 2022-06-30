@@ -385,7 +385,12 @@ function UpdateUser({
                 {avatar && (
                   <div style={{ margin: "10px" }}>
                     <img
-                      src={`${process.env.REACT_APP_SERVER}/uploads/${avatar.link}`}
+                      src={
+                        avatar.link ===
+                        "https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-icon-eps-file-easy-to-edit-default-avatar-photo-placeholder-profile-icon-124557887.jpg"
+                          ? avatar.link
+                          : `${process.env.REACT_APP_SERVER}/uploads/${avatar.link}`
+                      }
                       height="120px"
                       width="150px"
                       alt=""

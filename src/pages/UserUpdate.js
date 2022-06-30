@@ -4,7 +4,7 @@ import LoggedinNavbar from "../components/LoggedinNavbar";
 import { InputNumber, Upload, Button, Progress, notification } from "antd";
 import HumanVector from "../images/FreeVectorHumanSilhouette 1.png";
 import ImgCrop from "antd-img-crop";
-import { useTranslation } from "react-i18next";
+
 import { getUserProfileInfo } from "../services/users";
 import { userInfoContext } from "../contexts/UserStore";
 import { uploadImage } from "../services/mediaManager";
@@ -17,6 +17,7 @@ import ArrowForward from "../assets/icons/forward-arrows.png";
 import ArrowThreeActive from "../assets/icons/arrow-three-active.png";
 import { createCustomerDetails } from "../services/customer";
 import { LoadingOutlined } from "@ant-design/icons";
+import { T } from "../components/Translate";
 
 const iconsStyle = {
   color: "var(--color-orange)",
@@ -54,8 +55,6 @@ function UserUpdate() {
   const [waistSize, setWaistSize] = useState("");
   const [loading, setLoading] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(false);
-
-  const [t] = useTranslation();
 
   const openNotificationWithIcon = (type, message, description) => {
     notification[type]({
@@ -183,12 +182,12 @@ function UserUpdate() {
 
       <div className="user-update-container">
         <div className="user-update-container-heading font-card-heading">
-          {t("user_update.update_values")}
+          <T>user_update.update_values</T>
         </div>
         <div className="user-update-container-box">
           <div className="user-update-container-box-row1">
             <div className="user-update-container-box-row1-heading font-card-heading-light">
-              {t("user_update.your_goals")}
+              <T>user_update.your_goals</T>
             </div>
             <div className="user-update-container-box-row1-inside">
               <div
@@ -204,7 +203,7 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={Muscle} alt="" style={iconsStyle} />
-                {t("user_update.gain_muscle")}
+                <T>user_update.gain_muscle</T>
               </div>
               <div
                 className="font-paragraph-white"
@@ -219,7 +218,7 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={HeartRate} alt="" style={iconsStyle} />
-                {t("user_update.get_fit")}
+                <T>user_update.get_fit</T>
               </div>
               <div
                 className="font-paragraph-white"
@@ -234,13 +233,13 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={Waist} alt="" style={iconsStyle} />
-                {t("user_update.lose_weight")}
+                <T>user_update.lose_weight</T>
               </div>
             </div>
           </div>
           <div className="user-update-container-box-row2">
             <div className="user-update-container-box-row2-heading font-card-heading-light">
-              {t("user_update.current_fitness")}
+              <T>user_update.current_fitness</T>
             </div>
             <div className="user-update-container-box-row2-inside">
               <div
@@ -256,7 +255,7 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={ArrowOneActive} alt="" style={iconsStyleArrow} />
-                {t("user_update.inactive")}
+                <T>user_update.inactive</T>
               </div>
               <div
                 className="font-paragraph-white"
@@ -271,7 +270,7 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={ArrowOneActive} alt="" style={iconsStyleArrow} />
-                {t("user_update.light_active")}
+                <T>user_update.light_active</T>
               </div>
               <div
                 className="font-paragraph-white"
@@ -286,7 +285,7 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={ArrowForward} alt="" style={iconsStyleArrow} />
-                {t("user_update.average_active")}
+                <T>user_update.average_active</T>
               </div>
               <div
                 className="font-paragraph-white"
@@ -301,7 +300,7 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={ArrowThreeActive} alt="" style={iconsStyleArrow} />
-                {t("user_update.active")}
+                <T>user_update.active</T>
               </div>
               <div
                 className="font-paragraph-white"
@@ -316,13 +315,13 @@ function UserUpdate() {
               >
                 {" "}
                 <img src={ArrowThreeActive} alt="" style={iconsStyleArrow} />
-                {t("user_update.very_active")}
+                <T>user_update.very_active</T>
               </div>
             </div>
           </div>
           <div className="user-update-container-box-row3">
             <div className="user-update-container-box-row3-heading font-card-heading-light">
-              {t("user_update.other_details")}
+              <T>user_update.other_details</T>
             </div>
             <div className="user-update-container-box-row3-buttons">
               <button
@@ -334,7 +333,7 @@ function UserUpdate() {
                 }}
                 onClick={() => setMetric(true)}
               >
-                {t("user_update.metric")}
+                <T>user_update.metric</T>
               </button>
               <button
                 className="font-paragraph-white"
@@ -345,13 +344,13 @@ function UserUpdate() {
                 }}
                 onClick={() => setMetric(false)}
               >
-                {t("user_update.imperial")}
+                <T>user_update.imperial</T>
               </button>
             </div>
             <div className="user-update-container-box-row3-inside">
               <div>
                 <span className="font-paragraph-white">
-                  {t("user_update.weight")}:{" "}
+                  <T>user_update.weight</T>:{" "}
                 </span>
                 <InputNumber
                   className="font-paragraph-white"
@@ -373,7 +372,7 @@ function UserUpdate() {
               </div>
               <div>
                 <span className="font-paragraph-white">
-                  {t("user_update.height")}:{" "}
+                  <T>user_update.height</T>:
                 </span>
                 <InputNumber
                   className="font-paragraph-white"
@@ -395,7 +394,7 @@ function UserUpdate() {
               </div>
               <div>
                 <span className="font-paragraph-white">
-                  {t("user_update.age")}:{" "}
+                  <T>user_update.age</T>:
                 </span>
                 <InputNumber
                   className="font-paragraph-white"
@@ -498,13 +497,13 @@ function UserUpdate() {
 
           <div className="user-update-uploadimage">
             <div className="user-update-container-box-row2-heading font-card-heading-light">
-              {t("user_update.upload_your_pictures")}
+              <T>user_update.upload_your_pictures</T>
             </div>
             <div className="user-update-uploadimage-container">
               <div className="user-update-uploadimage-container-box">
                 <h3 className="font-paragraph-white">
                   {" "}
-                  {t("user_update.before")}
+                  <T>user_update.before</T>
                 </h3>
                 <img
                   src={
@@ -530,7 +529,7 @@ function UserUpdate() {
                       className="user-image-remove font-paragraph-white"
                       onClick={() => setBeforePic("")}
                     >
-                      {t("user_update.remove")}
+                      <T>user_update.remove</T>
                     </div>
                   </span>
                 ) : (
@@ -551,7 +550,7 @@ function UserUpdate() {
                           border: "none",
                         }}
                       >
-                        {t("user_update.upload_before_image")}
+                        <T>user_update.upload_before_image</T>
                       </Button>
                     </Upload>
                   </ImgCrop>
@@ -559,7 +558,7 @@ function UserUpdate() {
               </div>
               <div className="user-update-uploadimage-container-box">
                 <h3 className="font-paragraph-white">
-                  {t("user_update.after")}
+                  <T>user_update.after</T>
                 </h3>
                 <img
                   src={
@@ -585,7 +584,7 @@ function UserUpdate() {
                       className="user-image-remove font-paragraph-white"
                       onClick={() => setAfterPic("")}
                     >
-                      {t("user_update.remove")}
+                      <T>user_update.remove</T>
                     </div>
                   </span>
                 ) : (
@@ -606,7 +605,7 @@ function UserUpdate() {
                           border: "none",
                         }}
                       >
-                        {t("user_update.upload_after_image")}
+                        <T>user_update.upload_after_image</T>
                       </Button>
                     </Upload>
                   </ImgCrop>
@@ -630,7 +629,7 @@ function UserUpdate() {
               }}
               onClick={() => saveUserUpdate("save")}
             >
-              {t("user_update.save")}
+              <T>user_update.save</T>
             </button>
           )}
         </div>
