@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Steps, Button, InputNumber, Switch } from "antd";
 import {
   ForwardOutlined,
@@ -16,10 +16,12 @@ import DumbellIcon from "../../assets/icons/dumbell-icon.svg";
 
 import { getAllTrainerGoals } from "../../services/trainers";
 import { T } from "../Translate";
+import { LanguageContext } from "../../contexts/LanguageContext";
 
 const { Step } = Steps;
 
 function Wizard({ setWizardCompleted }) {
+  const { language } = useContext(LanguageContext);
   const [allFitnessInterests, setAllFitnessInterests] = useState([]);
   const [selectedFitnessInterests, setSelectedFitnessInterests] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -100,7 +102,7 @@ function Wizard({ setWizardCompleted }) {
   }, [gender, details, fitnessLevel]);
 
   const getAllFitnessInterests = async () => {
-    const res = await getAllTrainerGoals();
+    const res = await getAllTrainerGoals(language);
     if (res) {
       console.log(res);
       setAllFitnessInterests(res.goals);

@@ -47,7 +47,7 @@ function AllRequests() {
         setFilterAllData(allData?.recipes?.filter((f) => !f.adminApproved));
       }
     }
-    if (requestsTypeFilter === "magazine") {
+    if (requestsTypeFilter === "blog") {
       if (requestsApprovedFilter === "approved") {
         setFilterAllData(allData?.blogs?.filter((f) => f.adminApproved));
       }
@@ -60,7 +60,7 @@ function AllRequests() {
   const fetchData = async () => {
     const data = await getAllAdminRequests();
     setAllData(data.res);
-    console.log("all magazines", data.res);
+    console.log("all blogs", data.res);
   };
 
   const columns = [
@@ -178,7 +178,7 @@ function AllRequests() {
             <Select.Option key={2} value={"recipe"}>
               Recipes
             </Select.Option>
-            <Select.Option key={3} value={"magazine"}>
+            <Select.Option key={3} value={"blog"}>
               Blogs
             </Select.Option>
           </Select>

@@ -628,11 +628,12 @@ function CreatePayment(props) {
           fontSize: "18px",
           backgroundColor: "var(--mirage)",
           padding: "10px ",
-          float: "left",
           margin: "10px 0 0 50px",
           position: "absolute",
           border: "none",
           cursor: "pointer",
+          top: "0",
+          left: "0",
         }}
       >
         <ArrowLeftOutlined /> Back

@@ -40,6 +40,7 @@ const dragHandle = {
 };
 
 function CustomWorkoutPanel({
+  update,
   w,
   weeks,
   setWeeks,
@@ -112,13 +113,15 @@ function CustomWorkoutPanel({
             key={t.workoutId}
           >
             <div style={{ float: "right" }}>
-              <Button
-                onClick={() => {
-                  duplicateWorkout(w.weekId, t);
-                }}
-              >
-                Duplicate
-              </Button>
+              {!update && (
+                <Button
+                  onClick={() => {
+                    duplicateWorkout(w.weekId, t);
+                  }}
+                >
+                  Duplicate
+                </Button>
+              )}
               <Button
                 style={{ marginLeft: "10px" }}
                 onClick={() => {

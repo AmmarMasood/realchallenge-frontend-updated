@@ -104,19 +104,32 @@ function TrainerProfile(props) {
           style={{
             background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${
               process.env.REACT_APP_SERVER
-            }/uploads/${trainer.heroBanner ? trainer.heroBanner : ""})`,
-            backgroundSize: "cover",
+            }/uploads/${
+              trainer.heroBanner
+                ? trainer.heroBanner.replaceAll(" ", "%20")
+                : ""
+            })`,
+            backgroundSize: "100% 100vh",
             backgroundPosition: "10% 10%",
+            backgroundRepeat: "no-repeat",
           }}
         >
           {console.log(
-            `${process.env.REACT_APP_SERVER}/uploads/${trainer.heroBanner}`
+            `${process.env.REACT_APP_SERVER}/uploads/${
+              trainer.heroBanner
+                ? trainer.heroBanner.replaceAll(" ", "%20")
+                : ""
+            }`
           )}
           <div className="profile-box">
             <div className="profile-box-row1">
               <div className="profile-box-row1-avatar">
                 <img
-                  src={`${process.env.REACT_APP_SERVER}/uploads/${trainer.avatarLink}`}
+                  src={`${process.env.REACT_APP_SERVER}/uploads/${
+                    trainer.avatarLink
+                      ? trainer.avatarLink.replaceAll(" ", "%20")
+                      : ""
+                  }`}
                   alt="trainer-profile"
                 />
               </div>
@@ -248,7 +261,11 @@ function TrainerProfile(props) {
                   key={challenge._id}
                 >
                   <ChallengeCard
-                    picture={`${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink}`}
+                    picture={`${process.env.REACT_APP_SERVER}/uploads/${
+                      challenge.thumbnailLink
+                        ? challenge.thumbnailLink.replaceAll(" ", "%20")
+                        : ""
+                    }`}
                     name={challenge.challengeName}
                     rating={challenge.rating}
                   />

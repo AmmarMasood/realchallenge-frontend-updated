@@ -32,7 +32,7 @@ export function getAllChallengeTags(language) {
 
 export function deleteChallengeTag(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/tags/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/tags/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully deleted tag", "");
     })

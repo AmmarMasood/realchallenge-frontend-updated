@@ -237,11 +237,14 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
               <Option value={""} key={1}>
                 -
               </Option>
-              {allBlogs.map((r, i) => (
-                <Option key={i + 2} value={r._id}>
-                  {r.title}
-                </Option>
-              ))}
+              {allBlogs.map(
+                (r, i) =>
+                  r._id !== blogInfo._id && (
+                    <Option key={i + 2} value={r._id}>
+                      {r.title}
+                    </Option>
+                  )
+              )}
             </Select>
           </div>
           <Form.Item

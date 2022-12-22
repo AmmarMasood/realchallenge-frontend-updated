@@ -78,8 +78,6 @@ export function getAllMusics() {
     });
 }
 
-
-
 export function getAllIcons() {
   return axios
     .get(`${process.env.REACT_APP_SERVER}/api/media/get/icons/all`)
@@ -122,18 +120,18 @@ export function getAllFoods() {
     });
 }
 
-export function getAllRcFiles(foldername){
+export function getAllRcFiles(foldername) {
   return axios
-  .get(`${process.env.REACT_APP_SERVER}/api/media/get/rc/all/${foldername}`)
-  .then((res) => res.data)
-  .catch((err) => {
-    openNotificationWithIcon(
-      "error",
-      "Unable to get rc files",
-      "Sorry we are unable to get the rc files from our database. Please try again in few moments. If the issue continues please contact us."
-    );
-    console.log(err);
-  });
+    .get(`${process.env.REACT_APP_SERVER}/api/media/get/rc/all/${foldername}`)
+    .then((res) => res.data)
+    .catch((err) => {
+      openNotificationWithIcon(
+        "error",
+        "Unable to get rc files",
+        "Sorry we are unable to get the rc files from our database. Please try again in few moments. If the issue continues please contact us."
+      );
+      console.log(err);
+    });
 }
 export function uploadImage(file) {
   var formData = new FormData();
@@ -150,12 +148,14 @@ export function uploadImage(file) {
     });
 }
 
-
 export function uploadRc(file, foldername) {
   var formData = new FormData();
   formData.append("file", file);
   return axios
-    .post(`${process.env.REACT_APP_SERVER}/api/media/rc/${foldername}`, formData)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/media/rc/${foldername}`,
+      formData
+    )
     .then((res) => {
       openNotificationWithIcon("success", "file successfully uploaded", "");
       return res.data;
@@ -165,7 +165,6 @@ export function uploadRc(file, foldername) {
       console.log(err);
     });
 }
-
 
 export function uploadMusic(file) {
   var formData = new FormData();
@@ -237,11 +236,7 @@ export function uploadTemp(file) {
   return axios
     .post(`${process.env.REACT_APP_SERVER}/api/media/temps`, formData)
     .then((res) => {
-      openNotificationWithIcon(
-        "success",
-        "Temps successfully uploaded",
-        ""
-      );
+      openNotificationWithIcon("success", "Temps successfully uploaded", "");
       return res.data;
     })
     .catch((err) => {
@@ -256,11 +251,7 @@ export function uploadFood(file) {
   return axios
     .post(`${process.env.REACT_APP_SERVER}/api/media/foods`, formData)
     .then((res) => {
-      openNotificationWithIcon(
-        "success",
-        "food successfully uploaded",
-        ""
-      );
+      openNotificationWithIcon("success", "food successfully uploaded", "");
       return res.data;
     })
     .catch((err) => {
@@ -275,11 +266,7 @@ export function uploadIcons(file) {
   return axios
     .post(`${process.env.REACT_APP_SERVER}/api/media/icons`, formData)
     .then((res) => {
-      openNotificationWithIcon(
-        "success",
-        "icons successfully uploaded",
-        ""
-      );
+      openNotificationWithIcon("success", "icons successfully uploaded", "");
       return res.data;
     })
     .catch((err) => {
@@ -291,7 +278,9 @@ export function uploadIcons(file) {
 export function deleteMediaFiles(files) {
   console.log(files);
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/media/files`, { data: files })
+    .post(`${process.env.REACT_APP_SERVER}/api/media/files/delete`, {
+      data: files,
+    })
     .then((res) => {
       openNotificationWithIcon("success", "file deleted successfully", "");
       return res.data;

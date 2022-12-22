@@ -446,7 +446,9 @@ function SearchNutrition({
               <Link to={`/recipe/${slug(meal.name)}/${meal._id}`}>
                 {console.log(meal)}
                 <ChallengeCard
-                  picture={`${process.env.REACT_APP_SERVER}/uploads/${meal.image}`}
+                  picture={`${
+                    process.env.REACT_APP_SERVER
+                  }/uploads/${meal.image.replaceAll(" ", "%20")}`}
                   name={meal.name}
                   rating={meal.rating}
                   newc={true}

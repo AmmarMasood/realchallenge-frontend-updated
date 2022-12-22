@@ -1060,6 +1060,7 @@ function NewChallengeWorkoutTab({
     const dw = { ...workout };
     let w = [...weeks];
     dw.workoutId = v4();
+    delete dw._id;
     dw.exercises = dw.exercises.map((e) => ({ ...e, exerciseId: v4() }));
     w = w.map((j) => {
       if (j.weekId === weekId) {
@@ -1068,6 +1069,8 @@ function NewChallengeWorkoutTab({
       }
       return j;
     });
+
+    // console.log("workoouts", workoutIdsThatNeedToBeUpdated);
     setWeeks(w);
   };
 
@@ -1094,15 +1097,26 @@ function NewChallengeWorkoutTab({
       return week;
     });
 
-    // console.log(...w);
-    setWeeks(w);
+    console.log("here 2", w);
+    return;
+    // setWeeks(w);
   };
 
   const duplicateWeek = (week) => {
+    const ObjectId = (
+      m = Math,
+      d = Date,
+      h = 16,
+      s = (s) => m.floor(s).toString(h)
+    ) =>
+      s(d.now() / 1000) + " ".repeat(h).replace(/./g, () => s(m.random() * h));
     let newWeek = {
       ...week,
-      weekId: v4(),
+      weekId: ObjectId,
+      _id: ObjectId,
     };
+    // console.log("here3", newWeek, week);
+    // return;
     setWeeks([...weeks, newWeek]);
   };
   const updateWorkout = (workout) => {
@@ -1330,6 +1344,7 @@ function NewChallengeWorkoutTab({
             >
               {weeks.map((w, i) => (
                 <CustomWeekPanel
+                  update={update}
                   week={w}
                   index={i}
                   id={w.weekId}

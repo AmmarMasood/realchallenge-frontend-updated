@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/home.css";
 import "../assets/trainers.css";
 import "../assets/challenge.css";
@@ -11,12 +11,15 @@ import { Link } from "react-router-dom";
 import { getAllBlogs } from "../services/blogs";
 import slug from "elegant-slug";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
+import ReactHTMLParser from "react-html-parser";
 
 function Magazine() {
+  const { language } = useContext(LanguageContext);
   const [allBlogs, setAllBlogs] = useState([]);
 
   const fetchBlogs = async () => {
-    const res = await getAllBlogs(localStorage.getItem("locale"));
+    const res = await getAllBlogs(language);
     if (res.blogs) {
       const blogs = res.blogs.reverse();
       console.log(blogs);
@@ -25,7 +28,7 @@ function Magazine() {
   };
   useEffect(() => {
     fetchBlogs();
-  }, []);
+  }, [language]);
   return (
     <div>
       <Navbar color="dark" />
@@ -74,7 +77,7 @@ function Magazine() {
               className="font-paragraph-black"
               style={{ height: "100px", overflow: "hidden" }}
             >
-              {allBlogs[0] ? allBlogs[0].paragraph : ""}
+              {allBlogs[0] ? ReactHTMLParser(allBlogs[0].paragraph) : ""}
             </p>
           </div>
         </div>

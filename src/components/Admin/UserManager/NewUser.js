@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Input, Button, Select, List, Modal } from "antd";
 import {
   LoadingOutlined,
   CloseSquareOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
-import { registerUser } from "../../../services/authentication";
+import {
+  registerUser,
+  sendEmailVerification,
+} from "../../../services/authentication";
 import { createCustomerDetails } from "../../../services/customer";
 import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import {
@@ -19,6 +22,7 @@ import {
 } from "../../../services/trainers";
 import { getAllChallengeGoals } from "../../../services/createChallenge/goals";
 import EditTypeName from "./EditTypeName";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 const { Option } = Select;
 function NewUser({ setCurrentSelection, home }) {
@@ -61,6 +65,8 @@ function NewUser({ setCurrentSelection, home }) {
   const [selectedItemForUpdateTitle, setSelectedItemForUpdateTitle] =
     useState("");
 
+  const { language } = useContext(LanguageContext);
+
   // admin",
   //           "trainer",
   //           "nutrist",
@@ -75,8 +81,8 @@ function NewUser({ setCurrentSelection, home }) {
   }, []);
 
   const fetchData = async () => {
-    const res = await getAllTrainerGoals();
-    const aCh = await getAllChallengeGoals();
+    const res = await getAllTrainerGoals(language);
+    const aCh = await getAllChallengeGoals(language);
 
     // console.log("aCh", aCh);
     if (res.goals) {
@@ -128,6 +134,7 @@ function NewUser({ setCurrentSelection, home }) {
         role: role.toLowerCase(),
       };
       const res = await createUserByAdmin(data);
+      // await sendEmailVerification(email);
       console.log("yas0", res);
       if (res) {
         if (role === "ADMIN") {
@@ -173,11 +180,11 @@ function NewUser({ setCurrentSelection, home }) {
             bio,
             country,
             gender,
-            avatarLink: typeof avatar === "object" ? avatar.link : "",
+            avatarLink: typeof avatar === "object" ? avatar.link : avatar,
             trainersFitnessInterest: selectedFitnessInterest,
             trainerGoals: selectedTrainerGoal,
           };
-          await updateUserProfileByAdmin(data, res._id);
+          await updateUserProfileByAdmin(data, res._id, "trainer");
           console.log("TRAINER CREATED");
           setLoading(false);
         } else {
@@ -470,6 +477,11 @@ function NewUser({ setCurrentSelection, home }) {
                 {avatar && (
                   <div style={{ margin: "10px" }}>
                     <img
+                      style={{
+                        maxHeight: "500px",
+                        maxWidth: "500px",
+                        margin: "20px",
+                      }}
                       src={`${process.env.REACT_APP_SERVER}/uploads/${avatar.link}`}
                       // height="120px"
                       // width="150px"
@@ -621,7 +633,7 @@ function NewUser({ setCurrentSelection, home }) {
             // </Form.Item>
 
             <>
-              <Form.Item label="Goals" name="goals">
+              {/* <Form.Item label="Goals" name="goals">
                 <Select
                   mode="multiple"
                   allowClear
@@ -636,7 +648,7 @@ function NewUser({ setCurrentSelection, home }) {
                     <Option value={g._id}>{g.name}</Option>
                   ))}
                 </Select>
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item label="Fitness Interests" name="fitnessInterest">
                 <Select

@@ -31,8 +31,10 @@ import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
 import ReactHtmlParser from "react-html-parser";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 function RecipeProfile(props) {
+  const { language, updateLanguage } = useContext(LanguageContext);
   const [allComments, setAllComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [commentButtonLoading, setCommentButtomLoading] = useState(false);
@@ -45,17 +47,34 @@ function RecipeProfile(props) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
 
   const fetchData = async () => {
-    const id = props.match.params.id;
-    setLoading(true);
-    const res = await getRecipeById(id);
-    setAllComments(res.comments);
-    setRecipe(res);
-    setLoading(false);
-    console.log(res);
+    if (Object.keys(recipe).length > 0) {
+      if (recipe.language === language) {
+      } else {
+        if (recipe.alternativeLanguage) {
+          window.location.href = `${
+            process.env.REACT_APP_FRONTEND_SERVER
+          }/recipe/${slug(recipe.alternativeLanguage.name)}/${
+            recipe.alternativeLanguage._id
+          }`;
+        }
+      }
+    } else {
+      const id = props.match.params.id;
+      setLoading(true);
+      const res = await getRecipeById(id);
+      if (res) {
+        setAllComments(res.comments);
+        setRecipe(res);
+        setLoading(false);
+        updateLanguage(res.language);
+        console.log(res);
+      }
+    }
   };
+
   const postCommentToBackend = async () => {
     setCommentButtomLoading(true);
     const res = await addRecipeComment(recipe._id, commentText);
@@ -102,9 +121,14 @@ function RecipeProfile(props) {
         <div
           className="trainer-profile-container-column1"
           style={{
-            background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${process.env.REACT_APP_SERVER}/uploads/${recipe.image})`,
-            backgroundSize: "cover",
+            background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${
+              process.env.REACT_APP_SERVER
+            }/uploads/${
+              recipe.image ? recipe.image.replaceAll(" ", "%20") : ""
+            })`,
+            backgroundSize: "100% 100vh",
             backgroundPosition: "10% 10%",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <div className="profile-box">
@@ -251,7 +275,11 @@ function RecipeProfile(props) {
                       {line.name ? line.name.name : ""}{" "}
                       {line.method && `(${line.method})`}
                     </span>
-                    <span>{line.weight ? `${line.weight}g` : line.weight}</span>
+                    <span>
+                      {line.weight ? `${line.weight}g` : line.weight}{" "}
+                      {line.volume ? `${line.volume}ml` : line.volume}
+                      {line.pieces ? ` ${line.pieces} piece` : line.pieces}
+                    </span>
                   </div>
                 ))}
             </div>

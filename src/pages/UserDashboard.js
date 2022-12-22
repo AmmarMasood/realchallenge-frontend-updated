@@ -23,12 +23,14 @@ import {
   getRecommandedWeeklyDiet,
 } from "../services/users";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const barIconsStyle = {
   fontSize: "20px",
   paddingRight: "10px",
 };
 function UserDashboard() {
+  const { language } = useContext(LanguageContext);
   const [current, setCurrent] = useState("feed");
   const [userInfo, setUserInfo] = useContext(userInfoContext);
   const [userProfile, setUserProfile] = useState({});
@@ -43,7 +45,7 @@ function UserDashboard() {
       if (res.customer.customerDetails) {
         setUserProfile(res.customer.customerDetails);
       }
-      const rc = await getRecommandedChallenges(userInfo.id);
+      const rc = await getRecommandedChallenges(userInfo.id, language);
       const rd = await getRecommandedWeeklyDiet(userInfo.id);
       const gender = res.customer.gender;
       setGender(gender);

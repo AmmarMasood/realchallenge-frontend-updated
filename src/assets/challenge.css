@@ -111,6 +111,10 @@
   padding: 10px 20px;
 }
 
+.slick-track{
+  z-index: -1 !important;
+}
+
 @media screen and (min-width: 2000px) {
   .challenges-2-row {
     width: 60vw;

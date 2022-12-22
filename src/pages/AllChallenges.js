@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../assets/home.css";
 import "../assets/trainers.css";
 import "../assets/challenge.css";
@@ -15,6 +15,8 @@ import { getAllBodyFocus } from "../services/createChallenge/bodyFocus";
 import { getAllChallengeEquipments } from "../services/createChallenge/equipments";
 import slug from "elegant-slug";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
@@ -29,6 +31,8 @@ const filterTextStyle = {
 };
 
 function AllChallenges() {
+  const [loading, setLoading] = useState(false);
+  const { language } = useContext(LanguageContext);
   const [name, setName] = useState("");
   const [filterChallenges, setFilterChallenges] = useState([]);
   // eslint-disable-next-line
@@ -44,7 +48,7 @@ function AllChallenges() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
 
   const getAllEquipmentsFromWeeks = (weeks) => {
     const workouts = weeks.map((w) => w.workouts);
@@ -54,11 +58,12 @@ function AllChallenges() {
   };
 
   const fetchData = async () => {
-    const data = await getAllChallenges(localStorage.getItem("locale"));
-    const goals = await getAllChallengeGoals();
-    const bodyFocus = await getAllBodyFocus();
-    const equipments = await getAllChallengeEquipments();
-
+    setLoading(true);
+    const data = await getAllChallenges(language);
+    const goals = await getAllChallengeGoals(language);
+    const bodyFocus = await getAllBodyFocus(language);
+    const equipments = await getAllChallengeEquipments(language);
+    setLoading(false);
     const chal = data.challenges.map((c) => ({
       ...c,
       difficulty: c.difficulty ? [c.difficulty] : "",
@@ -153,7 +158,7 @@ function AllChallenges() {
                   fontSize: "18px",
                 }}
               >
-                F<T>challenges.filter</T>
+                <T>challenges.filter</T>
               </p>
             }
             key="1"
@@ -293,17 +298,25 @@ function AllChallenges() {
         </Collapse>
 
         <div className="trainers-3-row-cards">
-          {filterChallenges.map((challenge) => (
-            <Link to={`challenge/${challenge.challengeName}/${challenge._id}`}>
-              <ChallengeCard
-                picture={`${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink}`}
-                rating={challenge.rating}
-                name={challenge.challengeName}
-                newc={true}
-                key={challenge._id}
-              />
-            </Link>
-          ))}
+          {loading ? (
+            <LoadingOutlined
+              style={{ color: "#ff7700", fontSize: "30px", margin: "0 auto" }}
+            />
+          ) : (
+            filterChallenges.map((challenge) => (
+              <Link
+                to={`challenge/${challenge.challengeName}/${challenge._id}`}
+              >
+                <ChallengeCard
+                  picture={`${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink}`}
+                  rating={challenge.rating}
+                  name={challenge.challengeName}
+                  newc={true}
+                  key={challenge._id}
+                />
+              </Link>
+            ))
+          )}
         </div>
       </div>
 

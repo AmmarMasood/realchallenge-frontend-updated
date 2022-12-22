@@ -217,7 +217,7 @@
   /* border: 1px solid yellow; */
   background-color: #1d2631;
   padding: 20px;
-  min-width: 50rem;
+  /* min-width: 50rem; */
   margin: 10px;
   height: 550px;
 }
@@ -295,7 +295,7 @@
 .dashboard-challenges-row3 {
   background-color: #1d2631;
   padding: 20px;
-  min-width: 50rem;
+  /* min-width: 50rem; */
   margin: 10px;
 }
 .dashboard-challenges-row3-inbox {
@@ -631,5 +631,22 @@
   }
   .body-line4 > div {
     width: 60px;
+  }  
+
+}
+@media screen and (max-width: 380px) {
+  .dashboard-challenges-row2-mybody {
+    width: 320px;
+  }
+  .dashboard-challenges-row2-mydevelopment {
+    width: 320px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .dashboard-challenges-row2-mybody {
+    width: 285px;
+  }
+  .dashboard-challenges-row2-mydevelopment {
+    width: 285px;
   }
 }

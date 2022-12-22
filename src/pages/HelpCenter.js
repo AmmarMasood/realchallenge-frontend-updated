@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Input, Tag, Card } from "antd";
@@ -8,9 +8,11 @@ import "../assets/helpcenter.css";
 import { getAllFaqCategories, getAllFaqs } from "../services/faqs";
 import { includes } from "lodash";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
 const { CheckableTag } = Tag;
 
 function HelpCenter() {
+  const { language } = useContext(LanguageContext);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [filteredQuestion, setFilteredQuestions] = useState([]);
@@ -18,7 +20,7 @@ function HelpCenter() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
 
   useEffect(() => {
     const nC =
@@ -28,12 +30,11 @@ function HelpCenter() {
           )
         : questions;
     setFilteredQuestions(nC);
-    console.log("ddddddddddddddddddddddddddddddddd", nC);
   }, [selectedCategory, questions]);
 
   const fetchData = async () => {
-    const f = await getAllFaqs();
-    const c = await getAllFaqCategories();
+    const f = await getAllFaqs(language);
+    const c = await getAllFaqCategories(language);
 
     if (c) {
       setAllCategories(c.categories);

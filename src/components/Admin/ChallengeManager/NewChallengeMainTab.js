@@ -533,9 +533,13 @@ function NewChallengeMainTab({
       </Modal> */}
 
       <div>
-        <span style={{ marginRight: "5px" }}>Select Language:</span>
-
-        <LanguageSelector notFromNav={true} />
+        {!update && (
+          <>
+            {" "}
+            <span style={{ marginRight: "5px" }}>Select Language:</span>
+            <LanguageSelector notFromNav={true} />
+          </>
+        )}
         <div>
           <span
             style={{ marginRight: "5px" }}
@@ -546,9 +550,17 @@ function NewChallengeMainTab({
             onChange={(e) => setSelectedChallenge(e)}
           >
             <Option value={""}>-</Option>
-            {allChallenges.map((r, i) => (
-              <Option value={r._id}>{r.challengeName}</Option>
-            ))}
+            {!update &&
+              allChallenges.map((r, i) => (
+                <Option value={r._id}>{r.challengeName}</Option>
+              ))}
+            {update &&
+              allChallenges.map(
+                (r, i) =>
+                  r.challengeName !== name && (
+                    <Option value={r._id}>{r.challengeName}</Option>
+                  )
+              )}
           </Select>
         </div>
       </div>
@@ -778,9 +790,17 @@ function NewChallengeMainTab({
             value={goals}
             onChange={(e) => setGoals(e)}
           >
-            {allGoals.map((goal) => (
-              <Option value={goal._id}>{goal.name}</Option>
-            ))}
+            <Option value={"get-fit"}>
+              {" "}
+              <T>wizard.getfit</T>
+            </Option>
+            <Option value={"lose-weight"}>
+              <T>wizard.loseweight</T>
+            </Option>
+            <Option value={"gain-muscle"}>
+              {" "}
+              <T>wizard.gainmuslce</T>{" "}
+            </Option>
           </Select>
           {/* <Button
             style={{
@@ -860,13 +880,7 @@ function NewChallengeMainTab({
             allowClear
             style={{ width: "100%" }}
             placeholder="Please select"
-            value={
-              selectedFitnessInterest.length <= 0
-                ? []
-                : update
-                ? selectedFitnessInterest.map((g) => g._id)
-                : selectedFitnessInterest
-            }
+            value={selectedFitnessInterest}
             onChange={(e) => setSelectedFitnessInterest(e)}
           >
             {allTrainerGoals.map((g) => (

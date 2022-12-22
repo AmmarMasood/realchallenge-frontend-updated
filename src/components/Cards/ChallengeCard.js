@@ -22,6 +22,7 @@ function ChallengeCard({
         backgroundPosition: "50% 50%",
       }}
     >
+      {/* <img src={picture} alt="" /> */}
       <div className="challenge-card-basic-overlay"></div>
       {newc && (
         <div className="challenge-card-new-tag font-paragraph-white">New</div>

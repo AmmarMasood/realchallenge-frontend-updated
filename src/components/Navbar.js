@@ -65,7 +65,6 @@ function Navbar({ color, history }) {
         {" "}
         <T>navbar.logout</T>
       </Link>
-      <div>Chcking</div>
     </div>
   );
 
@@ -116,7 +115,7 @@ function Navbar({ color, history }) {
           <div style={{ position: "absolute", right: "60px", top: "30px" }}>
             {!userInfo.authenticated && !button && (
               <Link to="/new" className="nav-button font-paragraph-white">
-                Start Now
+                <T>navbar.start_now</T>
               </Link>
             )}
             {!userInfo.authenticated && !button && (
@@ -124,7 +123,7 @@ function Navbar({ color, history }) {
                 to="/login"
                 className="nav-button-login font-paragraph-white"
               >
-                Log In
+                <T>navbar.log_in</T>
               </Link>
             )}
           </div>
@@ -251,7 +250,7 @@ function Navbar({ color, history }) {
             <div style={{ width: "200px" }}>
               {button && (
                 <Link to="/new" className="nav-button font-paragraph-white">
-                  Start Now
+                  <T>navbar.start_now</T>
                 </Link>
               )}
               {button && (
@@ -259,7 +258,7 @@ function Navbar({ color, history }) {
                   to="/login"
                   className="nav-button-login font-paragraph-white"
                 >
-                  Log In
+                  <T>navbar.log_in</T>
                 </Link>
               )}
             </div>

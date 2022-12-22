@@ -61,7 +61,7 @@ function NewChallenge() {
   const [newBodyfocusName, setNewBodyfocusName] = useState("");
   const [showBodyfocusModal, setShowBodyfocusModal] = useState(false);
   //fitness interest
-  const [selectedFitnessInterest, setSelectedFitnessInterest] = useState("");
+  const [selectedFitnessInterest, setSelectedFitnessInterest] = useState([]);
   // we get all equipments from backend
   const [allEquipments, setAllEquipments] = useState([]);
   const [newEquipmentName, setNewEquipmentName] = useState("");
@@ -252,11 +252,12 @@ function NewChallenge() {
     // return;
     const res = await createChallenge(obj);
     console.log("opp===========>", res);
-    await addChallengeToCustomerDetail(userInfo.id, res.weeks._id);
+
     // console.log(error.response.data);
     // console.log(error.response.status);
     // console.log(error.response.headers);
     if (res && res.weeks) {
+      await addChallengeToCustomerDetail(userInfo.id, res.weeks._id);
       userCreatePost && createAPost(res.weeks._id);
       selectedChallenge && updateSelectedChallenge(res.weeks._id);
     }

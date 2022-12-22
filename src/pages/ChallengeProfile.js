@@ -37,11 +37,13 @@ import { set } from "lodash";
 import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const tooltipText = `
 If you don’t choose any plan and hit start now, you can go through the wizard, get your free intake, make a free account and enjoy our free challenges collection and one week meal plan. 
 `;
 function ChallengeProfile(props) {
+  const { language, updateLanguage } = useContext(LanguageContext);
   const [reviewOpen, setReviewOpen] = useState(false);
   const [open, setOpen] = useState(false);
   // eslint-disable-next-line
@@ -69,11 +71,15 @@ function ChallengeProfile(props) {
     setReplaceFreeChallengePopupVisible,
   ] = useState(false);
 
-  const fetchData = async () => {
+  const fetchChallengeData = async () => {
     setLoading(true);
     const res = await getChallengeById(props.match.params.id);
-    setChallenge(res);
-    setAllComments(res.comments);
+    if (res) {
+      setChallenge(res);
+      setAllComments(res.comments);
+      updateLanguage(res.language);
+    }
+
     if (localStorage.getItem("jwtToken") && userInfo.id) {
       const uInfo = await getUserProfileInfo(userInfo.id);
       uInfo && setUserDetails(uInfo.customer);
@@ -111,7 +117,24 @@ function ChallengeProfile(props) {
   };
   useEffect(() => {
     fetchData();
-  }, [userInfo]);
+  }, [userInfo, language]);
+
+  const fetchData = async () => {
+    if (challenge && Object.keys(challenge).length > 0) {
+      if (challenge.language === language) {
+      } else {
+        if (challenge.alternativeLanguage) {
+          window.location.href = `${
+            process.env.REACT_APP_FRONTEND_SERVER
+          }/challenge/${slug(challenge.alternativeLanguage.challengeName)}/${
+            challenge.alternativeLanguage._id
+          }`;
+        }
+      }
+    } else {
+      fetchChallengeData();
+    }
+  };
 
   const postCommentToBackend = async () => {
     setCommentButtomLoading(true);
@@ -733,7 +756,7 @@ function ChallengeProfile(props) {
         autoplay
         isOpen={open}
         controlsList="nodownload"
-        url={challenge.videoThumbnailLink}
+        url={`${process.env.REACT_APP_SERVER}/uploads/${challenge.videoThumbnailLink}`}
         onClose={() => setOpen(false)}
       />
       <ChallengeReviewModal
@@ -748,10 +771,13 @@ function ChallengeProfile(props) {
             background: `linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)), url(${
               process.env.REACT_APP_SERVER
             }/uploads/${
-              challenge.thumbnailLink ? challenge.thumbnailLink : ""
+              challenge.thumbnailLink
+                ? challenge.thumbnailLink.replaceAll(" ", "%20")
+                : ""
             })`,
-            backgroundSize: "cover",
+            backgroundSize: "100% 100vh",
             backgroundPosition: "10% 10%",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <div className="profile-box">
@@ -847,7 +873,7 @@ function ChallengeProfile(props) {
                       alt={trainer.firstName}
                     /> */}
                     <Link
-                      to={`/trainer/${trainer._id}`}
+                      to={`/trainer/${slug(trainer.firstName)}/${trainer._id}`}
                       className="challenge-trainer-box-text font-paragraph-white"
                     >
                       {trainer.firstName + " " + trainer.lastName}

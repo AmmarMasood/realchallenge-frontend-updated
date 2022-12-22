@@ -33,7 +33,7 @@ export function createFaq(details) {
 
 export function removeFaq(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/faq/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/faq/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Faq deleted!", "");
     })
@@ -45,7 +45,7 @@ export function removeFaq(id) {
 
 export function updateFaq(values, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/faq/${id}`, values)
+    .post(`${process.env.REACT_APP_SERVER}/api/faq/${id}/update`, values)
     .then((res) => {
       openNotificationWithIcon("success", "Faq updated successfully!", "");
     })
@@ -92,7 +92,7 @@ export function createFaqCategory(values) {
 
 export function removeFaqCategory(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/faq/category/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/faq/category/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Category removed!", "");
     })
@@ -104,7 +104,7 @@ export function removeFaqCategory(id) {
 
 export function updateFaqCategory(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/faq/category/${id}`, {
+    .post(`${process.env.REACT_APP_SERVER}/api/faq/category/${id}/update`, {
       name: name,
     })
     .then((res) => {

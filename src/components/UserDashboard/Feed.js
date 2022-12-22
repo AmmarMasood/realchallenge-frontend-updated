@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import { UserOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -13,8 +13,11 @@ import {
   addLikeToPost,
   addUnlikePost,
 } from "../../services/posts";
+import { LanguageContext } from "../../contexts/LanguageContext";
+import ReactHTMLParser from "react-html-parser";
 
 function Feed({ userInfo }) {
+  const { language } = useContext(LanguageContext);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
   // eslint-disable-next-line
@@ -25,7 +28,7 @@ function Feed({ userInfo }) {
 
   const fetchData = async () => {
     setLoading(true);
-    const res = await getPostsWithPagination(pageNumber);
+    const res = await getPostsWithPagination(pageNumber, language);
     setLoading(false);
     setData(res.posts);
     setTotalPosts(6 * res.lastPage);
@@ -34,7 +37,7 @@ function Feed({ userInfo }) {
 
   useEffect(() => {
     fetchData();
-  }, [pageNumber]);
+  }, [pageNumber, language]);
 
   const addLike = async (id) => {
     const res = await addLikeToPost(id);
@@ -137,7 +140,9 @@ function Feed({ userInfo }) {
                 <div
                   className="dashboard-feed-container-card-row2"
                   style={{
-                    background: `url(${process.env.REACT_APP_SERVER}/uploads/${d.image})`,
+                    background: `url(${process.env.REACT_APP_SERVER}/uploads/${
+                      d.image ? d.image.replaceAll(" ", "%20") : ""
+                    })`,
                     backgroundSize: "cover",
                     cursor: "pointer",
                   }}
@@ -149,10 +154,10 @@ function Feed({ userInfo }) {
                 {/* </Link> */}
                 <div className="dashboard-feed-container-card-row3">
                   <div className="dashboard-feed-container-card-row3-heading font-paragraph-white">
-                    {d.title}
+                    {ReactHTMLParser(d.title)}
                   </div>
                   <div className="dashboard-feed-container-card-row3-text font-paragraph-white">
-                    {d.text}
+                    {ReactHTMLParser(d.text)}
                   </div>
                 </div>
               </Link>

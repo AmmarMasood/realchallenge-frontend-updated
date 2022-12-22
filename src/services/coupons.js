@@ -34,7 +34,7 @@ export function getAllCoupons() {
 
 export function deleteCoupon(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/coupons/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/coupons/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Coupon deleted!", "");
     })
@@ -46,7 +46,7 @@ export function deleteCoupon(id) {
 
 export function updateCoupon(body, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/coupons/${id}`, body)
+    .post(`${process.env.REACT_APP_SERVER}/api/coupons/${id}/update`, body)
     .then((res) => {
       openNotificationWithIcon("success", "Coupon updated!", "");
     })

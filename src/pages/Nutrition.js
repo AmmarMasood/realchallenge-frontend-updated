@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../assets/home.css";
 import "../assets/trainers.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import { ArrowRightOutlined, CheckOutlined } from "@ant-design/icons";
+import {
+  ArrowRightOutlined,
+  CheckOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import "../assets/nutrition.css";
 import SearchNutrition from "../components/Nutrition/SearchNutrition";
 
@@ -15,8 +19,11 @@ import {
   getAllRecipes,
 } from "../services/recipes";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 function Nutrition() {
+  const { language } = useContext(LanguageContext);
+  const [loading, setLoading] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [allMealTypes, setAllMealTypes] = useState([]);
   const [allIngredients, setAllIngredients] = useState([]);
@@ -24,13 +31,15 @@ function Nutrition() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
 
   const fetchData = async () => {
-    const res = await getAllRecipes(localStorage.getItem("locale"));
-    const allMealT = await getAllMealTypes();
-    const allIngre = await getAllIngredients();
-    const allDiet = await getAllDietTypes();
+    setLoading(true);
+    const res = await getAllRecipes(language);
+    const allMealT = await getAllMealTypes(language);
+    const allIngre = await getAllIngredients(language);
+    const allDiet = await getAllDietTypes(language);
+    setLoading(false);
     console.log(allMealT);
     console.log(allIngre);
     console.log(allDiet);
@@ -64,13 +73,27 @@ function Nutrition() {
         </div>
       </div>
       <div>
-        {console.log("recipes", recipes)}
-        <SearchNutrition
-          allRecipies={recipes}
-          allDiets={allDiets}
-          allIngredients={allIngredients}
-          allMealTypes={allMealTypes}
-        />
+        {loading ? (
+          <div
+            style={{
+              backgroundColor: "#171e27",
+              padding: "50px",
+              height: "200px",
+              textAlign: "center",
+            }}
+          >
+            <LoadingOutlined
+              style={{ color: "#ff7700", fontSize: "30px", margin: "0 auto" }}
+            />
+          </div>
+        ) : (
+          <SearchNutrition
+            allRecipies={recipes}
+            allDiets={allDiets}
+            allIngredients={allIngredients}
+            allMealTypes={allMealTypes}
+          />
+        )}
       </div>
       {/* 3nd row */}
       <div style={{ backgroundColor: "#222932" }}>

@@ -33,7 +33,7 @@ export function createProducts(details) {
 
 export function removeProduct(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/shop/product/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/shop/product/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Product deleted!", "");
     })
@@ -45,7 +45,10 @@ export function removeProduct(id) {
 
 export function updateProduct(values, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/shop/product/${id}`, values)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/shop/product/${id}/update`,
+      values
+    )
     .then((res) => {
       openNotificationWithIcon("success", "Product updated successfully!", "");
     })
@@ -92,7 +95,7 @@ export function createCategory(name) {
 
 export function removeCategory(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/shop/category/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/shop/category/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Category removed!", "");
     })

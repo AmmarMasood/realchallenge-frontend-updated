@@ -75,6 +75,7 @@ function RenderedVideoPlayer({
   }, [workout]);
 
   useEffect(() => {
+    console.log("ammammrmar");
     // start();
 
     exercise.exerciseLength
@@ -86,9 +87,10 @@ function RenderedVideoPlayer({
     if (exerciseSeconds === 0) {
       playAudio();
       if (workout.exercises[currentExercise.index + 1]) {
+        console.log("IM CALLED");
         // this was how it was originall
         setPlayerState({ ...playerState, playing: false });
-        setTimerVisible(true);
+        // setTimerVisible(true);
         // these are new stuff
         // setPlayerState({ ...playerState, playing: false });
         // moveToNextExercise();
@@ -134,7 +136,7 @@ function RenderedVideoPlayer({
   return (
     <div
       className="player-wrapper"
-      style={{ position: "relative" }}
+      style={{ position: "relative", border: "10px solid red" }}
       ref={playerContainerRef}
       onMouseMove={handleMouseMove}
     >
@@ -149,7 +151,7 @@ function RenderedVideoPlayer({
         }}
         playing={playerState.playing}
         muted={playerState.muted}
-        loop={currentExercise.index === 0 ? false : true}
+        loop={true}
         volume={playerState.volume}
         url={
           exercise.videoURL

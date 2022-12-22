@@ -53,7 +53,7 @@ function LoggedinNavbar(props) {
     <>
       <nav className="loggedin-nav-container">
         <div>
-          <Link to="/user/dashboard" className="navbar-logo">
+          <Link to="/" className="navbar-logo">
             <img src={Logo} alt="logo" className="logo small-screenlogo" />
           </Link>
         </div>

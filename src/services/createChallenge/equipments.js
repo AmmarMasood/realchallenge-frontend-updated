@@ -22,7 +22,9 @@ export function createChallengeEquipment(values) {
 
 export function updateChallengeEquipment(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/equipment/${id}`, { name })
+    .post(`${process.env.REACT_APP_SERVER}/api/equipment/${id}/update`, {
+      name,
+    })
     .then((res) =>
       openNotificationWithIcon("success", "Successfully updated", "")
     )
@@ -44,7 +46,7 @@ export function getAllChallengeEquipments(language) {
 
 export function deleteChallengeEquipment(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/equipment/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/equipment/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully deleted equipment", "");
     })

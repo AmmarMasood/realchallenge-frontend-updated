@@ -4,8 +4,8 @@
   position: relative;
 }
 .trainer-profile-container-column1 {
-  background: linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)),
-    url("https://realchallenge.fit/wp-content/uploads/2018/12/matthew-lejune-716127-unsplash-scaled.jpg");
+  /* background: linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)),
+    url("https://realchallenge.fit/wp-content/uploads/2018/12/matthew-lejune-716127-unsplash-scaled.jpg"); */
   background-size: cover;
   background-position: 10% 10%;
   display: flex;
@@ -107,8 +107,8 @@
   .trainer-profile-container-column1 {
     /* border: 1px solid blue; */
     /* border: 1px solid red; */
-    background: linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)),
-      url("https://realchallenge.fit/wp-content/uploads/2018/12/matthew-lejune-716127-unsplash-scaled.jpg");
+    /* background: linear-gradient(rgba(23, 30, 39, 0), rgb(23, 30, 39)),
+      url("https://realchallenge.fit/wp-content/uploads/2018/12/matthew-lejune-716127-unsplash-scaled.jpg"); */
     background-size: cover;
     background-position: 10% 10%;
     display: flex;

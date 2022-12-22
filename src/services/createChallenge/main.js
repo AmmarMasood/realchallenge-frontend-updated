@@ -45,7 +45,10 @@ export function createExercise(e) {
 
 export function updateChallenge(challenge, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/challenges/${id}`, challenge)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/challenges/${id}/update`,
+      challenge
+    )
     .then((res) => {
       openNotificationWithIcon("success", "Successfully updated challenge", "");
       return res.data;
@@ -58,7 +61,7 @@ export function updateChallenge(challenge, id) {
 
 export function updateExercise(e, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/exercise/${id}`, e)
+    .post(`${process.env.REACT_APP_SERVER}/api/exercise/${id}/update`, e)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully updated", "");
       return res.data;
@@ -75,7 +78,7 @@ export function updateWorkoutOnBackend(workout) {
 
   for (let i = 0; i < workout.length; i++) {
     promises.push(
-      axios.put(
+      axios.post(
         `${process.env.REACT_APP_SERVER}/api/workout/update`,
         workout[i]
       )
@@ -103,7 +106,7 @@ export function updateWorkoutOnBackend(workout) {
 
 export function createWorkout(workout) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/workout/update`, workout)
+    .post(`${process.env.REACT_APP_SERVER}/api/workout/update`, workout)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully created workout", "");
       return res.data;
@@ -116,11 +119,7 @@ export function createWorkout(workout) {
 
 export function getAllChallenges(language) {
   return axios
-    .get(
-      `${process.env.REACT_APP_SERVER}/api/challenges?language=${
-        language ? language : "eng"
-      }`
-    )
+    .get(`${process.env.REACT_APP_SERVER}/api/challenges?language=${language}`)
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);
@@ -164,7 +163,7 @@ export function getAllUserExercises(language) {
 
 export function removeChallenge(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/challenges/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/challenges/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully Deleted", "");
       return res.data;
@@ -177,7 +176,7 @@ export function removeChallenge(id) {
 
 export function removeExercise(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/exercise/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/exercise/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully Deleted", "");
       return res.data;
@@ -247,11 +246,11 @@ export function addComment(challengeId, comment) {
     });
 }
 
-export function addChallengeReview(challengeId, rating, comment) {
+export function addChallengeReview(challengeId, rating, comment, language) {
   return axios
     .post(
       `${process.env.REACT_APP_SERVER}/api/challenges/${challengeId}/reviews`,
-      { comment: comment, rating: rating }
+      { comment: comment, rating: rating, language: language }
     )
     .then((res) => {
       return { success: true, data: res.data };
@@ -271,6 +270,7 @@ export function replaceFreeChallenge(challenge) {
     )
     .then((res) => {
       openNotificationWithIcon("success", "Challenge Replaced!", "");
+      window.location.reload(false);
       return { success: true, data: res.data };
     })
     .catch((err) => {

@@ -10,7 +10,7 @@ const openNotificationWithIcon = (type, message, description) => {
 
 export function createCustomerDetails(values, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/customerDetails/${id}`, {
+    .post(`${process.env.REACT_APP_SERVER}/api/customerDetails/${id}/update`, {
       gender: values.gender,
       customerDetails: values,
     })
@@ -23,16 +23,20 @@ export function createCustomerDetails(values, id) {
 
 export function addChallengeToCustomerDetail(userId, challengeId) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/auth/mollie/add/challenges`, {
-      challengeId,
-      userId,
-    })
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/auth/mollie/add/challenges/update`,
+      {
+        challengeId,
+        userId,
+      }
+    )
     .then((res) => {
       openNotificationWithIcon(
         "success",
         "Congratulations! Challenge added to your profile!",
         ""
       );
+      window.location.reload(false);
       return { data: res.data, success: true };
     })
     .catch((err) => {

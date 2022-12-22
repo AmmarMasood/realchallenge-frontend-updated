@@ -37,10 +37,10 @@ export function createPost(data) {
     });
 }
 
-export function getPostsWithPagination(number) {
+export function getPostsWithPagination(number, language) {
   return axios
     .get(
-      `${process.env.REACT_APP_SERVER}/api/community-posts/all/?pageNumber=${number}`
+      `${process.env.REACT_APP_SERVER}/api/community-posts/all/?pageNumber=${number}&language=${language}`
     )
     .then((res) => {
       return res.data;
@@ -53,7 +53,9 @@ export function getPostsWithPagination(number) {
 
 export function addLikeToPost(id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/community-posts/like/${id}`)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/community-posts/like/${id}/update`
+    )
     .then((res) => res.data)
     .catch((err) => {
       openNotificationWithIcon("error", "Unable to like the post.", "");
@@ -63,7 +65,9 @@ export function addLikeToPost(id) {
 
 export function addUnlikePost(id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/community-posts/unlike/${id}`)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/community-posts/unlike/${id}/update`
+    )
     .then((res) => res.data)
     .catch((err) => {
       openNotificationWithIcon("error", "Unable to unlike the post.", "");
@@ -86,7 +90,7 @@ export function addNewCommunityPostComment(id, obj) {
 
 export function deletePostById(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/community-posts/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/community-posts/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully deleted the post.", "");
     })
@@ -98,7 +102,10 @@ export function deletePostById(id) {
 
 export function updatePostById(id, values) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/community-posts/${id}`, values)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/community-posts/${id}/update`,
+      values
+    )
     .then((res) => {
       openNotificationWithIcon("success", "Successfully updated the post.", "");
     })

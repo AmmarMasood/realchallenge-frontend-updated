@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "../assets/home.css";
 import "../assets/trainers.css";
 import "../assets/challenge.css";
@@ -9,6 +9,7 @@ import {
   ArrowRightOutlined,
   CaretLeftOutlined,
   CaretRightOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import { Carousel } from "antd";
 import ChallengeCard from "../components/Cards/ChallengeCard";
@@ -16,23 +17,27 @@ import forward from "../assets/icons/forward-white.png";
 import { getAllChallenges } from "../services/createChallenge/main";
 import slug from "elegant-slug";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 function Challenges() {
   // eslint-disable-next-line
-
+  const [loading, setLoading] = useState(false);
+  const { language } = useContext(LanguageContext);
   const [challenges, setChallenges] = useState([]);
   const ref = useRef(null);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
 
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
   };
 
   const fetchData = async () => {
-    const data = await getAllChallenges(localStorage.getItem("locale"));
+    setLoading(true);
+    const data = await getAllChallenges(language);
+    setLoading(false);
     const chal = data.challenges;
     console.log(chal);
     setChallenges(chal ? chal.reverse().slice(0, 8) : []);
@@ -60,75 +65,92 @@ function Challenges() {
       <div style={{ backgroundColor: "#222932" }}>
         <div className="challenges-2-row">
           <Carousel autoplay>
-            {challenges.map((challenge) => (
-              <Link
-                key={challenge._id}
-                to={`challenge/${slug(challenge.challengeName)}/${
-                  challenge._id
-                }`}
-              >
-                <div
-                  className="challenge-carousel-body"
-                  style={{
-                    background: `url(${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "50% 50%",
-                  }}
+            {loading ? (
+              <LoadingOutlined
+                style={{
+                  color: "#ff7700 !important",
+                  fontSize: "30px !important",
+                  margin: "0 auto",
+                }}
+              />
+            ) : (
+              challenges.map((challenge) => (
+                <Link
+                  key={challenge._id}
+                  to={`challenge/${slug(challenge.challengeName)}/${
+                    challenge._id
+                  }`}
                 >
-                  <div className="challenge-carousel-body-overcolor"></div>
-                  <div className="challenge-carousel-body-abstext for-650px-screen-nodisplay">
-                    <h1
-                      className="font-subheading-white"
-                      style={{ fontSize: "4rem" }}
-                    >
-                      <T>challenges.new_cha</T>
-                    </h1>
-                    <p className="challenge-carousel-body-abstext-paragraph font-subheading-white">
-                      <T>challenges.tp</T>
-                    </p>
-                  </div>
                   <div
-                    className="challenge-carousel-body-textbox font-subheading-white"
-                    style={{ fontSize: "3rem" }}
+                    className="challenge-carousel-body"
+                    style={{
+                      zIndex: 1000000,
+                      background: `url(${
+                        process.env.REACT_APP_SERVER
+                      }/uploads/${
+                        challenge.thumbnailLink
+                          ? challenge.thumbnailLink.replaceAll(" ", "%20")
+                          : ""
+                      })`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "50% 50%",
+                    }}
                   >
-                    <h1>{challenge.challengeName}</h1>
-                    <p className="challenge-carousel-body-abstext-paragraph  font-paragraph-white">
-                      {challenge.description}
-                    </p>
-                    <div>
-                      <img
-                        src={forward}
-                        alt=""
-                        style={{
-                          height: "20px",
-                          margin: "5px 0",
-                        }}
-                      />
+                    <div className="challenge-carousel-body-overcolor"></div>
+                    <div className="challenge-carousel-body-abstext for-650px-screen-nodisplay">
+                      <h1
+                        className="font-subheading-white"
+                        style={{ fontSize: "4rem" }}
+                      >
+                        <T>challenges.new_cha</T>
+                      </h1>
+                      <p className="challenge-carousel-body-abstext-paragraph font-subheading-white">
+                        <T>challenges.tp</T>
+                      </p>
                     </div>
+                    <div
+                      className="challenge-carousel-body-textbox font-subheading-white"
+                      style={{ fontSize: "3rem" }}
+                    >
+                      <h1>{challenge.challengeName}</h1>
+                      <p className="challenge-carousel-body-abstext-paragraph  font-paragraph-white">
+                        {challenge.description}
+                      </p>
+                      <div>
+                        <img
+                          src={forward}
+                          alt=""
+                          style={{
+                            height: "20px",
+                            margin: "5px 0",
+                          }}
+                        />
+                      </div>
 
-                    <div>
-                      {new Array(challenge.rating ? challenge.rating : 1)
-                        .fill(0)
-                        .map((e, index) => (
-                          <svg
-                            width="18"
-                            height="18"
-                            viewBox="0 0 18 18"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            key={index}
-                          >
-                            <path
-                              d="M11.3925 6.71722L9.77427 1.43049C9.45503 0.3928 7.97995 0.3928 7.67173 1.43049L6.04253 6.71722H1.14394C0.0761601 6.71722 -0.364163 8.0826 0.505475 8.69429L4.51241 11.5343L2.93826 16.5698C2.61902 17.5856 3.8079 18.4048 4.65552 17.7604L8.71749 14.7019L12.7795 17.7713C13.6271 18.4158 14.816 17.5965 14.4967 16.5807L12.9226 11.5452L16.9295 8.70521C17.7991 8.0826 17.3588 6.72814 16.291 6.72814H11.3925V6.71722Z"
-                              fill="#FDA136"
-                            />
-                          </svg>
-                        ))}
+                      <div>
+                        {new Array(challenge.rating ? challenge.rating : 1)
+                          .fill(0)
+                          .map((e, index) => (
+                            <svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 18 18"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              key={index}
+                            >
+                              <path
+                                d="M11.3925 6.71722L9.77427 1.43049C9.45503 0.3928 7.97995 0.3928 7.67173 1.43049L6.04253 6.71722H1.14394C0.0761601 6.71722 -0.364163 8.0826 0.505475 8.69429L4.51241 11.5343L2.93826 16.5698C2.61902 17.5856 3.8079 18.4048 4.65552 17.7604L8.71749 14.7019L12.7795 17.7713C13.6271 18.4158 14.816 17.5965 14.4967 16.5807L12.9226 11.5452L16.9295 8.70521C17.7991 8.0826 17.3588 6.72814 16.291 6.72814H11.3925V6.71722Z"
+                                fill="#FDA136"
+                              />
+                            </svg>
+                          ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))
+            )}
           </Carousel>
         </div>
       </div>
@@ -154,21 +176,31 @@ function Challenges() {
               flexWrap: "nowrap",
             }}
           >
-            {challenges.map((challenge) => (
-              <Link
-                to={`/challenge/${slug(challenge.challengeName)}/${
-                  challenge._id
-                }`}
-              >
-                <ChallengeCard
-                  picture={`${process.env.REACT_APP_SERVER}/uploads/${challenge.thumbnailLink}`}
-                  rating={challenge.rating}
-                  name={challenge.challengeName}
-                  newc={true}
-                  key={challenge._id}
-                />
-              </Link>
-            ))}
+            {loading ? (
+              <LoadingOutlined
+                style={{ color: "#ff7700", fontSize: "30px", margin: "0 auto" }}
+              />
+            ) : (
+              challenges.map((challenge) => (
+                <Link
+                  to={`/challenge/${slug(challenge.challengeName)}/${
+                    challenge._id
+                  }`}
+                >
+                  <ChallengeCard
+                    picture={`${process.env.REACT_APP_SERVER}/uploads/${
+                      challenge.thumbnailLink
+                        ? challenge.thumbnailLink.replaceAll(" ", "%20")
+                        : ""
+                    }`}
+                    rating={challenge.rating}
+                    name={challenge.challengeName}
+                    newc={true}
+                    key={challenge._id}
+                  />
+                </Link>
+              ))
+            )}
           </div>
           <div style={{ paddingTop: "10px" }}>
             <Link

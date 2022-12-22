@@ -22,7 +22,7 @@ export function createBodyFocus(name) {
 
 export function updateBodyFocus(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/body/${id}`, { name })
+    .post(`${process.env.REACT_APP_SERVER}/api/body/${id}/update`, { name })
     .then((res) =>
       openNotificationWithIcon("success", "Successfully Updated", "")
     )
@@ -44,7 +44,7 @@ export function getAllBodyFocus(language) {
 
 export function deleteChallengeBodyfocus(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/body/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/body/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon(
         "success",

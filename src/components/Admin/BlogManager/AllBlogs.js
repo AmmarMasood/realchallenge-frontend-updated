@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Table, Space, Input } from "antd";
+import { Button, Table, Space, Input, Select } from "antd";
 import moment from "moment";
 import UpdateBlog from "./UpdateBlog";
 import {
@@ -55,7 +55,7 @@ function AllBlogs() {
       dataIndex: "user",
       key: "user",
       render: (text) => (
-        <span className="font-paragraph-black">{text.username}</span>
+        <span className="font-paragraph-black">{text?.username}</span>
       ),
     },
     {
@@ -65,6 +65,12 @@ function AllBlogs() {
       render: (text) => (
         <span className="font-paragraph-black">{text ? text.name : ""}</span>
       ),
+    },
+    {
+      title: "Language",
+      dataIndex: "language",
+      key: "language",
+      render: (text) => <span className="font-paragraph-black">{text}</span>,
     },
     {
       title: "Updated At",
@@ -110,6 +116,7 @@ function AllBlogs() {
         {" "}
         <T>adminDashboard.blogs.alL</T>
       </h2>
+
       <div className="admin-allchallenges-list-container">
         <Input
           placeholder="Search Blogs By Name"
@@ -132,6 +139,7 @@ function AllBlogs() {
             )
           }
         />
+
         <Table columns={columns} dataSource={filterAllBlogs} />
       </div>
     </div>

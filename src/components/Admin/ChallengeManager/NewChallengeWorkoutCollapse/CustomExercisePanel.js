@@ -52,7 +52,7 @@ function CustomExercisePanel({ w, t, e, i, duplicateExercise }) {
             triggerStyle={{ cursor: "pointer" }}
             key={e.exerciseId}
           >
-            {t.renderWorkout ? (
+            {/* {t.renderWorkout ? (
               <Button
                 style={{ float: "right", marginTop: "10px" }}
                 onClick={() => duplicateExercise(w.weekId, t, e)}
@@ -61,7 +61,7 @@ function CustomExercisePanel({ w, t, e, i, duplicateExercise }) {
               </Button>
             ) : (
               ""
-            )}
+            )} */}
             <div className="display-workout-inside-week-container">
               <div>
                 <span className="font-paragraph-black">Exercise Name</span>
@@ -86,7 +86,7 @@ function CustomExercisePanel({ w, t, e, i, duplicateExercise }) {
                   <span className="font-paragraph-black">
                     Exercise Video Length
                   </span>
-                  <Input value={e.exerciseVideo.videoLength} disabled={true} />
+                  <Input value={e.exerciseVideo?.videoLength} disabled={true} />
                 </div>
               )}
               {t.renderWorkout && (

@@ -11,9 +11,7 @@ const openNotificationWithIcon = (type, message, description) => {
 export function getAllRecipes(language) {
   return axios
     .get(
-      `${process.env.REACT_APP_SERVER}/api/recipes/recipe?language=${
-        language ? language : "eng"
-      }`
+      `${process.env.REACT_APP_SERVER}/api/recipes/recipe?language=${language}`
     )
     .then((res) => {
       return res.data;
@@ -76,7 +74,10 @@ export function createRecipe(values) {
 
 export function updateRecipe(values, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/recipes/recipe/${id}`, values)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/recipes/recipe/${id}/update`,
+      values
+    )
     .then((res) => {
       openNotificationWithIcon("success", "Recipe updated successfully", "");
     })
@@ -91,7 +92,7 @@ export function updateRecipe(values, id) {
 }
 export function deleteRecipeWithId(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/recipes/recipe/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/recipe/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "recipe delete successfully", "");
     })
@@ -125,7 +126,7 @@ export function getAllMealTypes(language) {
 
 export function removeMealType(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/recipes/mealType/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/mealType/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Meal Type deleted successfully", "");
     })
@@ -165,7 +166,7 @@ export function createMealType(name, language) {
 
 export function updateMealType(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/recipes/mealType/${id}`, {
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/mealType/${id}/update`, {
       name: name,
     })
     .then((res) => {
@@ -220,7 +221,7 @@ export function createFoodType(name, language) {
 
 export function removeFoodType(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/recipes/foodType/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/foodType/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Food Type deleted successfully", "");
     })
@@ -236,7 +237,7 @@ export function removeFoodType(id) {
 
 export function updateFoodType(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/recipes/foodType/${id}`, {
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/foodType/${id}/update`, {
       name: name,
     })
     .then((res) => {
@@ -291,7 +292,7 @@ export function createDiet(name, language) {
 
 export function updateDiet(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/recipes/diet/${id}`, {
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/diet/${id}/update`, {
       name: name,
     })
     .then((res) => {
@@ -309,7 +310,7 @@ export function updateDiet(name, id) {
 
 export function removeDiet(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/recipes/diet/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/diet/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Diet deleted successfully", "");
     })
@@ -366,9 +367,12 @@ export function createIngredient(name, language) {
 
 export function updateIngredient(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/recipes/ingredient/${id}`, {
-      name: name,
-    })
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/recipes/ingredient/${id}/update`,
+      {
+        name: name,
+      }
+    )
     .then((res) => {
       openNotificationWithIcon(
         "success",
@@ -387,7 +391,7 @@ export function updateIngredient(name, id) {
 }
 export function removeIngredient(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/recipes/ingredient/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/recipes/ingredient/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon(
         "success",
@@ -425,8 +429,8 @@ export function getRecipeById(id) {
 
 export function favouriteRecipeById(body, id) {
   return axios
-    .put(
-      `${process.env.REACT_APP_SERVER}/api/customerDetails/favouriteRecipe/${id}`,
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/customerDetails/favouriteRecipe/${id}/update`,
       body
     )
     .then((res) => {
@@ -453,8 +457,8 @@ export function favouriteRecipeById(body, id) {
 
 export function unFavouriteRecipeById(body, id) {
   return axios
-    .put(
-      `${process.env.REACT_APP_SERVER}/api/customerDetails/unfavouriteRecipe/${id}`,
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/customerDetails/unfavouriteRecipe/${id}/update`,
       body
     )
     .then((res) => {

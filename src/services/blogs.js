@@ -47,7 +47,7 @@ export function createBlog(details) {
 
 export function removeBlog(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/blog/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/blog/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Blog deleted!", "");
     })
@@ -59,7 +59,7 @@ export function removeBlog(id) {
 
 export function updateBlog(values, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/blog/${id}`, values)
+    .post(`${process.env.REACT_APP_SERVER}/api/blog/${id}/update`, values)
     .then((res) => {
       openNotificationWithIcon("success", "Blog updated successfully!", "");
     })
@@ -101,7 +101,7 @@ export function createBlogCategory(values) {
 
 export function updateBlogCategory(name, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/blog/category/${id}`, {
+    .post(`${process.env.REACT_APP_SERVER}/api/blog/category/${id}/update`, {
       name: name,
     })
     .then((res) => {
@@ -115,7 +115,7 @@ export function updateBlogCategory(name, id) {
 
 export function removeBlogCategory(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/blog/category/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/blog/category/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Category removed!", "");
     })
@@ -138,5 +138,22 @@ export function getBlogById(id) {
     .catch((err) => {
       openNotificationWithIcon("error", "Unable to get data", "");
       console.log(err);
+    });
+}
+
+export function addBlogComment(blogId, comment) {
+  return axios
+    .post(`${process.env.REACT_APP_SERVER}/api/blog/${blogId}/comments`, {
+      text: comment,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      if (err.response.data.header && err.response.data.header.message) {
+        openNotificationWithIcon("error", err.response.data.header.message, "");
+        return;
+      }
+      openNotificationWithIcon("error", "Unable to add comment", "");
     });
 }

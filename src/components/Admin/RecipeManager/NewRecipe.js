@@ -4,11 +4,12 @@ import {
   Input,
   Button,
   message,
-  Select,
+  Select as AntdSelect,
   Modal,
   InputNumber,
   List,
 } from "antd";
+import Select from "react-select";
 import { PlusOutlined, CloseSquareOutlined } from "@ant-design/icons";
 import { v4 } from "uuid";
 import {
@@ -39,7 +40,7 @@ import TextEditor from "../../TextEditor";
 import LanguageSelector from "../../LanguageSelector/LanguageSelector";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 
-const { Option } = Select;
+const { Option } = AntdSelect;
 
 function NewRecipe({ setCurrentSelection }) {
   const [userInfo, setUserInfo] = useContext(userInfoContext);
@@ -110,8 +111,12 @@ function NewRecipe({ setCurrentSelection }) {
     const ingredients = await getAllIngredients(language);
 
     setAllDiets(diets.diets);
-    setAllMealTypes(meals.mealTypes);
-    setAllFoodTypes(foodTypes.foodTypes);
+    setAllMealTypes(
+      meals.mealTypes.map((f) => ({ ...f, name: f.name.split("___")[0] }))
+    );
+    setAllFoodTypes(
+      foodTypes.foodTypes.map((f) => ({ ...f, name: f.name.split("___")[0] }))
+    );
     setAllIngredients(ingredients.ingredients);
   }
 
@@ -156,9 +161,9 @@ function NewRecipe({ setCurrentSelection }) {
       persons: persons,
       fat: fat,
       fiber: fiber,
-      mealTypes: mealTypes,
-      foodTypes: foodType,
-      diet: diet,
+      mealTypes: mealTypes.map((f) => f.value),
+      foodTypes: foodType.map((f) => f.value),
+      diet: diet.map((f) => f.value),
       ingredients: ingredients,
       cookingProcess: cookingProcess,
       notes: notes,
@@ -167,9 +172,11 @@ function NewRecipe({ setCurrentSelection }) {
       allowComments: allowComments,
       allowReviews: allowReviews,
     };
+
     if (selectedRecipe) d.alternativeLanguage = selectedRecipe;
     // console.log("Success:", values);
     // console.log(values);
+
     const res = await createRecipe(d);
     if (res) {
       userCreatePost && createAPost(res.newRecipe._id);
@@ -231,10 +238,18 @@ function NewRecipe({ setCurrentSelection }) {
         <div>
           <span className="font-paragraph-black">Select Ingredient</span>
           <Select
+            onChange={(e) => changeIngredientValue("name", item.id, e.value)}
+            options={allIngredients.map((food) => ({
+              label: food.name,
+              value: food._id,
+            }))}
+          />
+          {/* <AntdSelect
             style={{ width: "100%" }}
             showSearch
             onSearch={(v) => console.log("value", v)}
             onChange={(e) => changeIngredientValue("name", item.id, e)}
+            listHeight="100"
             filterOption={(input, option) => {
               // console.log("value", input,option);
               return (
@@ -243,9 +258,11 @@ function NewRecipe({ setCurrentSelection }) {
             }}
           >
             {allIngredients.map((i) => (
-              <Option value={i._id}>{i.name}</Option>
+              <Option value={i._id} key={i._id}>
+                {i.name}
+              </Option>
             ))}
-          </Select>
+          </AntdSelect> */}
         </div>
         <div>
           <span className="font-paragraph-black">Weight (gm)</span>
@@ -361,7 +378,10 @@ function NewRecipe({ setCurrentSelection }) {
             htmlType="submit"
             onClick={async () => {
               if (newMealTypeName.length > 0) {
-                await createMealType(newMealTypeName, language);
+                await createMealType(
+                  `${newMealTypeName}___${language}`,
+                  language
+                );
                 // setEquipmentModal(false);
                 fetchData();
               }
@@ -437,7 +457,10 @@ function NewRecipe({ setCurrentSelection }) {
             htmlType="submit"
             onClick={async () => {
               if (newFoodTypeName.length > 0) {
-                await createFoodType(newFoodTypeName, language);
+                await createFoodType(
+                  `${newFoodTypeName}___${language}`,
+                  language
+                );
                 // setEquipmentModal(false);
                 fetchData();
               }
@@ -669,17 +692,17 @@ function NewRecipe({ setCurrentSelection }) {
             <span
               style={{ marginRight: "5px" }}
             >{`Select alternative language version`}</span>
-            <Select
+            <AntdSelect
               style={{ width: "500px" }}
               onChange={(e) => setSelectedRecipe(e)}
             >
               <Option value={""}>-</Option>
               {allRecipes.map((r, i) => (
-                <Option key={i} value={r._id}>
+                <Option key={i._id} value={r._id}>
                   {r.name}
                 </Option>
               ))}
-            </Select>
+            </AntdSelect>
           </div>
         </div>
         <Form
@@ -857,6 +880,15 @@ function NewRecipe({ setCurrentSelection }) {
           </Form>
           <Form.Item label="Meal Types" name="mealTypes">
             <Select
+              isMulti
+              onChange={(e) => setMealTypes(e)}
+              value={mealTypes}
+              options={allMealTypes.map((food) => ({
+                label: food.name,
+                value: food._id,
+              }))}
+            />
+            {/* <AntdSelect
               mode="multiple"
               allowClear
               style={{ width: "100%" }}
@@ -865,9 +897,11 @@ function NewRecipe({ setCurrentSelection }) {
               onChange={(e) => setMealTypes(e)}
             >
               {allMealTypes.map((meal) => (
-                <Option value={meal._id}>{meal.name}</Option>
+                <Option value={meal._id} key={meal._id}>
+                  {meal.name}
+                </Option>
               ))}
-            </Select>
+            </AntdSelect> */}
             <Button
               style={{
                 backgroundColor: "var(--color-orange)",
@@ -883,6 +917,15 @@ function NewRecipe({ setCurrentSelection }) {
           </Form.Item>
           <Form.Item label="Food Types" name="foodTypes">
             <Select
+              isMulti
+              onChange={(e) => setFoodTypes(e)}
+              value={foodType}
+              options={allFoodTypes.map((food) => ({
+                label: food.name,
+                value: food._id,
+              }))}
+            />
+            {/* <AntdSelect
               mode="multiple"
               allowClear
               style={{ width: "100%" }}
@@ -891,9 +934,11 @@ function NewRecipe({ setCurrentSelection }) {
               onChange={(e) => setFoodTypes(e)}
             >
               {allFoodTypes.map((food) => (
-                <Option value={food._id}>{food.name}</Option>
+                <Option value={food._id} key={food._id}>
+                  {food.name}
+                </Option>
               ))}
-            </Select>
+            </AntdSelect> */}
             <Button
               style={{
                 backgroundColor: "var(--color-orange)",
@@ -909,6 +954,15 @@ function NewRecipe({ setCurrentSelection }) {
           </Form.Item>
           <Form.Item label="Diet" name="diet">
             <Select
+              isMulti
+              onChange={(e) => setDiet(e)}
+              value={diet}
+              options={allDiets.map((food) => ({
+                label: food.name,
+                value: food._id,
+              }))}
+            />
+            {/* <AntdSelect
               mode="multiple"
               allowClear
               style={{ width: "100%" }}
@@ -917,9 +971,11 @@ function NewRecipe({ setCurrentSelection }) {
               onChange={(e) => setDiet(e)}
             >
               {allDiets.map((d) => (
-                <Option value={d._id}>{d.name}</Option>
+                <Option value={d._id} key={d._id}>
+                  {d.name}
+                </Option>
               ))}
-            </Select>
+            </AntdSelect> */}
             <Button
               style={{
                 backgroundColor: "var(--color-orange)",

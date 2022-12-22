@@ -178,7 +178,7 @@ function Login(props) {
               <Form.Item
                 label={
                   <span className="font-paragraph-white">
-                    <T>lTgin.username</T>
+                    <T>login.username</T>
                   </span>
                 }
                 name="username"
@@ -193,7 +193,7 @@ function Login(props) {
               <Form.Item
                 label={
                   <span className="font-paragraph-white">
-                    <T>lTgin.password</T>
+                    <T>login.password</T>
                   </span>
                 }
                 name="password"
@@ -206,7 +206,7 @@ function Login(props) {
               </Form.Item>
             </div>
             <Link to="/forgot-password" className="login-forgot-password">
-              <T>logiT.forgot_pass</T>
+              <T>login.forgot_pass</T>
             </Link>
             <div style={{ textAlign: "center", margin: "10px 0" }}>
               {loading ? (

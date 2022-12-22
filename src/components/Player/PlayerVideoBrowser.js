@@ -149,7 +149,9 @@ function PlayerVideoBrowser({
                         {e.exerciseLength ? (
                           <>
                             <span style={{ marginRight: "8px" }}>
-                              {e.exerciseLength} secs
+                              {workout.isRendered
+                                ? `${e.exerciseLength} secs`
+                                : ""}
                             </span>{" "}
                           </>
                         ) : (
@@ -208,7 +210,7 @@ function PlayerVideoBrowser({
                       <p style={{ lineHeight: "10px" }}>{e.title}</p>
                       <p>
                         <span style={{ marginRight: "8px" }}>
-                          {e.exerciseLength} secs
+                          {e.exerciseLength ? `${e.exerciseLength} secs` : ""}
                         </span>
                       </p>
                     </div>

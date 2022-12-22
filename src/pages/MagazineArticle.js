@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../assets/magazineArticle.css";
 import "../assets/trainerprofile.css";
 import "../assets/home.css";
@@ -6,11 +6,11 @@ import "../assets/challengeProfile.css";
 import "../assets/recipeProfile.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Avatar } from "antd";
+import { Avatar, Input } from "antd";
 import { UserOutlined, LoadingOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
-import { getBlogById } from "../services/blogs";
+import { addBlogComment, getBlogById } from "../services/blogs";
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -25,63 +25,61 @@ import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
 import ReactHtmlParser from "react-html-parser";
 import { T } from "../components/Translate";
+import { LanguageContext } from "../contexts/LanguageContext";
+import ModalVideo from "react-modal-video";
 
 function MagazineArticle(props) {
+  const { language, updateLanguage } = useContext(LanguageContext);
   const [blogInfo, setBlogInfo] = useState({});
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [commentButtonLoading, setCommentButtomLoading] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [allComments, setAllComments] = useState([]);
 
   useEffect(() => {
     fetchInfo();
-  }, []);
+  }, [language]);
+
+  const postCommentToBackend = async () => {
+    setCommentButtomLoading(true);
+    const res = await addBlogComment(blogInfo._id, commentText);
+
+    if (res) {
+      setAllComments(res.comments);
+    }
+    setCommentButtomLoading(false);
+    setCommentText("");
+  };
 
   const fetchInfo = async () => {
-    setLoading(true);
-    const id = props.match.params.id;
-    const res = await getBlogById(id);
-    if (res) {
-      const d = res.data.blog;
-      setBlogInfo(d);
+    if (Object.keys(blogInfo).length > 0) {
+      if (blogInfo.language === language) {
+      } else {
+        if (blogInfo.alternativeLanguage) {
+          window.location.href = `${
+            process.env.REACT_APP_FRONTEND_SERVER
+          }/magazine/${slug(blogInfo.alternativeLanguage.title)}/${
+            blogInfo.alternativeLanguage._id
+          }`;
+        }
+      }
+    } else {
+      setLoading(true);
+      const id = props.match.params.id;
+      const res = await getBlogById(id);
+      if (res && res.data) {
+        const d = res.data.blog;
+        setBlogInfo(d);
+        setAllComments(d.comments);
+        updateLanguage(d.language);
+      }
+      setLoading(false);
     }
-    console.log("res", res);
-    setLoading(false);
   };
 
   // eslint-disable-next-line
-  const [article, setArticle] = useState({
-    writerInfo: {
-      name: "Filip",
-      facebookLink: "www.facebook.com",
-      twitter: "www.twitter.com",
-      linkedin: "www.linkedin.com",
-      pinterest: "",
-    },
-    coverPhoto:
-      "https://realchallenge.fit/wp-content/uploads/2018/12/karl-s-1060222-unsplash-1024x681.jpg",
-    writeAvatar: "",
-    articleName: "Four Mistakes People Make when Choosing a Trainer",
-    articleSubheading:
-      "A training method to enhance neuromuscular efficiency and improve maximum strength.",
-    articleCategory: "TRAINING",
-    articleDate: new Date(),
-    videoLink: "https://www.youtube.com/watch?v=Pwz4kQrW4g4",
-    articleText:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id metus vel est pulvinar suscipit in id ligula. Phasellus porta urna eu risus pulvinar sodales. Morbi finibus mauris dolor, sed pulvinar leo gravida nec. Phasellus a sodales nisi. Vivamus vehicula euismod porta. Curabitur id diam fermentum, placerat massa vitae, consequat diam. Proin dapibus at sem at mollis. Praesent malesuada neque vitae tincidunt laoreet. Duis quis accumsan magna. Aenean diam nisl, pellentesque ut est vitae, suscipit varius velit. Sed consectetur dolor et neque accumsan fringilla.Integer id odio a ligula imperdiet facilisis sit amet id nisi. Ut laoreet, libero sit amet rhoncus accumsan, quam nisl sollicitudin metus, ac tristique odio lacus eu nulla. Curabitur ac vehicula erat. Morbi metus neque, auctor rutrum erat nec, ultrices tristique dui. Nulla sit amet erat vitae nulla mattis tincidunt. Cras quis pharetra dui, eu convallis eros. Cras eu viverra justo, at molestie felis. Aliquam erat volutpat. Sed tellus nunc, tempus vel est non, ultricies efficitur erat. Duis turpis lacus, tristique et tellus sed, interdum gravida leo. Sed maximus ante nibh, id hendrerit ligula ornare id. Quisque tincidunt enim magna, quis condimentum arcu cursus nec. Suspendisse eu diam nec augue efficitur tincidunt id quis lectus. Maecenas vestibulum magna sed mi porta, ut mollis neque dictum. Duis molestie, lacus eget consequat scelerisque, mauris leo feugiat ligula, eu mollis velit lorem ac est. Duis venenatis sagittis magna, vitae volutpat risus eleifend eget. In quam elit, ullamcorper eget quam quis, tincidunt fermentum ante. Donec nec augue tortor. Quisque sodales viverra orci sed bibendum. Mauris interdum ante eget odio scelerisque pharetra. Duis arcu purus, ullamcorper vitae risus eget, viverra facilisis orci. Praesent non auctor dolor, in porttitor eros. Pellentesque tempus justo tellus, in laoreet nisi faucibus eu. Ut sit amet commodo elit. Quisque bibendum porta dui, vitae suscipit magna rhoncus mattis. Integer ultrices sollicitudin varius. Vivamus a interdum libero.",
-    comments: [
-      {
-        id: 13123,
-        username: "Ammarms",
-        comment: "Amazing work",
-        date: new Date(),
-      },
-      {
-        id: 13123,
-        username: "don",
-        comment:
-          "Quisque sodales viverra orci sed bibendum. Mauris interdum ante eget odio scelerisque pharetra. Duis arcu purus, ullamcorper vitae risus eget, viverra facilisis orci. Praesent non auctor dolor, in porttitor eros",
-        date: new Date(),
-      },
-    ],
-  });
+
   return loading ? (
     <div
       style={{
@@ -129,6 +127,14 @@ function MagazineArticle(props) {
           backgroundSize: "cover",
         }}
       ></div>
+      <ModalVideo
+        channel="custom"
+        autoplay
+        isOpen={open}
+        controlsList="nodownload"
+        url={`${process.env.REACT_APP_SERVER}/uploads/${blogInfo?.videoLink}`}
+        onClose={() => setOpen(false)}
+      />
       <div className="article-container">
         <div className="article-container-column1">
           <div className="article-container-column1-row1 font-paragraph-black">
@@ -209,48 +215,95 @@ function MagazineArticle(props) {
               {blogInfo && blogInfo.category ? blogInfo.category.name : ""}
             </span>
             <span style={{ fontSize: "1.6rem" }}>
-              {moment(article.articleDate).format("LL")}
+              {moment(blogInfo?.createdAt).format("LL")}
             </span>
             {/* {console.log(article.articleDate)} */}
           </div>
           {/* <h1 className="font-subheading-black">{article.articleSubheading}</h1> */}
-          <a href={blogInfo.videoLink} style={{ color: "var(--color-orange)" }}>
+          <span
+            onClick={() => setOpen(true)}
+            style={{ color: "var(--color-orange)", cursor: "pointer" }}
+          >
             Video Link To This Article
-          </a>
+          </span>
           <p className="font-paragraph-black" style={{ fontSize: "1.8rem" }}>
             {ReactHtmlParser(blogInfo?.paragraph)}
           </p>
+
+          {/* comments */}
           <div
-            className="recipe-mealValues-heading font-paragraph-white"
-            style={{ fontSize: "1.8rem", padding: "10px 0" }}
+            className="trainer-profile-goals"
+            style={{
+              borderBottom: "1px solid transparent",
+              backgroundColor: "#e1e9f2",
+              padding: "10px",
+            }}
           >
-            <T>magazine.comments</T>
-          </div>
-          <div
-            className="trainer-profile-goals-container"
-            style={{ backgroundColor: "#e1e9f2" }}
-          >
-            {article.comments.map((comment) => (
-              <div
-                className="challenge-profile-comment font-paragraph-white"
-                style={{ backgroundColor: "transparent" }}
-              >
-                <span
-                  className="challenge-profile-comment-username"
-                  style={{ paddingBottom: "0" }}
+            <div
+              className="trainer-profile-goals-heading font-paragraph-white"
+              style={{
+                color: "#72777B",
+                textTransform: "uppercase",
+              }}
+            >
+              <T>challenge_profile.comments</T>
+            </div>
+            {allComments.map((c) => (
+              <div className="comment-container">
+                <div className="comment-container-c1 font-paragraph-black">
+                  <Avatar src={c.user.avatarLink} shape="square" />{" "}
+                  <span style={{ marginLeft: "5px" }}>{c.user.username}</span>
+                  <div className="comment-container-c2 font-paragraph-black">
+                    {c.text}
+                  </div>
+                </div>
+
+                <div
+                  className="font-paragraph-white comment-container-c3"
+                  style={{ color: "#82868b" }}
                 >
-                  <UserOutlined /> {comment.username}
-                </span>
-                <span
-                  className="font-paragraph-black"
-                  style={{ fontSize: "1.4rem" }}
-                >
-                  {moment(comment.date).format("DD/MM/YYYY")}
-                </span>
-                <span style={{ color: "black" }}>{comment.comment}</span>
+                  {moment(c.createdAt).format("MMM, Do YYYY")}
+                </div>
               </div>
             ))}
+            {localStorage.getItem("jwtToken") && (
+              <>
+                <div
+                  className="trainer-profile-goals-container"
+                  style={{ marginTop: "10px" }}
+                >
+                  <Input.TextArea
+                    rows={4}
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                  />
+                </div>
+                {commentButtonLoading ? (
+                  <LoadingOutlined
+                    style={{
+                      color: "#ff7700",
+                      fontSize: "30px",
+                      marginTop: "10px",
+                    }}
+                  />
+                ) : (
+                  <button
+                    className="common-transparent-button font-paragraph-white"
+                    onClick={postCommentToBackend}
+                    style={{
+                      color: "#ff7700",
+                      borderColor: "#ff7700",
+                      marginTop: "10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <T>common.postComment</T>
+                  </button>
+                )}
+              </>
+            )}
           </div>
+          {/* comments */}
         </div>
       </div>
       <Footer />

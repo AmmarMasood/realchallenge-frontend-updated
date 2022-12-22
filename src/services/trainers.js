@@ -42,9 +42,12 @@ export function createTrainerGoal(body) {
 
 export function updateTrainerGoal(body, id) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/trainers/trainerGoals/${id}`, {
-      name: body,
-    })
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/trainers/trainerGoals/${id}/update`,
+      {
+        name: body,
+      }
+    )
     .then((res) => res.data)
     .catch((err) => {
       openNotificationWithIcon("error", "Unable to update trainer goal");
@@ -54,7 +57,9 @@ export function updateTrainerGoal(body, id) {
 
 export function deleteTrainerGoals(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/trainers/trainerGoals/${id}`)
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/trainers/trainerGoals/${id}/delete`
+    )
     .then((res) => res.data)
     .catch((err) => {
       openNotificationWithIcon("error", "Unable to get delete trainer goals");
@@ -74,7 +79,7 @@ export function getTrainerById(id) {
 
 export function updateTrainerById(id, data) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/trainers/${id}`, data)
+    .post(`${process.env.REACT_APP_SERVER}/api/trainers/${id}/update`, data)
     .then((res) => {
       openNotificationWithIcon("success", "Trainer was updated");
     })

@@ -40,6 +40,7 @@ const getListStyle = (isDraggingOver) => ({
 });
 
 function CustomWeekPanel({
+  update,
   week,
   index,
   id,
@@ -184,6 +185,7 @@ function CustomWeekPanel({
                   >
                     {week.workouts.map((t, i) => (
                       <CustomWorkoutPanel
+                        update={update}
                         w={week}
                         weeks={weeks}
                         setWeeks={setWeeks}

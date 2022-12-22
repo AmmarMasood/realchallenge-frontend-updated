@@ -15,6 +15,7 @@ import { userInfoContext } from "../../contexts/UserStore";
 import ChallengeCompleteNextModal from "./ChallengeCompleteNextModal";
 import { createPost } from "../../services/communityPosts";
 import slug from "elegant-slug";
+import { LanguageContext } from "../../contexts/LanguageContext";
 
 const ChallengeCompleteModal = ({
   visible,
@@ -25,6 +26,7 @@ const ChallengeCompleteModal = ({
   fetchData,
 }) => {
   const userInfo = useContext(userInfoContext)[0];
+  const { language } = useContext(LanguageContext);
   const [input, setInput] = useState("");
   const [rating, setRating] = useState(1);
   const [currentLayout, setCurrentLayout] = useState(1);
@@ -37,7 +39,7 @@ const ChallengeCompleteModal = ({
 
   const getNextChallenges = async () => {
     setLoading(true);
-    const rc = await getRecommandedChallenges(userInfo.id);
+    const rc = await getRecommandedChallenges(userInfo.id, language);
     rc && setRecommandedChallenges(rc.recommendedchallenge);
     setLoading(false);
   };
@@ -51,9 +53,15 @@ const ChallengeCompleteModal = ({
         image: challenge?.thumbnailLink,
         type: "Finished Completed",
         url: `/challenge/${slug(challenge?.challengeName)}/${challenge?._id}`,
+        language: language,
       };
 
-      const res = await addChallengeReview(challengeId, rating, input);
+      const res = await addChallengeReview(
+        challengeId,
+        rating,
+        input,
+        language
+      );
       await createPost(data);
 
       if (res.success) {

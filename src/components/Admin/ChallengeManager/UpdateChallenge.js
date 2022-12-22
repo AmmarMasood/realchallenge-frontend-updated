@@ -18,6 +18,7 @@ import { getAllChallengeProducts } from "../../../services/createChallenge/produ
 import {
   createChallenge,
   getAllChallenges,
+  getAllUserChallenges,
   updateChallenge,
 } from "../../../services/createChallenge/main";
 import setAuthToken from "../../../helpers/setAuthToken";
@@ -70,7 +71,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
   const [showTagModal, setShowTagModal] = useState(false);
 
   //fitness interest
-  const [selectedFitnessInterest, setSelectedFitnessInterest] = useState("");
+  const [selectedFitnessInterest, setSelectedFitnessInterest] = useState([]);
 
   // state of main tab ends
 
@@ -191,10 +192,8 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
     setTrainers(trainers.map((t) => t._id));
     setDescription(description);
     setDifficulty(difficulty);
-    setSelectedFitnessInterest(
-      trainersFitnessInterest ? trainersFitnessInterest : ""
-    );
-    setGoals(challengeGoals.map((t) => t._id));
+    setSelectedFitnessInterest(trainersFitnessInterest.map((t) => t._id));
+    setGoals(challengeGoals);
     setBodyFocus(body.map((t) => t._id));
     setDuration(duration);
     setTags(tags.map((t) => t._id));
@@ -223,6 +222,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
     );
     setWeeksToBeUpdated(weeks);
     // setWeeks(weeks);
+    console.log("checking ammar", weeks);
     const w = weeks.map((week) => ({
       _id: week._id,
       id: week._id,
@@ -257,18 +257,18 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
         groupName: workout.groupName ? workout.groupName : "",
         exercises: workout.isRendered
           ? workout.exercises.map((e) => ({
-              _id: e._id,
-              exerciseId: e.exerciseId._id,
-              exerciseName: e.exerciseId.title ? e.exerciseId.title : "",
-              exerciseVideo: e.exerciseId.videoURL,
-              voiceOverFile: e.exerciseId.voiceOverLink,
-              videoLength: e.exerciseLength ? e.exerciseLength : "",
-              exerciseGroupName: e.groupName ? e.groupName : "",
-              breakAfterExercise: e.break ? e.break : "",
+              _id: e?._id,
+              exerciseId: e?.exerciseId?._id,
+              exerciseName: e?.exerciseId?.title ? e?.exerciseId?.title : "",
+              exerciseVideo: e?.exerciseId?.videoURL,
+              voiceOverFile: e?.exerciseId?.voiceOverLink,
+              videoLength: e?.exerciseLength ? e?.exerciseLength : "",
+              exerciseGroupName: e?.groupName ? e?.groupName : "",
+              breakAfterExercise: e?.break ? e?.break : "",
             }))
           : workout.exercises.map((e) => ({
-              exerciseName: e.renderedWorkoutExerciseName,
-              exerciseVideo: e.renderedWorkoutExerciseVideo,
+              exerciseName: e?.renderedWorkoutExerciseName,
+              exerciseVideo: e?.renderedWorkoutExerciseVideo,
             })),
       })),
     }));
@@ -292,7 +292,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
     const equipments = await getAllChallengeEquipments("");
     const trainers = await getAllTrainers("");
     const products = await getAllChallengeProducts("");
-    const challenges = await getAllChallenges("");
+    const challenges = await getAllUserChallenges("");
 
     setAllBodyfocus(bodyFocus.body);
     setAllEquipments(equipments.equipments);
@@ -376,11 +376,16 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
       allowComments,
       allowReviews,
       isPublic: makePublic,
-      alternativeLanguage: selectedChallenge,
+      alternativeLanguage: selectedChallenge ? selectedChallenge : null,
     };
     console.log(obj, selectedChallengeForUpdate._id);
     // return;
     const res = await updateChallenge(obj, selectedChallengeForUpdate._id);
+    selectedChallenge &&
+      (await updateChallenge(
+        { alternativeLanguage: selectedChallengeForUpdate._id },
+        selectedChallenge
+      ));
     console.log("response", res);
     console.log("weeks", workoutIdsThatNeedToBeUpdated);
     // updateWorkouts(obj.weeks);

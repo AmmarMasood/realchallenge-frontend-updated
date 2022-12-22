@@ -769,6 +769,14 @@ function UpdateRecipe(props) {
                       marginTop: "10px",
                     }}
                   >
+                    {console.log(
+                      "test",
+                      `${process.env.REACT_APP_SERVER}/uploads/${
+                        typeof featuredImage === "object"
+                          ? featuredImage.link
+                          : featuredImage
+                      }`
+                    )}
                     <img
                       alt=""
                       src={`${process.env.REACT_APP_SERVER}/uploads/${
@@ -789,6 +797,14 @@ function UpdateRecipe(props) {
                 </div>
               ) : (
                 <div style={{ display: "flex" }}>
+                  {console.log(
+                    "test",
+                    `${process.env.REACT_APP_SERVER}/uploads/${
+                      typeof featuredImage === "object"
+                        ? featuredImage.link
+                        : featuredImage
+                    }`
+                  )}
                   <div
                     style={{
                       display: "flex",

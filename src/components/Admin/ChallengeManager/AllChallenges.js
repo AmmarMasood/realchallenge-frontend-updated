@@ -69,6 +69,12 @@ function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
       render: (text) => <span className="font-paragraph-black">{text}</span>,
     },
     {
+      title: "Language",
+      dataIndex: "language",
+      key: "language",
+      render: (text) => <span className="font-paragraph-black">{text}</span>,
+    },
+    {
       title: "Updated At",
       dataIndex: "createdAt",
       key: "createdAt",

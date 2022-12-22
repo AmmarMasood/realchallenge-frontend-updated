@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Input, Modal } from "antd";
 import { updateBlogCategory } from "../../../services/blogs";
 import {
@@ -7,6 +7,7 @@ import {
   updateIngredient,
   updateMealType,
 } from "../../../services/recipes";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 function EditTypeName({
   editCategoryNameModalVisible,
@@ -15,6 +16,7 @@ function EditTypeName({
   fethData,
   titleName,
 }) {
+  const { language } = useContext(LanguageContext);
   const [newCategoryName, setNewCategoryName] = useState("");
   React.useEffect(() => {
     if (selectedForUpdate) {
@@ -25,10 +27,16 @@ function EditTypeName({
   const updateItem = async () => {
     if (newCategoryName.length > 0) {
       if (titleName === "Update Meal Type") {
-        await updateMealType(newCategoryName, selectedForUpdate._id);
+        await updateMealType(
+          `${newCategoryName}___${language}`,
+          selectedForUpdate._id
+        );
       }
       if (titleName === "Update Food Type") {
-        await updateFoodType(newCategoryName, selectedForUpdate._id);
+        await updateFoodType(
+          `${newCategoryName}___${language}`,
+          selectedForUpdate._id
+        );
       }
       if (titleName === "Update Diet Type") {
         await updateDiet(newCategoryName, selectedForUpdate._id);

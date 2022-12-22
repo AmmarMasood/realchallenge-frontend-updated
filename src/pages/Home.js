@@ -3,7 +3,6 @@ import "../assets/home.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Hero from "../components/Home/Hero";
-
 import { Link, withRouter } from "react-router-dom";
 import {
   ArrowRightOutlined,
@@ -19,11 +18,17 @@ import MobileScreen from "../images/ipx-dash-515x1024.png";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/scss/modal-video.scss";
 import { userInfoContext } from "../contexts/UserStore";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { T } from "../components/Translate";
+import { getAllBlogs } from "../services/blogs";
+import slug from "elegant-slug";
+import ReactHtmlParser from "react-html-parser";
 
 function Home(props) {
+  const { language } = useContext(LanguageContext);
   const [isOpen, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useContext(userInfoContext);
+  const [allBlogs, setAllBlogs] = useState([]);
   const [link, setLink] = useState("");
 
   useEffect(() => {
@@ -36,6 +41,17 @@ function Home(props) {
       }
     }
   }, []);
+
+  useEffect(() => {
+    fetchBlogs();
+  }, [language]);
+
+  const fetchBlogs = async () => {
+    const blogs = await getAllBlogs(language);
+    if (blogs.blogs) {
+      setAllBlogs(blogs.blogs);
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -64,7 +80,7 @@ function Home(props) {
             </p>
             <Link className="home-button font-paragraph-white" to="/challenges">
               <span className="home-button-text">
-                <T>common.accepT_the_challenge</T> <ArrowRightOutlined />
+                <T>common.accept_the_challenge</T> <ArrowRightOutlined />
               </span>
             </Link>
           </div>
@@ -90,7 +106,7 @@ function Home(props) {
                 }}
               />
               <span className="home-text font-paragraph-white">
-                <T>home.home-row-2.Tuccess_monitor</T>
+                <T>home.home-row-2.success_monitor</T>
               </span>
             </div>
             <div className="home-row-2-col-2-box">
@@ -239,7 +255,7 @@ function Home(props) {
           className="home-row-4-subheading font-heading-black"
           style={{ margin: "20px 0" }}
         >
-          <T>home.home-row-4.exTrcise_whenever</T>
+          <T>home.home-row-4.exercise_whenever</T>
         </div>
         <div className="home-row-4-text font-paragraph-black">
           <T>home.home-row-4.working_out</T>
@@ -460,6 +476,7 @@ function Home(props) {
       {/* 7th row */}
       {/* 8th row */}
       <div className="home-row-6" style={{ padding: "100px 50px" }}>
+        {console.log(allBlogs, "here")};
         <h1 className="home-row-6-heading font-heading-black">
           <T>home.home-row-8.how</T>
         </h1>
@@ -467,75 +484,57 @@ function Home(props) {
           <T>home.home-row-8.be_sure</T>
         </p>
         <div className="home-row-6-video-container">
-          <Link
-            to="/magazine/12312321"
-            style={{
-              textAlign: "left",
-              cursor: "pointer",
-              color: "#171e27",
-              padding: "10px",
-            }}
-          >
-            <div className="magazine-row-2-box" style={{ height: "300px" }}>
-              <div className="home-row-8-blog-container-box home-8-box-1"></div>
-            </div>
+          {allBlogs.map(
+            (blog, i) =>
+              blog.adminApproved &&
+              blog.isPublic && (
+                <Link
+                  key={i}
+                  to={`/magazine/${slug(blog.title)}/${blog._id}`}
+                  style={{
+                    textAlign: "left",
+                    cursor: "pointer",
+                    color: "#171e27",
+                    padding: "10px",
+                    width: "100%",
+                  }}
+                >
+                  <div
+                    className="magazine-row-2-box"
+                    style={{ height: "300px" }}
+                  >
+                    <div
+                      className="home-row-8-blog-container-box home-8-box-1"
+                      style={{
+                        background: `url(${process.env.REACT_APP_SERVER}/uploads/${blog.featuredImage})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                      }}
+                    ></div>
+                  </div>
 
-            <div style={{ color: "#ff7700", textAlign: "right" }}>TRAINING</div>
-            <h2 style={{ fontWeight: "600" }} className="font-subheading-black">
-              Four Mistakes People Make when Choosing a Trainer
-            </h2>
-            <p className="font-paragraph-black">
-              {" "}
-              A training method to enhance neuromuscular efficiency and improve
-              maximum strength
-            </p>
-          </Link>
-          <Link
-            to="/magazine/12312321"
-            style={{
-              textAlign: "left",
-              cursor: "pointer",
-              color: "#171e27",
-              padding: "10px",
-            }}
-          >
-            <div className="magazine-row-2-box" style={{ height: "300px" }}>
-              <div className="home-row-8-blog-container-box home-8-box-2"></div>
-            </div>
-
-            <div style={{ color: "#ff7700", textAlign: "right" }}>NUTRIENT</div>
-            <h2 style={{ fontWeight: "600" }} className="font-subheading-black">
-              Six Things You Should Know Before Turning Vegan
-            </h2>
-            <p className="font-paragraph-black">
-              {" "}
-              Labels are about to become your new best friends
-            </p>
-          </Link>
-          <Link
-            to="/magazine/12312321"
-            style={{
-              textAlign: "left",
-              cursor: "pointer",
-              color: "#171e27",
-              padding: "10px",
-            }}
-          >
-            <div className="magazine-row-2-box" style={{ height: "300px" }}>
-              <div className="home-row-8-blog-container-box home-8-box-3"></div>
-            </div>
-
-            <div style={{ color: "#ff7700", textAlign: "right" }}>
-              WELL-BEING
-            </div>
-            <h2 style={{ fontWeight: "600" }} className="font-subheading-black">
-              Cardio focused, weight loss Training Challenges
-            </h2>
-            <p className="font-paragraph-black">
-              {" "}
-              Designed to make you move fast and sweat more
-            </p>
-          </Link>
+                  <div
+                    style={{
+                      color: "#ff7700",
+                      textAlign: "right",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {blog?.category?.name}
+                  </div>
+                  <h2
+                    style={{ fontWeight: "600" }}
+                    className="font-subheading-black"
+                  >
+                    {blog.title}
+                  </h2>
+                  <p className="font-paragraph-black">
+                    {" "}
+                    {ReactHtmlParser(blog?.paragraph)}
+                  </p>
+                </Link>
+              )
+          )}
         </div>
       </div>
       {/* 8th row */}

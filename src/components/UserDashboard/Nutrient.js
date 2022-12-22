@@ -316,6 +316,7 @@ function Nutrient({
 
   return (
     <>
+      {console.log("selected", selectedSupplements, suggestedSupplements)}
       {/* suplemet modal starts */}
       <Modal
         title={
@@ -381,7 +382,7 @@ function Nutrient({
                   <div
                     style={{
                       height: "150px",
-                      background: `url(${process.env.REACT_APP_SERVER}/api${meal.image})`,
+                      background: `url(${process.env.REACT_APP_SERVER}/uploads/${meal.image})`,
                       backgroundSize: "cover",
                     }}
                   ></div>
@@ -426,7 +427,7 @@ function Nutrient({
                     <div
                       style={{
                         height: "150px",
-                        background: `url(${process.env.REACT_APP_SERVER}/api${meal.image})`,
+                        background: `url(${process.env.REACT_APP_SERVER}/uploads/${meal.image})`,
                         backgroundSize: "cover",
                       }}
                     ></div>

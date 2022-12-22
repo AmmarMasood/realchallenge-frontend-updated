@@ -34,7 +34,7 @@ export function getAllChallengeGoals(language) {
 
 export function deleteChallengeTGoal(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/challengeGoals/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/challengeGoals/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "Successfully deleted goal", "");
     })

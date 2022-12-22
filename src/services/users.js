@@ -31,22 +31,38 @@ export function createUserByAdmin(userInfo) {
     });
 }
 
-export function updateUserProfileByAdmin(userInfo, id) {
-  return axios
-    .put(`${process.env.REACT_APP_SERVER}/api/users/${id}`, userInfo)
-    .then((res) => {
-      openNotificationWithIcon("success", "User updated successfully!");
-      return res.data;
-    })
-    .catch((err) => {
-      openNotificationWithIcon("error", "Unable to update user");
-      console.log(err);
-    });
+export function updateUserProfileByAdmin(userInfo, id, type) {
+  if (type === "trainer") {
+    return axios
+      .post(
+        `${process.env.REACT_APP_SERVER}/api/trainers/${id}/update`,
+        userInfo
+      )
+      .then((res) => {
+        openNotificationWithIcon("success", "User updated successfully!");
+        return res.data;
+      })
+      .catch((err) => {
+        openNotificationWithIcon("error", "Unable to update user");
+        console.log(err);
+      });
+  } else {
+    return axios
+      .post(`${process.env.REACT_APP_SERVER}/api/users/${id}/update`, userInfo)
+      .then((res) => {
+        openNotificationWithIcon("success", "User updated successfully!");
+        return res.data;
+      })
+      .catch((err) => {
+        openNotificationWithIcon("error", "Unable to update user");
+        console.log(err);
+      });
+  }
 }
 
 export function deleteUser(id) {
   return axios
-    .delete(`${process.env.REACT_APP_SERVER}/api/users/${id}`)
+    .post(`${process.env.REACT_APP_SERVER}/api/users/${id}/delete`)
     .then((res) => {
       openNotificationWithIcon("success", "User deleted successfully!");
     })
@@ -65,10 +81,10 @@ export function getUserProfileInfo(id) {
     });
 }
 
-export function getRecommandedChallenges(id) {
+export function getRecommandedChallenges(id, language) {
   return axios
     .get(
-      `${process.env.REACT_APP_SERVER}/api/customerDetails/recommendedChallenges/${id}`
+      `${process.env.REACT_APP_SERVER}/api/customerDetails/recommendedChallenges/${id}?language=${language}`
     )
     .then((res) => res.data)
     .catch((err) => {
@@ -104,8 +120,8 @@ export function swapRecipeInRecommandedNutrients(customerId, meal) {
 
 export function saveChallengeProgress(data, customerId) {
   return axios
-    .put(
-      `${process.env.REACT_APP_SERVER}/api/customerDetails/track-challenge/${customerId}`,
+    .post(
+      `${process.env.REACT_APP_SERVER}/api/customerDetails/track-challenge/${customerId}/update`,
       { progress: data }
     )
     .then((res) => {

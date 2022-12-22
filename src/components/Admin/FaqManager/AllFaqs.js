@@ -11,10 +11,12 @@ function AllFaqs() {
   const [selectedFaq, setSelectedFaq] = useState({});
 
   const fetchData = async () => {
-    const d = await getAllFaqs();
+    const d = await getAllFaqs("");
+    if (d && d.faqs) {
+      setAllFaqs(d.faqs);
+      setFilterAllFaqs(d.faqs);
+    }
     // console.log("dasdasdasd", d);
-    setAllFaqs(d.faqs);
-    setFilterAllFaqs(d.faqs);
   };
 
   const removeFaqClick = async (faq) => {
