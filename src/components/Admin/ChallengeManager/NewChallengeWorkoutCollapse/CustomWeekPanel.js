@@ -117,13 +117,15 @@ function CustomWeekPanel({
             >
               Remove
             </Button>
-            <Button
-              style={{ float: "right", marginRight: "10px" }}
-              type="primary"
-              onClick={() => duplicateWeek(week)}
-            >
-              Duplicate
-            </Button>
+            {!update && (
+              <Button
+                style={{ float: "right", marginRight: "10px" }}
+                type="primary"
+                onClick={() => duplicateWeek(week)}
+              >
+                Duplicate
+              </Button>
+            )}
 
             <p
               className="font-paragraph-black"

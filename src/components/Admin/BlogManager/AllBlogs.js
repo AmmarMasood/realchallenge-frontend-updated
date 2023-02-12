@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Table, Space, Input, Select } from "antd";
 import moment from "moment";
 import UpdateBlog from "./UpdateBlog";
@@ -8,8 +8,10 @@ import {
   updateBlog,
 } from "../../../services/blogs";
 import { T } from "../../Translate";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 function AllBlogs() {
+  const { language } = useContext(LanguageContext);
   const [filterAllBlogs, setFilterAllBlogs] = useState([]);
   const [allBlogs, setAllBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState({});
@@ -17,7 +19,7 @@ function AllBlogs() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
 
   const onUpdateComplete = async (setLoading, vals, blogId) => {
     await updateBlog(vals, blogId);
@@ -27,7 +29,7 @@ function AllBlogs() {
   };
 
   const fetchData = async () => {
-    const data = await getAllUserBlogs("");
+    const data = await getAllUserBlogs(language);
     setAllBlogs(data.blogs);
     setFilterAllBlogs(data.blogs);
     console.log("all blogs", data.blogs);

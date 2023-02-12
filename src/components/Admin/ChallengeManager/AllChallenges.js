@@ -12,6 +12,7 @@ import { userInfoContext } from "../../../contexts/UserStore";
 import slug from "elegant-slug";
 import { Link } from "react-router-dom";
 import { T } from "../../Translate";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
   const [filterAllChallenges, setFilterAllChallenge] = useState([]);
@@ -19,6 +20,7 @@ function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
   const [filter, setFilter] = useState("all");
   const [allTrainers, setAllTrainers] = useState([]);
   const userInfo = useContext(userInfoContext);
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     if (filter === "all") {
@@ -33,10 +35,10 @@ function AllChallenges({ setCurrentSelection, setSelectedChallengeForUpdate }) {
 
   useEffect(() => {
     fetchChallenges();
-  }, []);
+  }, [language]);
 
   const fetchChallenges = async () => {
-    const c = await getAllUserChallenges("");
+    const c = await getAllUserChallenges(language);
     const t = await getAllTrainers();
     console.log("trainers", t);
     console.log(c);

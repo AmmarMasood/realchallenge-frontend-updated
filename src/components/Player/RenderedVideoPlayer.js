@@ -94,8 +94,12 @@ function RenderedVideoPlayer({
         // these are new stuff
         // setPlayerState({ ...playerState, playing: false });
         // moveToNextExercise();
-        // setTimerVisible(true);
+        // setPlayerState({ ...playerState, playing: false });
+        setTimeout(() => {
+          setTimerVisible(true);
+        }, 500);
       } else {
+        // console.log("ammar");
         moveToNextExercise();
         // setPlayerState({ ...playerState, playing: true });
       }
@@ -136,7 +140,10 @@ function RenderedVideoPlayer({
   return (
     <div
       className="player-wrapper"
-      style={{ position: "relative", border: "10px solid red" }}
+      style={{
+        position: "relative",
+        //  border: "10px solid red"
+      }}
       ref={playerContainerRef}
       onMouseMove={handleMouseMove}
     >
@@ -205,8 +212,14 @@ function RenderedVideoPlayer({
       {timerVisible && (
         <BreakTimer
           moveToNextExercise={moveToNextExercise}
-          nextExerciseTitle={nextExerciseTitle}
-          exercise={workout.exercises[currentExercise.index]}
+          nextExerciseTitle={exercise.title}
+          exercise={
+            workout.exercises[
+              currentExercise.index - 1 < 0
+                ? currentExercise.index
+                : currentExercise.index - 1
+            ]
+          }
           timerVisible={timerVisible}
           setTimerVisible={setTimerVisible}
         />

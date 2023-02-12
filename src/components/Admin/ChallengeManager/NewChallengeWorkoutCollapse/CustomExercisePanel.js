@@ -22,7 +22,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle,
 });
 
-function CustomExercisePanel({ w, t, e, i, duplicateExercise }) {
+function CustomExercisePanel({ w, t, e, i, duplicateExercise, update }) {
   return (
     <Draggable key={e.exerciseId} draggableId={e.exerciseId} index={i}>
       {(provided, snapshot) => (
@@ -52,7 +52,7 @@ function CustomExercisePanel({ w, t, e, i, duplicateExercise }) {
             triggerStyle={{ cursor: "pointer" }}
             key={e.exerciseId}
           >
-            {/* {t.renderWorkout ? (
+            {t.renderWorkout ? (
               <Button
                 style={{ float: "right", marginTop: "10px" }}
                 onClick={() => duplicateExercise(w.weekId, t, e)}
@@ -61,7 +61,7 @@ function CustomExercisePanel({ w, t, e, i, duplicateExercise }) {
               </Button>
             ) : (
               ""
-            )} */}
+            )}
             <div className="display-workout-inside-week-container">
               <div>
                 <span className="font-paragraph-black">Exercise Name</span>

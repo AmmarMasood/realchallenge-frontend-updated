@@ -53,7 +53,7 @@ function UserSetting() {
     const res = await getUserProfileInfo(userInfo.id);
     const subInfo = await getSubscribtionInformation(res.customer.mollieId);
     setUserEmail(res.customer.email);
-    if (res && subInfo.response) {
+    if (res && subInfo && subInfo.response) {
       const f = JSON.parse(subInfo.response)._embedded.subscriptions[0];
       setMembershipDetails({
         name: res.customer.customerDetails.membership[0].name,

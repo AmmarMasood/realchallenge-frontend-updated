@@ -7,15 +7,18 @@ import {
 } from "../../../services/recipes";
 import moment from "moment";
 import UpdateRecipe from "./UpdateRecipe";
+import { useContext } from "react";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 function AllRecipes() {
+  const { language } = useContext(LanguageContext);
   const [filterAllRecipes, setFilterAllRecipes] = useState([]);
   const [allRecipes, setAllRecipes] = useState([]);
   const [updateModal, setUpdateModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
 
   async function fetchData() {
-    const data = await getAllUserRecipes("");
+    const data = await getAllUserRecipes(language);
     if (data) {
       setAllRecipes(data.recipes);
       setFilterAllRecipes(data.recipes);
@@ -28,7 +31,7 @@ function AllRecipes() {
   }
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [language]);
   const columns = [
     {
       title: "ID",
@@ -108,7 +111,7 @@ function AllRecipes() {
         getAllProducts={fetchData}
         key={Math.random()}
       />
-      <h2 className="font-heading-black">All Users</h2>
+      <h2 className="font-heading-black">All Recipes</h2>
       <div className="admin-allchallenges-list-container">
         <Input
           placeholder="Search Recipe By Name"

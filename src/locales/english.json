@@ -295,7 +295,8 @@
     "login": "Log In",
     "username": "Username",
     "password": "Password",
-    "forgot_pass": "Forgot Password"
+    "forgot_pass": "Forgot Password",
+    "new_user": "New User"
   },
   "how_it_works": {
     "workout": "Workout your body,",

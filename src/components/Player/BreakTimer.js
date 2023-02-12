@@ -65,6 +65,8 @@ function BreakTimer({
         date={Date.now() + exercise.break * 1000}
         renderer={CountdownDisplay}
         onMount={() => {
+          moveToNextExercise();
+          setPlayerState({ ...playerState, playing: false });
           setCurrentBreak(true);
           console.log("break mounted");
         }}
@@ -78,8 +80,8 @@ function BreakTimer({
           console.log("timer completed");
           setTimerVisible(false);
           setCurrentBreak(false);
-          moveToNextExercise();
-          // setPlayerState({ ...playerState, playing: true });
+          // moveToNextExercise();
+          setPlayerState({ ...playerState, playing: true });
           console.log("break ended");
           // startVideoPlayer();
         }}

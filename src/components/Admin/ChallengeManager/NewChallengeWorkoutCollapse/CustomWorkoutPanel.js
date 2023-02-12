@@ -113,7 +113,7 @@ function CustomWorkoutPanel({
             key={t.workoutId}
           >
             <div style={{ float: "right" }}>
-              {!update && (
+              {
                 <Button
                   onClick={() => {
                     duplicateWorkout(w.weekId, t);
@@ -121,7 +121,7 @@ function CustomWorkoutPanel({
                 >
                   Duplicate
                 </Button>
-              )}
+              }
               <Button
                 style={{ marginLeft: "10px" }}
                 onClick={() => {
@@ -202,6 +202,7 @@ function CustomWorkoutPanel({
                         e={e}
                         i={i}
                         duplicateExercise={duplicateExercise}
+                        update={update}
                       />
                     ))}
                   </div>

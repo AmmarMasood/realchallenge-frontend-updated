@@ -164,7 +164,9 @@ function Login(props) {
     <div>
       <div className="login-container">
         <div className="login-container-column1">
-          <img className="login-logo" src={Logo} alt="logo" />
+          <Link to={"/"}>
+            <img className="login-logo" src={Logo} alt="logo" />
+          </Link>
           <h1 className="font-heading-white">
             <T>login.login</T>
           </h1>
@@ -205,9 +207,21 @@ function Login(props) {
                 <Input.Password />
               </Form.Item>
             </div>
-            <Link to="/forgot-password" className="login-forgot-password">
-              <T>login.forgot_pass</T>
-            </Link>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Link to="/forgot-password" className="login-forgot-password">
+                <T>login.forgot_pass</T>
+              </Link>
+              <Link to="/new" className="login-forgot-password">
+                <T>login.new_user</T>
+              </Link>
+            </div>
+
             <div style={{ textAlign: "center", margin: "10px 0" }}>
               {loading ? (
                 <LoadingOutlined

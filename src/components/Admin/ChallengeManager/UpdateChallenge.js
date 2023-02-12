@@ -24,6 +24,7 @@ import {
 import setAuthToken from "../../../helpers/setAuthToken";
 import { userInfoContext } from "../../../contexts/UserStore";
 import { createPost } from "../../../services/posts";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 const { TabPane } = Tabs;
 
@@ -141,13 +142,16 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
   //
   const [selectedChallenge, setSelectedChallenge] = useState("");
   const [allChallenges, setAllChallenges] = useState([]);
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     setAuthToken(localStorage.getItem("jwtToken"));
     addStuffToMainTabForm();
-    fethData();
   }, []);
 
+  useEffect(() => {
+    fethData();
+  }, []);
   const addStuffToMainTabForm = () => {
     console.log("selected challenge", selectedChallengeForUpdate);
     const {
@@ -286,13 +290,15 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
     });
   };
   async function fethData() {
-    const bodyFocus = await getAllBodyFocus("");
-    const goals = await getAllChallengeGoals("");
-    const tags = await getAllChallengeTags("");
-    const equipments = await getAllChallengeEquipments("");
-    const trainers = await getAllTrainers("");
-    const products = await getAllChallengeProducts("");
-    const challenges = await getAllUserChallenges("");
+    const bodyFocus = await getAllBodyFocus(language);
+    const goals = await getAllChallengeGoals(language);
+    const tags = await getAllChallengeTags(language);
+    const equipments = await getAllChallengeEquipments(language);
+    const trainers = await getAllTrainers(language);
+    const products = await getAllChallengeProducts(language);
+    const challenges = await getAllUserChallenges(
+      language === "dutch" ? "english" : "dutch"
+    );
 
     setAllBodyfocus(bodyFocus.body);
     setAllEquipments(equipments.equipments);
@@ -378,7 +384,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
       isPublic: makePublic,
       alternativeLanguage: selectedChallenge ? selectedChallenge : null,
     };
-    console.log(obj, selectedChallengeForUpdate._id);
+    console.log("JASON", obj, selectedChallengeForUpdate._id);
     // return;
     const res = await updateChallenge(obj, selectedChallengeForUpdate._id);
     selectedChallenge &&
@@ -449,6 +455,7 @@ function UpdateChallenge({ selectedChallengeForUpdate, setCurrentSelection }) {
       </h2>
 
       <div className="newchallenge-creator-container">
+        <p>Language: {selectedChallengeForUpdate?.language}</p>
         <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="Main" key="1">
             <NewChallengeMainTab

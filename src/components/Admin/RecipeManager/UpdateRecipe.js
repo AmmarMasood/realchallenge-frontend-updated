@@ -31,6 +31,7 @@ import RemoteMediaManager from "../MediaManager/RemoteMediaManager";
 import EditTypeName from "./EditTypeName";
 import TextEditor from "../../TextEditor";
 import { userInfoContext } from "../../../contexts/UserStore";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 const { Option } = Select;
 
 function UpdateRecipe(props) {
@@ -93,16 +94,21 @@ function UpdateRecipe(props) {
   const [selectedItemForUpdateTitle, setSelectedItemForUpdateTitle] =
     useState("");
   const userInfo = useContext(userInfoContext)[0];
+  const { language } = useContext(LanguageContext);
 
   async function fetchData() {
-    const diets = await getAllDietTypes("");
-    const meals = await getAllMealTypes("");
-    const foodTypes = await getAllFoodTypes("");
-    const ingredients = await getAllIngredients("");
+    const diets = await getAllDietTypes(language);
+    const meals = await getAllMealTypes(language);
+    const foodTypes = await getAllFoodTypes(language);
+    const ingredients = await getAllIngredients(language);
 
     setAllDiets(diets.diets);
-    setAllMealTypes(meals.mealTypes);
-    setAllFoodTypes(foodTypes.foodTypes);
+    setAllMealTypes(
+      meals.mealTypes.map((f) => ({ ...f, name: f.name.split("___")[0] }))
+    );
+    setAllFoodTypes(
+      foodTypes.foodTypes.map((f) => ({ ...f, name: f.name.split("___")[0] }))
+    );
     setAllIngredients(ingredients.ingredients);
   }
 
@@ -222,7 +228,9 @@ function UpdateRecipe(props) {
   };
 
   async function fetchAllRecipes() {
-    const res = await getAllUserRecipes("");
+    const res = await getAllUserRecipes(
+      language === "english" ? "dutch" : "english"
+    );
     if (res && res.recipes) {
       setAllRecipes(res.recipes);
     }
@@ -394,7 +402,10 @@ function UpdateRecipe(props) {
               htmlType="submit"
               onClick={async () => {
                 if (newMealTypeName.length > 0) {
-                  await createMealType(newMealTypeName);
+                  await createMealType(
+                    `${newMealTypeName}___${language}`,
+                    language
+                  );
                   // setEquipmentModal(false);
                   fetchData();
                 }
@@ -470,7 +481,10 @@ function UpdateRecipe(props) {
               htmlType="submit"
               onClick={async () => {
                 if (newFoodTypeName.length > 0) {
-                  await createFoodType(newFoodTypeName);
+                  await createFoodType(
+                    `${newFoodTypeName}___${language}`,
+                    language
+                  );
                   // setEquipmentModal(false);
                   fetchData();
                 }
@@ -702,6 +716,7 @@ function UpdateRecipe(props) {
           className="admin-newuser-container"
           style={{ padding: "50px 50px 50px 20px" }}
         >
+          <p>Language: {props.selectedProduct?.language}</p>
           <div>
             <span
               style={{ marginRight: "5px" }}

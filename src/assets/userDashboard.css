@@ -631,8 +631,33 @@
   }
   .body-line4 > div {
     width: 60px;
-  }  
+  }
+  /*  */
+  .dashboard-challenges-mychallenge-body {
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+  .dashboard-challenges-mychallenge-body-box {
+    justify-content: flex-end;
+  }
+  .dashboard-feed-container-card-row2-tag {
+    display: none;
+  }
+  .dashboard-challenges-mychallenge-body-box-insidebox {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  .dashboard-challenges-mychallenge-body-box-insidebox-about {
+    display: none !important;
+  }
+  .dashboard-challenges-mychallenge-body-box-insidebox-info {
+    position: relative;
+    z-index: 12;
+  }
 
+  /*  */
 }
 @media screen and (max-width: 380px) {
   .dashboard-challenges-row2-mybody {

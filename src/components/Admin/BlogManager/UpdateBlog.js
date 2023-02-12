@@ -12,6 +12,7 @@ import EditCategoryName from "./EditCategoryName";
 import TextEditor from "../../TextEditor";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import { userInfoContext } from "../../../contexts/UserStore";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 
 const { Option } = Select;
 
@@ -43,6 +44,7 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
 
   const [allBlogs, setAllBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState("");
+  const { language } = useContext(LanguageContext);
 
   const userInfo = useContext(userInfoContext)[0];
   useEffect(() => {
@@ -68,14 +70,16 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
   }, [blogInfo]);
 
   async function getAllBlogsFromBackend() {
-    const data = await getAllUserBlogs("");
+    const data = await getAllUserBlogs(
+      language === "dutch" ? "english" : "dutch"
+    );
     if (data && data.blogs) {
       setAllBlogs(data.blogs);
     }
   }
 
   const fethData = async () => {
-    const data = await getAllBlogCategories("");
+    const data = await getAllBlogCategories(language);
     setAllCategories(data.categories);
     console.log(data);
   };
@@ -145,6 +149,7 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
         visible={categoryModalVisible}
       >
         <p className="font-paragraph-white">Manage Blog Category</p>
+
         <div style={{ display: "flex", alignItems: "center" }}>
           <Input
             value={newCategoryName}
@@ -226,6 +231,7 @@ function UpdateBlog({ blogInfo, show, setShow, onUpdateComplete }) {
           onFinishFailed={onFinishFailed}
         >
           <div>
+            <p>Language: {blogInfo?.language}</p>
             <span
               style={{ marginRight: "5px" }}
             >{`Select alternative language version`}</span>

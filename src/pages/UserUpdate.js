@@ -133,12 +133,16 @@ function UserUpdate() {
   const saveUserUpdate = async () => {
     setLoading(true);
     try {
-      const savedAfterePic =
-        typeof afterPic === "object" ? await uploadImage(afterPic) : afterPic;
-      const savedBeforePic =
-        typeof beforePic === "object"
+      const savedAfterePic = afterPic
+        ? typeof afterPic === "object"
+          ? await uploadImage(afterPic)
+          : afterPic
+        : "";
+      const savedBeforePic = beforePic
+        ? typeof beforePic === "object"
           ? await uploadImage(beforePic)
-          : beforePic;
+          : beforePic
+        : "";
       const month = new Date().getMonth();
       const w = weightArray;
       w[month] = weight;
@@ -171,6 +175,7 @@ function UserUpdate() {
       openNotificationWithIcon("success", "Information Updated!", "");
       console.log("values to be saved", values);
     } catch (error) {
+      console.log(error, "afterPic", afterPic, "beforePic", beforePic);
       setLoading(false);
       openNotificationWithIcon("error", "Unable to updated values", "");
     }

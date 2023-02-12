@@ -202,7 +202,7 @@ function NewChallengeWorkoutTab({
     return q.includes(workoutToUpdate);
   };
 
-  const updateWorkoutOnTheBackend = async (workout, type) => {
+  const updateWorkoutOnTheBackend = async (workout, type, myWeekId) => {
     console.log("yelloe mello", workout, type);
     // return;
     if (type === "update") {
@@ -259,22 +259,12 @@ function NewChallengeWorkoutTab({
             })),
       };
       const res = await createWorkout(w);
-      console.log("nasdasdsadsadasdasdds", workoutIdsThatNeedToBeUpdated);
-      console.log("nasdasdsadsadasdasdds res", res);
-
       if (res && res.data) {
         setWorkoutIdsThatNeedToBeUpdated([
           ...workoutIdsThatNeedToBeUpdated,
-          { weelId: currentWeek, workout: res.data },
+          { weelId: myWeekId ? myWeekId : currentWeek, workout: res.data },
         ]);
       }
-      console.log(
-        "setWorkoutIdsThatNeedToBeUpdated",
-        workoutIdsThatNeedToBeUpdated
-      );
-
-      // console.log("new workout", res);
-      // console.log("current week", currentWeek);
     }
     console.log("here");
   };
@@ -1061,7 +1051,11 @@ function NewChallengeWorkoutTab({
     let w = [...weeks];
     dw.workoutId = v4();
     delete dw._id;
-    dw.exercises = dw.exercises.map((e) => ({ ...e, exerciseId: v4() }));
+    dw.exercises = dw.exercises.map((e) => {
+      let p = { ...e, exerciseId: update ? e.exerciseId : v4() };
+      delete p._id;
+      return p;
+    });
     w = w.map((j) => {
       if (j.weekId === weekId) {
         j.workouts.push(dw);
@@ -1070,6 +1064,8 @@ function NewChallengeWorkoutTab({
       return j;
     });
 
+    update && updateWorkoutOnTheBackend(dw, "new", weekId);
+
     // console.log("workoouts", workoutIdsThatNeedToBeUpdated);
     setWeeks(w);
   };
@@ -1077,9 +1073,11 @@ function NewChallengeWorkoutTab({
   const duplicateExercise = (weekId, workout, exercise) => {
     const newE = {
       ...exercise,
-      exerciseId: v4(),
+      exerciseId: update ? exercise.exerciseId : v4(),
     };
-
+    // console.log("who cares", newE, exercise);
+    // return;
+    delete newE._id;
     let w = [...weeks];
     w = w.map((week) => {
       if (week.weekId === weekId) {
@@ -1098,24 +1096,36 @@ function NewChallengeWorkoutTab({
     });
 
     console.log("here 2", w);
-    return;
-    // setWeeks(w);
+    // return;
+    setWeeks(w);
+    setTimeout(() => {
+      // console.log("yelloe mello", w.workout, w);
+      update && updateWorkoutOnTheBackend(w[0].workouts, "update");
+    }, 1000);
   };
 
   const duplicateWeek = (week) => {
-    const ObjectId = (
-      m = Math,
-      d = Date,
-      h = 16,
-      s = (s) => m.floor(s).toString(h)
-    ) =>
-      s(d.now() / 1000) + " ".repeat(h).replace(/./g, () => s(m.random() * h));
+    const ObjectId = v4();
     let newWeek = {
       ...week,
       weekId: ObjectId,
-      _id: ObjectId,
+      workouts: week.workouts.map((t) => {
+        let p = {
+          ...t,
+          exercises: t.exercises.map((l) => {
+            delete l._id;
+            return l;
+          }),
+        };
+        delete p._id;
+        update && updateWorkoutOnTheBackend(p, "new", ObjectId);
+        return p;
+      }),
+      // _id: ObjectId,
     };
-    // console.log("here3", newWeek, week);
+    delete newWeek._id;
+
+    console.log("here3", newWeek, week);
     // return;
     setWeeks([...weeks, newWeek]);
   };

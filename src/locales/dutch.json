@@ -295,7 +295,8 @@
     "login": "Inloggen",
     "username": "Gebruikersnaam",
     "password": "Wachtwoord",
-    "forgot_pass": "Wachtwoord vergeten"
+    "forgot_pass": "Wachtwoord vergeten",
+    "new_user": "Nieuwe gebruiker"
   },
   "how_it_works": {
     "workout": "Train je lichaam",

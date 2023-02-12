@@ -232,7 +232,7 @@ function ChallengePlayer(props) {
         false
       );
       updateExerciseWorkoutTimer("next", currentExercise.index + 1);
-      // setPlayerState({ ...playerState, playing: true });
+      // setPlayerState({ ...playerState, playing: false });
       return;
     } else {
       setPlayerState({ ...playerState, playing: false });
@@ -410,35 +410,36 @@ function ChallengePlayer(props) {
           ) : (
             ""
           )}
-          {workout.relatedEquipments && workout.relatedEquipments.length > 0 && (
-            <div className="workout-info">
-              <p
-                className="font-paragraph-white"
-                style={{
-                  color: "#555A61",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                <T>playerTtoday_equipment</T>
-              </p>
-              <div>
-                {workout.relatedEquipments.map((e) => (
-                  <button
-                    key={e._id}
-                    className="challenge-player-attachment font-paragraph-white"
-                  >
-                    <img
-                      src={DumbbellIcon}
-                      alt=""
-                      style={{ marginRight: "10px" }}
-                    />
-                    {e.name}
-                  </button>
-                ))}
+          {workout.relatedEquipments &&
+            workout.relatedEquipments.length > 0 && (
+              <div className="workout-info">
+                <p
+                  className="font-paragraph-white"
+                  style={{
+                    color: "#555A61",
+                    fontWeight: "500",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  <T>playerTtoday_equipment</T>
+                </p>
+                <div>
+                  {workout.relatedEquipments.map((e) => (
+                    <button
+                      key={e._id}
+                      className="challenge-player-attachment font-paragraph-white"
+                    >
+                      <img
+                        src={DumbbellIcon}
+                        alt=""
+                        style={{ marginRight: "10px" }}
+                      />
+                      {e.name}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
           {workout.relatedProducts && workout.relatedProducts.length > 0 && (
             <div className="workout-info">
               <p

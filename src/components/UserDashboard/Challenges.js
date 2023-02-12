@@ -175,10 +175,10 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                               alt=""
                             />
                             Completed{" "}
-                            {
-                              challengeProgress[i]?.data
-                                ?.challengeCompletionRate
-                            }{" "}
+                            {challengeProgress[i]?.data?.challengeCompletionRate
+                              ? challengeProgress[i]?.data
+                                  ?.challengeCompletionRate
+                              : 0}{" "}
                             %
                           </span>
                         </div>
