@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import "../assets/login.css";
 import "../assets/home.css";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import GoogleLogin from "react-google-login";
 import Logo from "../images/logo.png";
 
@@ -246,7 +246,8 @@ function Login(props) {
             </p>
           </Form>
 
-          <FacebookLogin
+          {/* todo do later */}
+          {/* <FacebookLogin
             appId={process.env.REACT_APP_FACEBOOK_APP_ID}
             fields="name,email,picture"
             callback={responseFacebook}
@@ -258,7 +259,7 @@ function Login(props) {
                 Login With Facebook
               </button>
             )}
-          />
+          /> */}
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_APP_ID}
             render={(renderProps) => (

@@ -5,8 +5,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Link, withRouter } from "react-router-dom";
-import ModalVideo from "react-modal-video";
-import "react-modal-video/scss/modal-video.scss";
+// import ModalVideo from "react-modal-video";
+// import "react-modal-video/scss/modal-video.scss";
 import ChallengeCard from "../components/Cards/ChallengeCard";
 import { addCommentToTrainer, getTrainerById } from "../services/trainers";
 import QuoteIcon from "../assets/icons/quote-icon.png";
@@ -90,14 +90,15 @@ function TrainerProfile(props) {
       </Helmet>
       <Navbar />
       {/* video modal */}
-      <ModalVideo
+      {/* todo do later */}
+      {/* <ModalVideo
         channel="custom"
         autoplay
         isOpen={open}
         controlsList="nodownload"
         videoId={`${process.env.REACT_APP_SERVER}/uploads/${trainer.videoTrailerLink}`}
         onClose={() => setOpen(false)}
-      />
+      /> */}
       <div className="trainer-profile-container">
         <div
           className="trainer-profile-container-column1"

@@ -21,7 +21,7 @@ import {
   addUnlikePost,
   getPostsWithPagination,
 } from "../../services/communityPosts";
-import ReactHTMLParser from "react-html-parser";
+// import ReactHTMLParser from "react-html-parser";
 import { LanguageContext } from "../../contexts/LanguageContext";
 
 function Community({ userInfo }) {
@@ -164,10 +164,10 @@ function Community({ userInfo }) {
                 {/* </Link> */}
                 <div className="dashboard-feed-container-card-row3">
                   <div className="dashboard-feed-container-card-row3-heading font-paragraph-white">
-                    {ReactHTMLParser(d.title)}
+                    {/* {ReactHTMLParser(d.title)} */}
                   </div>
                   <div className="dashboard-feed-container-card-row3-text font-paragraph-white">
-                    {ReactHTMLParser(d.text)}
+                    {/* {ReactHTMLParser(d.text)} */}
                   </div>
                 </div>
               </Link>

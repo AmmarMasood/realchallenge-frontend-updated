@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { Card } from "antd";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import FileViewer from "react-file-viewer";
+// import FileViewer from "react-file-viewer";
 import PrivacyPolicyDocument from "../assets/documents/Cookie Policy - Real Challenge.docx";
 import PrivacyPolicyDocumentDutch from "../assets/documents/Cookiebeleid - Real Challenge.docx";
 import { T } from "../components/Translate";
@@ -37,19 +37,23 @@ function CookiePolicy() {
 
         <Card style={{ height: "650px" }}>
           {language === "dutch" ? (
-            <FileViewer
-              fileType={type}
-              filePath={PrivacyPolicyDocumentDutch}
-              // errorComponent={CustomErrorComponent}
-              onError={onError}
-            />
+            <div></div>
           ) : (
-            <FileViewer
-              fileType={type}
-              filePath={PrivacyPolicyDocument}
-              // errorComponent={CustomErrorComponent}
-              onError={onError}
-            />
+            // todo do later
+            // <FileViewer
+            //   fileType={type}
+            //   filePath={PrivacyPolicyDocumentDutch}
+            //   // errorComponent={CustomErrorComponent}
+            //   onError={onError}
+            // />
+            <div></div>
+            // todo do later
+            // <FileViewer
+            //   fileType={type}
+            //   filePath={PrivacyPolicyDocument}
+            //   // errorComponent={CustomErrorComponent}
+            //   onError={onError}
+            // />
           )}
         </Card>
       </div>

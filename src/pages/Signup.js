@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import Wizard from "../components/New/Wizard";
 import "../assets/signup.css";
 import "../assets/login.css";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import GoogleLogin from "react-google-login";
 import { Input, Form } from "antd";
 import { LoadingOutlined, ArrowLeftOutlined } from "@ant-design/icons";
@@ -181,7 +181,8 @@ function Signup(props) {
             <p className="font-subheading-white" style={{ paddingTop: "12px" }}>
               <T>signup.social</T>
             </p>
-            <FacebookLogin
+            {/* todo do later */}
+            {/* <FacebookLogin
               appId={process.env.REACT_APP_FACEBOOK_APP_ID}
               // autoLoad={true}
               fields="name,email,picture"
@@ -195,7 +196,7 @@ function Signup(props) {
                   <T>signup.signFacebook</T>
                 </button>
               )}
-            />
+            /> */}
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_APP_ID}
               render={(renderProps) => (

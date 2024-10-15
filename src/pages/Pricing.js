@@ -15,7 +15,7 @@ import Footer from "../components/Footer";
 // import ModalVideo from "react-modal-video";
 
 import NewWelcome from "./NewWelcome";
-import "react-modal-video/scss/modal-video.scss";
+// import "react-modal-video/scss/modal-video.scss";
 function Pricing() {
   // const [isOpen, setIsOpen] = useState(false);
 

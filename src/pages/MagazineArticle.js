@@ -23,10 +23,14 @@ import {
 } from "react-share";
 import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
-import ReactHtmlParser from "react-html-parser";
 import { T } from "../components/Translate";
 import { LanguageContext } from "../contexts/LanguageContext";
-import ModalVideo from "react-modal-video";
+{
+  /* todo later */
+}
+// import ReactHtmlParser from "react-html-parser";
+
+// import ModalVideo from "react-modal-video";
 
 function MagazineArticle(props) {
   const { language, updateLanguage } = useContext(LanguageContext);
@@ -127,14 +131,15 @@ function MagazineArticle(props) {
           backgroundSize: "cover",
         }}
       ></div>
-      <ModalVideo
+      {/* todo do later */}
+      {/* <ModalVideo
         channel="custom"
         autoplay
         isOpen={open}
         controlsList="nodownload"
         url={`${process.env.REACT_APP_SERVER}/uploads/${blogInfo?.videoLink}`}
         onClose={() => setOpen(false)}
-      />
+      /> */}
       <div className="article-container">
         <div className="article-container-column1">
           <div className="article-container-column1-row1 font-paragraph-black">
@@ -227,7 +232,8 @@ function MagazineArticle(props) {
             Video Link To This Article
           </span>
           <p className="font-paragraph-black" style={{ fontSize: "1.8rem" }}>
-            {ReactHtmlParser(blogInfo?.paragraph)}
+            {/* todo later */}
+            {/* {ReactHtmlParser(blogInfo?.paragraph)} */}
           </p>
 
           {/* comments */}

@@ -3,7 +3,7 @@ import "../assets/userUpdate.css";
 import LoggedinNavbar from "../components/LoggedinNavbar";
 import { InputNumber, Upload, Button, Progress, notification } from "antd";
 import HumanVector from "../images/FreeVectorHumanSilhouette 1.png";
-import ImgCrop from "antd-img-crop";
+// import ImgCrop from "antd-img-crop";
 
 import { getUserProfileInfo } from "../services/users";
 import { userInfoContext } from "../contexts/UserStore";
@@ -538,27 +538,29 @@ function UserUpdate() {
                     </div>
                   </span>
                 ) : (
-                  <ImgCrop rotate>
-                    <Upload
-                      aspect="3/2"
-                      customRequest={dummyRequest}
-                      multiple={false}
-                      onChange={onChange}
-                      showUploadList={false}
-                      progress={<Progress type="line" />}
-                      // onPreview={onPreview}
-                    >
-                      <Button
-                        className="font-paragraph-white hover-orange"
-                        style={{
-                          backgroundColor: "var(--color-gray-light)",
-                          border: "none",
-                        }}
-                      >
-                        <T>user_update.upload_before_image</T>
-                      </Button>
-                    </Upload>
-                  </ImgCrop>
+                  <div></div>
+                  // todo do later
+                  // <ImgCrop rotate>
+                  //   <Upload
+                  //     aspect="3/2"
+                  //     customRequest={dummyRequest}
+                  //     multiple={false}
+                  //     onChange={onChange}
+                  //     showUploadList={false}
+                  //     progress={<Progress type="line" />}
+                  //     // onPreview={onPreview}
+                  //   >
+                  //     <Button
+                  //       className="font-paragraph-white hover-orange"
+                  //       style={{
+                  //         backgroundColor: "var(--color-gray-light)",
+                  //         border: "none",
+                  //       }}
+                  //     >
+                  //       <T>user_update.upload_before_image</T>
+                  //     </Button>
+                  //   </Upload>
+                  // </ImgCrop>
                 )}
               </div>
               <div className="user-update-uploadimage-container-box">
@@ -593,27 +595,29 @@ function UserUpdate() {
                     </div>
                   </span>
                 ) : (
-                  <ImgCrop rotate>
-                    <Upload
-                      aspect="3/2"
-                      customRequest={dummyAfterPicRequest}
-                      multiple={false}
-                      onChange={onChange}
-                      showUploadList={false}
-                      progress={<Progress type="line" />}
-                      // onPreview={onPreview}
-                    >
-                      <Button
-                        className="font-paragraph-white hover-orange"
-                        style={{
-                          backgroundColor: "var(--color-gray-light)",
-                          border: "none",
-                        }}
-                      >
-                        <T>user_update.upload_after_image</T>
-                      </Button>
-                    </Upload>
-                  </ImgCrop>
+                  <div></div>
+                  // todo do later
+                  // <ImgCrop rotate>
+                  //   <Upload
+                  //     aspect="3/2"
+                  //     customRequest={dummyAfterPicRequest}
+                  //     multiple={false}
+                  //     onChange={onChange}
+                  //     showUploadList={false}
+                  //     progress={<Progress type="line" />}
+                  //     // onPreview={onPreview}
+                  //   >
+                  //     <Button
+                  //       className="font-paragraph-white hover-orange"
+                  //       style={{
+                  //         backgroundColor: "var(--color-gray-light)",
+                  //         border: "none",
+                  //       }}
+                  //     >
+                  //       <T>user_update.upload_after_image</T>
+                  //     </Button>
+                  //   </Upload>
+                  // </ImgCrop>
                 )}
               </div>
             </div>

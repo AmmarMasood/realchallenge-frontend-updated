@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CloseOutlined, UserOutlined } from "@ant-design/icons";
-import { Scrollbars } from "react-custom-scrollbars";
+// import { Scrollbars } from "react-custom-scrollbars";
 import { Input, Button } from "antd";
 import { addNewComment } from "../../services/posts";
 import { addNewCommunityPostComment } from "../../services/communityPosts";
@@ -75,7 +75,8 @@ function CommentSection({ post, updatePosts, visible, setVisible, community }) {
         />
       </div>
       <div className="challenge-review-modal">
-        <Scrollbars style={{ height: "400px" }}>
+        {/* todo do later */}
+        {/* <Scrollbars style={{ height: "400px" }}>
           {allComments.length > 0 ? (
             allComments.map((comment) => (
               // <div className="challenge-profile-comment font-paragraph-white">
@@ -138,7 +139,7 @@ function CommentSection({ post, updatePosts, visible, setVisible, community }) {
               }}
             />
           )}
-        </Scrollbars>
+        </Scrollbars> */}
         <div style={{ marginTop: "10px" }}>
           <div style={{ display: "flex", alignItems: "flex-start" }}>
             <Avatar

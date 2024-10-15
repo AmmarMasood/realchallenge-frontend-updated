@@ -29,9 +29,12 @@ import ReviewsModal from "../components/Common/ReviewsModal";
 import moment from "moment";
 import slug from "elegant-slug";
 import { Helmet } from "react-helmet";
-import ReactHtmlParser from "react-html-parser";
 import { T } from "../components/Translate";
 import { LanguageContext } from "../contexts/LanguageContext";
+{
+  /* todo later */
+}
+// import ReactHtmlParser from "react-html-parser";
 
 function RecipeProfile(props) {
   const { language, updateLanguage } = useContext(LanguageContext);
@@ -259,7 +262,8 @@ function RecipeProfile(props) {
               <T>recipe_profile.short_info</T>
             </div>
             <div className="recipe-mealValues-info">
-              {recipe.description ? ReactHtmlParser(recipe.description) : ""}
+              {/* todo later */}
+              {/* {recipe.description ? ReactHtmlParser(recipe.description) : ""} */}
             </div>
           </div>
           {/* asdasdasd */}
@@ -316,7 +320,7 @@ function RecipeProfile(props) {
                 padding: "10px",
               }}
             >
-              {ReactHtmlParser(recipe?.tips)}
+              {/* {ReactHtmlParser(recipe?.tips)} */}
             </div>
           </div>
           {/* sdasdasdas */}
@@ -333,7 +337,8 @@ function RecipeProfile(props) {
                 listStyle: "none",
               }}
             >
-              {ReactHtmlParser(recipe?.notes)}
+              {/* todo later */}
+              {/* {ReactHtmlParser(recipe?.notes)} */}
             </div>
           </div>
           {/* sdasdasdas */}

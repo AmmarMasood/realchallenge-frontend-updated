@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { StarOutlined, ForwardOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import "react-modal-video/scss/modal-video.scss";
+// import "react-modal-video/scss/modal-video.scss";
 
 import ChallengeCard from "../components/Cards/ChallengeCard";
 import { T } from "../components/Translate";

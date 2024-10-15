@@ -15,14 +15,14 @@ import {
 } from "@ant-design/icons";
 import VideoPhone from "../images/ipx-video-1024x515.png";
 import MobileScreen from "../images/ipx-dash-515x1024.png";
-import ModalVideo from "react-modal-video";
-import "react-modal-video/scss/modal-video.scss";
+// import ModalVideo from "react-modal-video";
+// import "react-modal-video/scss/modal-video.scss";
 import { userInfoContext } from "../contexts/UserStore";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { T } from "../components/Translate";
 import { getAllBlogs } from "../services/blogs";
 import slug from "elegant-slug";
-import ReactHtmlParser from "react-html-parser";
+// import ReactHtmlParser from "react-html-parser";
 
 function Home(props) {
   const { language } = useContext(LanguageContext);
@@ -57,13 +57,14 @@ function Home(props) {
       <Navbar />
       <Hero />
       {/* video modal */}
-      <ModalVideo
+      {/* todo do later */}
+      {/* <ModalVideo
         channel="youtube"
         autoplay
         isOpen={isOpen}
         videoId={link}
         onClose={() => setOpen(false)}
-      />
+      /> */}
 
       {/* pick your first goal starts */}
       <div className="home-row-2-outside">
@@ -530,7 +531,7 @@ function Home(props) {
                   </h2>
                   <p className="font-paragraph-black">
                     {" "}
-                    {ReactHtmlParser(blog?.paragraph)}
+                    {/* {ReactHtmlParser(blog?.paragraph)} */}
                   </p>
                 </Link>
               )

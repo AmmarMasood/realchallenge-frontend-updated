@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { FlagOutlined } from "@ant-design/icons";
 import MaleBody from "../../images/Asset-514@4x-1.png";
 import FemaleBody from "../../images/Group 9879.png";
-import {
-  VictoryPie,
-  VictoryChart,
-  VictoryBar,
-  VictoryLabel,
-  VictoryAxis,
-} from "victory";
-import { Scrollbars } from "react-custom-scrollbars";
+// import {
+//   VictoryPie,
+//   VictoryChart,
+//   VictoryBar,
+//   VictoryLabel,
+//   VictoryAxis,
+// } from "victory";
+// import { Scrollbars } from "react-custom-scrollbars";
 import "../../assets/userDashboard.css";
 
 import { ReactCompareSlider } from "react-compare-slider";
@@ -126,7 +126,8 @@ function Challenges({ userProfile, gender, recommandedChal }) {
               <T>userDashboard.challenges.mcc</T>
             </div>
             <div className="divider"></div>
-            <Scrollbars style={{ height: "500px" }}>
+            {/* todo do later */}
+            {/* <Scrollbars style={{ height: "500px" }}>
               <div className="dashboard-challenges-mychallenge-body">
                 {myChallenges && myChallenges.length > 0 ? (
                   myChallenges.map((d, i) => (
@@ -191,7 +192,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                   </h2>
                 )}
               </div>
-            </Scrollbars>
+            </Scrollbars> */}
           </div>
           <div className="dashboard-challenges-myshape">
             <div
@@ -256,7 +257,8 @@ function Challenges({ userProfile, gender, recommandedChal }) {
             {/* <VictoryContainer style={{ width: "50%" }}> */}
             {/* <svg viewBox="0 0 200 350"> */}
             <div style={{ width: "50%" }}>
-              <VictoryPie
+              {/* todo do later */}
+              {/* <VictoryPie
                 innerRadius={30}
                 padding={10}
                 height={200}
@@ -267,7 +269,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                   { x: "Body Weight", y: myDevelopment.bodyFat },
                   { x: "", y: 100 - myDevelopment.bodyFat },
                 ]}
-              />
+              /> */}
             </div>
             {/* </svg> */}
             {/* </VictoryContainer> */}
@@ -285,7 +287,8 @@ function Challenges({ userProfile, gender, recommandedChal }) {
             </div>
           </div>
           <div className="dashboard-challenges-row2-mydevelopment-insidebox-2">
-            <VictoryChart
+            {/* todo do later */}
+            {/* <VictoryChart
               // domainPadding={10}
               height={250}
             >
@@ -310,7 +313,7 @@ function Challenges({ userProfile, gender, recommandedChal }) {
                   },
                 }}
               />
-            </VictoryChart>
+            </VictoryChart> */}
           </div>
         </div>
         <div className="dashboard-challenges-row2-mybody">

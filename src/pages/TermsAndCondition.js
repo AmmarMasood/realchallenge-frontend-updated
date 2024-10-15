@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Card } from "antd";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import FileViewer from "react-file-viewer";
+// import FileViewer from "react-file-viewer";
 import PrivacyPolicyDocument from "../assets/documents/Terms and Conditions - Real Challenge.docx";
 import PrivacyPolicyDocumentDutch from "../assets/documents/Algemene Voorwaarden - Real Challenge.docx";
 import { T } from "../components/Translate";
@@ -34,19 +34,23 @@ function TermsAndCondition() {
 
         <Card style={{ height: "650px" }}>
           {localStorage.getItem("locale") === "du" ? (
-            <FileViewer
-              fileType={type}
-              filePath={PrivacyPolicyDocumentDutch}
-              // errorComponent={CustomErrorComponent}
-              onError={onError}
-            />
+            <div></div>
           ) : (
-            <FileViewer
-              fileType={type}
-              filePath={PrivacyPolicyDocument}
-              // errorComponent={CustomErrorComponent}
-              onError={onError}
-            />
+            // todo do later
+            // <FileViewer
+            //   fileType={type}
+            //   filePath={PrivacyPolicyDocumentDutch}
+            //   // errorComponent={CustomErrorComponent}
+            //   onError={onError}
+            // />
+            <div></div>
+            // todo do later
+            // <FileViewer
+            //   fileType={type}
+            //   filePath={PrivacyPolicyDocument}
+            //   // errorComponent={CustomErrorComponent}
+            //   onError={onError}
+            // />
           )}
         </Card>
       </div>

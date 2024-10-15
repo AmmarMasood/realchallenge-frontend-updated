@@ -7,8 +7,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowRightOutlined, PlayCircleOutlined } from "@ant-design/icons";
-import ModalVideo from "react-modal-video";
-import "react-modal-video/scss/modal-video.scss";
+// import ModalVideo from "react-modal-video";
+// import "react-modal-video/scss/modal-video.scss";
 import { T } from "../components/Translate";
 
 function HowItWork() {
@@ -19,13 +19,14 @@ function HowItWork() {
     <div>
       <Navbar />
       {/* modal video */}
-      <ModalVideo
+      {/* todo do later */}
+      {/* <ModalVideo
         channel="youtube"
         autoplay
         isOpen={isOpen}
         videoId={link}
         onClose={() => setOpen(false)}
-      />
+      /> */}
       {/* <Hero /> */}
       <div className="page-header howitworks-background">
         <div className="page-header-textbox" style={{ padding: "50px" }}>

@@ -12,7 +12,7 @@ import { getAllBlogs } from "../services/blogs";
 import slug from "elegant-slug";
 import { T } from "../components/Translate";
 import { LanguageContext } from "../contexts/LanguageContext";
-import ReactHTMLParser from "react-html-parser";
+// import ReactHTMLParser from "react-html-parser";
 
 function Magazine() {
   const { language } = useContext(LanguageContext);
@@ -77,7 +77,7 @@ function Magazine() {
               className="font-paragraph-black"
               style={{ height: "100px", overflow: "hidden" }}
             >
-              {allBlogs[0] ? ReactHTMLParser(allBlogs[0].paragraph) : ""}
+              {/* {allBlogs[0] ? ReactHTMLParser(allBlogs[0].paragraph) : ""} */}
             </p>
           </div>
         </div>

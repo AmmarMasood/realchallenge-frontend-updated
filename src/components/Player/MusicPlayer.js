@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Modal, Slider } from "antd";
 import ReactPlayer from "react-player";
-import { Scrollbars } from "react-custom-scrollbars";
+// import { Scrollbars } from "react-custom-scrollbars";
 import { CloseOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import useWindowDimensions from "../../helpers/useWindowDimensions";
 
@@ -104,7 +104,8 @@ function MusicPlayer({ visible, setMusicPlayerVisible, musicList }) {
       <div className="music-player-modal-container--list">
         <img src={MusicListIcon} alt="music-list-icon" />{" "}
         <h3 className="font-paragraph-white">Choose your mood</h3>
-        <Scrollbars style={{ minHeight: "100px" }}>
+        {/* todo do later */}
+        {/* <Scrollbars style={{ minHeight: "100px" }}>
           <div className="music-player-modal-container--list-files">
             <div key={1234} onClick={() => handleOnMusicSelect("stop")}>
               <span
@@ -139,7 +140,7 @@ function MusicPlayer({ visible, setMusicPlayerVisible, musicList }) {
               </div>
             ))}
           </div>
-        </Scrollbars>
+        </Scrollbars> */}
       </div>
     </div>
     // </Modal>

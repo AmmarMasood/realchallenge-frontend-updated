@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CloseOutlined } from "@ant-design/icons";
-import { Scrollbars } from "react-custom-scrollbars";
+// import { Scrollbars } from "react-custom-scrollbars";
 import { Input, Button, Rate } from "antd";
 // import { addNewComment } from "../../services/posts";
 import Modal from "react-modal";
@@ -86,7 +86,8 @@ function ReviewsModal({ item, visible, setVisible, type, fetchData }) {
         />
       </div>
       <div className="challenge-review-modal">
-        <Scrollbars style={{ height: "300px" }}>
+        {/* todo do later */}
+        {/* <Scrollbars style={{ height: "300px" }}>
           {allReviews.length > 0 ? (
             allReviews.map((review) => (
               // <div className="challenge-profile-comment font-paragraph-white">
@@ -160,7 +161,7 @@ function ReviewsModal({ item, visible, setVisible, type, fetchData }) {
               }}
             />
           )}
-        </Scrollbars>
+        </Scrollbars> */}
         {localStorage.getItem("jwtToken") ? (
           !alreadyReviewd ? (
             <div style={{ marginTop: "10px" }}>

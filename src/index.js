@@ -9,7 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./App.css";
 import { setChonkyDefaults } from "chonky";
 import { ChonkyIconFA } from "chonky-icon-fontawesome";
-import "react-modal-video/scss/modal-video.scss";
+// import "react-modal-video/scss/modal-video.scss";
 import PaymentProcessStore from "./contexts/PaymentProcessStore";
 import { fetchTranslations } from "./helpers/translationHelpers";
 

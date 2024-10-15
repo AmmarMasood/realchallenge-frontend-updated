@@ -14,7 +14,7 @@ import Attachment from "../assets/icons/attachement-symbol.png";
 import Ellipse from "../assets/icons/ellipse.svg";
 import { addComment, getChallengeById } from "../services/createChallenge/main";
 import { Link, withRouter } from "react-router-dom";
-import ModalVideo from "react-modal-video";
+// import ModalVideo from "react-modal-video";
 import { Tooltip, Collapse, Input, Avatar, Progress } from "antd";
 
 import { userInfoContext } from "../contexts/UserStore";
@@ -751,14 +751,15 @@ function ChallengeProfile(props) {
       </Helmet>
       <Navbar />
       {/* video modal */}
-      <ModalVideo
+      {/* todo do later */}
+      {/* <ModalVideo
         channel="custom"
         autoplay
         isOpen={open}
         controlsList="nodownload"
         url={`${process.env.REACT_APP_SERVER}/uploads/${challenge.videoThumbnailLink}`}
         onClose={() => setOpen(false)}
-      />
+      /> */}
       <ChallengeReviewModal
         visible={reviewOpen}
         setVisible={setReviewOpen}

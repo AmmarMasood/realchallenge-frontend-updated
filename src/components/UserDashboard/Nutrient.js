@@ -29,7 +29,7 @@ import GrayFire from "../../assets/icons/gray-fire.png";
 import SwapIcon from "../../assets/icons/swapIcon.png";
 import GrayPin from "../../assets/icons/pushpin-gray.png";
 
-import { Scrollbars } from "react-custom-scrollbars";
+// import { Scrollbars } from "react-custom-scrollbars";
 
 import {
   getAllDietTypes,
@@ -416,7 +416,8 @@ function Nutrient({
                 </div>
               ))}
             </div>
-            <Scrollbars style={{ height: "400px" }}>
+            {/* todo do later */}
+            {/* <Scrollbars style={{ height: "400px" }}>
               <div className="meals-list-container">
                 <h3 className="font-card-heading">
                   <T>userDashboard.nutrient.selectPi</T>
@@ -467,7 +468,7 @@ function Nutrient({
                   </div>
                 ))}
               </div>
-            </Scrollbars>
+            </Scrollbars> */}
           </>
         ) : (
           ""

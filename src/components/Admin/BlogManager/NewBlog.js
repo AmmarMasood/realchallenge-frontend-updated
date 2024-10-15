@@ -17,7 +17,7 @@ import TextEditor from "../../TextEditor";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import { createPost } from "../../../services/posts";
 import slug from "elegant-slug";
-import ReactHTMLParser from "react-html-parser";
+// import ReactHTMLParser from "react-html-parser";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import LanguageSelector from "../../LanguageSelector/LanguageSelector";
 import { T } from "../../Translate";
