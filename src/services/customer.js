@@ -10,7 +10,7 @@ const openNotificationWithIcon = (type, message, description) => {
 
 export function createCustomerDetails(values, id) {
   return axios
-    .post(`${process.env.REACT_APP_SERVER}/api/customerDetails/${id}/update`, {
+    .put(`${process.env.REACT_APP_SERVER}/api/customerDetails/${id}`, {
       gender: values.gender,
       customerDetails: values,
     })
